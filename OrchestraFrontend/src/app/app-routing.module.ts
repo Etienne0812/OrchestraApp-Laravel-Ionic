@@ -1,0 +1,28 @@
+import { NgModule } from '@angular/core';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+
+const routes: Routes = [
+  {
+    path: '',
+    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+  },
+  {
+    path: 'employee-page',
+    loadChildren: () => import('./employee-page/employee-page.module').then( m => m.EmployeePagePageModule)
+  },
+  {
+    path: 'employee-requests',
+    loadChildren: () => import('./employee-requests/employee-requests.module').then( m => m.EmployeeRequestsPageModule)
+  },
+  {
+    path: 'create-request',
+    loadChildren: () => import('./create-request/create-request.module').then( m => m.CreateRequestPageModule)
+  }
+];
+@NgModule({
+  imports: [
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+  ],
+  exports: [RouterModule]
+})
+export class AppRoutingModule {}
