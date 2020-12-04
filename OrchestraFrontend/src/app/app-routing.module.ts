@@ -17,6 +17,18 @@ const routes: Routes = [
   {
     path: 'create-request',
     loadChildren: () => import('./create-request/create-request.module').then( m => m.CreateRequestPageModule)
+  },
+  {
+    path: 'update-request',
+    loadChildren: () => import('./update-request/update-request.module').then( m => m.UpdateRequestPageModule)
+  },
+  {
+    path: 'employee-data',
+    loadChildren: () => import('./employee-data/employee-data.module').then( m => m.EmployeeDataPageModule)
+  },
+  {
+    path: 'register',
+    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
   }
 ];
 @NgModule({

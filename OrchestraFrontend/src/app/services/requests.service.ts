@@ -34,11 +34,6 @@ export class RequestsService {
 
   getRequests(): Observable<Requests[]> {
     return this.http.get<Requests[]>(apiUrl + "/get");
-      // .pipe(
-      //   tap(tv => console.log('fetched tvs'))
-      //   // ,
-      //   // catchError(this.handleError('getTVs', []))
-      // );
   };
 
   deleteRequest(id: number): Observable<any>{
@@ -57,13 +52,15 @@ export class RequestsService {
     return this.http.post(apiUrl + "/post", body, httpOptions);
   }
 
-  // updateBicycle(id: number, tv: TV): Observable<any>{
-  //   let bodyEncoded = new URLSearchParams();
-  //   bodyEncoded.append("model", tv.model);
-  //   bodyEncoded.append("brand", tv.brand);
-  //   bodyEncoded.append("price", tv.price);
-  //   let body = bodyEncoded.toString();
+  updateRequest(id: number, req: Requests): Observable<any>{
+    let bodyEncoded = new URLSearchParams();
+    bodyEncoded.append("type", req.type);
+    bodyEncoded.append("reason", req.reason);
+    bodyEncoded.append("startDate", req.startDate);
+    bodyEncoded.append("endDate", req.endDate);
+    bodyEncoded.append("employeeId", req.employeeId);
+    let body = bodyEncoded.toString();
     
-  //   return this.http.put(apiUrl + "/" + id, body, httpOptions);
-  // }
+    return this.http.put(apiUrl + "/update/" + id, body, httpOptions);
+  }
 }

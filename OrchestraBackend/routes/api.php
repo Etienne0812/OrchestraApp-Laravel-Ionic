@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\RequestsController;
+use App\Http\Controllers\DataController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,4 +36,12 @@ Route::prefix('requests')->group(function () {
     Route::put('/put/{id}', [RequestsController::class, 'update']);
     Route::get('/get/{id}', [RequestsController::class, 'show']);
     Route::delete('/delete/{id}', [RequestsController::class, 'destroy']);
+});
+
+Route::prefix('data')->group(function () {
+    Route::get('/get', [DataController::class, 'index']);
+    Route::post('/post', [DataController::class, 'store']);
+    Route::put('/put/{id}', [DataController::class, 'update']);
+    Route::get('/get/{id}', [DataController::class, 'show']);
+    Route::delete('/delete/{id}', [DataController::class, 'destroy']);
 });

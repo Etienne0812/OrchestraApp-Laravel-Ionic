@@ -14,7 +14,7 @@ class DataController extends Controller
      */
     public function index()
     {
-        //
+        return Data::all();
     }
 
     /**
@@ -35,7 +35,7 @@ class DataController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Data::create($request->except('id'));
     }
 
     /**
@@ -44,9 +44,9 @@ class DataController extends Controller
      * @param  \App\Data  $data
      * @return \Illuminate\Http\Response
      */
-    public function show(Data $data)
+    public function show(Data $data, $id)
     {
-        //
+        return Data::findOrFail($id);
     }
 
     /**
@@ -67,9 +67,10 @@ class DataController extends Controller
      * @param  \App\Data  $data
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Data $data)
+    public function update(Request $request, Data $data, $id)
     {
-        //
+        Data::find($id)->update($request->all());
+        return $request->all();
     }
 
     /**
@@ -78,8 +79,9 @@ class DataController extends Controller
      * @param  \App\Data  $data
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Data $data)
+    public function destroy(Data $data, $id)
     {
-        //
+        Data::find($id)->delete();
+        return "done";
     }
 }

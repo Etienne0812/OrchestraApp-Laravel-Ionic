@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>update-request</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="requestUpdateForm" (ngSubmit)="onFormSubmit()">
+    <ion-item>
+      <ion-label position="floating">Tipo</ion-label>
+      <ion-input formControlName="type" type="text" required></ion-input>
+      <ion-label color="danger" *ngIf="requestUpdateForm.controls.type.errors?.minlength && (requestUpdateForm.touched || requestUpdateForm.dirty)">* Mínimo 4 carácteres.</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Motivo</ion-label>
+      <ion-input formControlName="reason" type="text" required></ion-input>
+      <ion-label color="danger" *ngIf="requestUpdateForm.controls.reason.errors?.minlength && (requestUpdateForm.touched || requestUpdateForm.dirty)">* Mínimo 4 carácteres.</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Fecha de inicio</ion-label>
+      <ion-input formControlName="startDate" type="text" required></ion-input>
+      <ion-label color="danger" *ngIf="requestUpdateForm.controls.startDate.errors?.minlength && (requestUpdateForm.touched || requestUpdateForm.dirty)">* Mínimo 4 carácteres.</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Fecha de finalización</ion-label>
+      <ion-input formControlName="endDate" type="text" required></ion-input>
+      <ion-label color="danger" *ngIf="requestUpdateForm.controls.endDate.errors?.minlength && (requestUpdateForm.touched || requestUpdateForm.dirty)">* Mínimo 4 carácteres.</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Autor</ion-label>
+      <ion-input formControlName="employeeId" type="text" required></ion-input>
+      <ion-label color="danger" *ngIf="requestUpdateForm.controls.employeeId.errors?.minlength && (requestUpdateForm.touched || requestUpdateForm.dirty)">* Mínimo 4 carácteres.</ion-label>
+    </ion-item>
+
+    <ion-row>
+      <ion-col>
+        <ion-button class = "add-form-submit" color = "tertiary" type="submit" shape="round" expand="block">Enviar</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

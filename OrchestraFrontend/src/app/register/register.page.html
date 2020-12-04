@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>register</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="requestCreateForm" (ngSubmit)="onFormSubmit()">
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <!-- <ion-input formControlName="type" type="text" required></ion-input>
+      <ion-label color="danger" *ngIf="requestCreateForm.controls.type.errors?.required && (requestCreateForm.touched || requestCreateForm.dirty)">* El tipo es obligatorio </ion-label>
+      <ion-label color="danger" *ngIf="requestCreateForm.controls.type.errors?.minlength && (requestCreateForm.touched || requestCreateForm.dirty)">* Mínimo 4 carácteres.</ion-label> -->
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Contraseña</ion-label>
+      <!-- <ion-input formControlName="reason" type="text" required></ion-input>
+      <ion-label color="danger" *ngIf="requestCreateForm.controls.reason.errors?.required && (requestCreateForm.touched || requestCreateForm.dirty)">* El motivo es obligatorio </ion-label>
+      <ion-label color="danger" *ngIf="requestCreateForm.controls.reason.errors?.minlength && (requestCreateForm.touched || requestCreateForm.dirty)">* Mínimo 4 carácteres.</ion-label> -->
+    </ion-item>
+
+    <ion-row>
+      <ion-col>
+        <ion-button class = "add-form-submit" color = "tertiary" type="submit" shape="round" expand="block">Enviar</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

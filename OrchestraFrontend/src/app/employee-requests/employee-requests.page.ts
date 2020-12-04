@@ -35,4 +35,9 @@ export class EmployeeRequestsPage implements OnInit {
     })
   }
 
+  updateRequest(id: number){
+    this.RequestsService.setCurrentRequestId(id);
+    this.router.navigateByUrl("/update-request");
+  }
+
 }
