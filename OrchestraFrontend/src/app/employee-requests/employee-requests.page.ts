@@ -10,12 +10,13 @@ import { RequestsService } from '../services/requests.service';
 })
 export class EmployeeRequestsPage implements OnInit {
 
-  req: Requests[]
+  req: Requests[];
 
   constructor(private RequestsService: RequestsService, private router: Router) { }
 
   ngOnInit() {
     this.getAllRequests();
+
   }
 
   getAllRequests(){

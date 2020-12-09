@@ -5,19 +5,26 @@
 </ion-header>
 
 <ion-content>
-  <form [formGroup]="requestCreateForm" (ngSubmit)="onFormSubmit()">
+  <form [formGroup]="registForm" (ngSubmit)="onFormSubmit()">
     <ion-item>
       <ion-label position="floating">Email</ion-label>
-      <!-- <ion-input formControlName="type" type="text" required></ion-input>
-      <ion-label color="danger" *ngIf="requestCreateForm.controls.type.errors?.required && (requestCreateForm.touched || requestCreateForm.dirty)">* El tipo es obligatorio </ion-label>
-      <ion-label color="danger" *ngIf="requestCreateForm.controls.type.errors?.minlength && (requestCreateForm.touched || requestCreateForm.dirty)">* Mínimo 4 carácteres.</ion-label> -->
+      <ion-input formControlName="email" type="text" required></ion-input>
+      <ion-label color="danger" *ngIf="registForm.controls.email.errors?.required && (registForm.touched || registForm.dirty)">* El tipo es obligatorio </ion-label>
+      <ion-label color="danger" *ngIf="registForm.controls.email.errors?.minlength && (registForm.touched || registForm.dirty)">* Mínimo 4 carácteres.</ion-label>
     </ion-item>
 
     <ion-item>
       <ion-label position="floating">Contraseña</ion-label>
-      <!-- <ion-input formControlName="reason" type="text" required></ion-input>
-      <ion-label color="danger" *ngIf="requestCreateForm.controls.reason.errors?.required && (requestCreateForm.touched || requestCreateForm.dirty)">* El motivo es obligatorio </ion-label>
-      <ion-label color="danger" *ngIf="requestCreateForm.controls.reason.errors?.minlength && (requestCreateForm.touched || requestCreateForm.dirty)">* Mínimo 4 carácteres.</ion-label> -->
+      <ion-input formControlName="password" type="text" required></ion-input>
+      <ion-label color="danger" *ngIf="registForm.controls.password.errors?.required && (registForm.touched || registForm.dirty)">* El motivo es obligatorio </ion-label>
+      <ion-label color="danger" *ngIf="registForm.controls.password.errors?.minlength && (registForm.touched || registForm.dirty)">* Mínimo 4 carácteres.</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Confirmar contraseña</ion-label>
+      <ion-input formControlName="cpassword" type="text" required></ion-input>
+      <ion-label color="danger" *ngIf="registForm.controls.cpassword.errors?.required && (registForm.touched || registForm.dirty)">* El motivo es obligatorio </ion-label>
+      <ion-label color="danger" *ngIf="registForm.controls.cpassword.errors?.minlength && (registForm.touched || registForm.dirty)">* Mínimo 4 carácteres.</ion-label>
     </ion-item>
 
     <ion-row>

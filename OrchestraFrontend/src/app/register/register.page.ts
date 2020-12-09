@@ -1,4 +1,9 @@
+import { ReturnStatement } from '@angular/compiler';
+import { PipeCollector } from '@angular/compiler/src/template_parser/binding_parser';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-register',
@@ -7,9 +12,38 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterPage implements OnInit {
 
-  constructor() { }
+  registForm: FormGroup;
+
+  constructor(public fb: FormBuilder, 
+    private UserService: UserService,
+    private router: Router) {
+      this.registForm = this.fb.group({
+        email: ['', [Validators.required, Validators.minLength(4)]],
+        password: ['', [Validators.required, Validators.minLength(4)]], 
+        cpassword: ['', [Validators.required, Validators.minLength(4)]]
+      });
+     }
 
   ngOnInit() {
+  }
+
+  onFormSubmit() {
+    if (!this.registForm.valid) {
+      return false;
+      
+    } else {
+      let usr = {
+        id: null,
+        email: this.registForm.value.email,
+        password: this.registForm.value.password, 
+        password_confirmation: this.registForm.value.cpassword, 
+        role: null, 
+      }
+      this.UserService.addUser(usr)
+        .subscribe((res) => {
+          this.router.navigateByUrl("/tabs/tab1");
+        });
+    }
   }
 
 }

@@ -17,8 +17,10 @@ use App\Http\Controllers\DataController;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['middleware' => 'auth:api'], function(){
+    // Users
+    Route::get('users', 'UserController@index')->middleware('isAdmin');
+    Route::get('users/{id}', 'UserController@show')->middleware('isAdminOrSelf');
 });
 
 Route::prefix('employee')->group(function () {
@@ -44,4 +46,14 @@ Route::prefix('data')->group(function () {
     Route::put('/put/{id}', [DataController::class, 'update']);
     Route::get('/get/{id}', [DataController::class, 'show']);
     Route::delete('/delete/{id}', [DataController::class, 'destroy']);
+});
+
+Route::prefix('auth')->group(function () {
+    Route::post('register', 'AuthController@register');
+    Route::post('login', 'AuthController@login');
+    Route::get('refresh', 'AuthController@refresh');
+    Route::group(['middleware' => 'auth:api'], function(){
+        Route::get('user', 'AuthController@user');
+        Route::post('logout', 'AuthController@logout');
+    });
 });

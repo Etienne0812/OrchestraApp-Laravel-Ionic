@@ -46,7 +46,7 @@ export class RequestsService {
     bodyEncoded.append("reason", req.reason);
     bodyEncoded.append("startDate", req.startDate);
     bodyEncoded.append("endDate", req.endDate);
-    bodyEncoded.append("employeeId", req.employeeId);
+    bodyEncoded.append("employeeId", req.employeeId.toString());
     let body = bodyEncoded.toString();
 
     return this.http.post(apiUrl + "/post", body, httpOptions);
@@ -58,7 +58,7 @@ export class RequestsService {
     bodyEncoded.append("reason", req.reason);
     bodyEncoded.append("startDate", req.startDate);
     bodyEncoded.append("endDate", req.endDate);
-    bodyEncoded.append("employeeId", req.employeeId);
+    bodyEncoded.append("employeeId", req.employeeId.toString());
     let body = bodyEncoded.toString();
     
     return this.http.put(apiUrl + "/update/" + id, body, httpOptions);

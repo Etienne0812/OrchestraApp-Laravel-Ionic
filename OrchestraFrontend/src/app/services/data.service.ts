@@ -48,7 +48,7 @@ export class DataService {
     bodyEncoded.append("secondSurname", dat.secondSurname);
     bodyEncoded.append("phone", dat.phone);
     bodyEncoded.append("email", dat.email);
-    bodyEncoded.append("employeeId", dat.employeeId);
+    bodyEncoded.append("employeeId", dat.employeeId.toString());
     let body = bodyEncoded.toString();
 
     return this.http.post(apiUrl + "/post", body, httpOptions);
@@ -62,7 +62,7 @@ export class DataService {
     bodyEncoded.append("secondSurname", dat.secondSurname);
     bodyEncoded.append("phone", dat.phone);
     bodyEncoded.append("email", dat.email);
-    bodyEncoded.append("employeeId", dat.employeeId);
+    bodyEncoded.append("employeeId", dat.employeeId.toString());
     let body = bodyEncoded.toString();
     
     return this.http.put(apiUrl + "/update/" + id, body, httpOptions);
