@@ -46,7 +46,7 @@ export class RequestsService {
     bodyEncoded.append("reason", req.reason);
     bodyEncoded.append("startDate", req.startDate);
     bodyEncoded.append("endDate", req.endDate);
-    bodyEncoded.append("employeeId", req.employeeId.toString());
+    bodyEncoded.append("userEmail", req.userEmail);
     let body = bodyEncoded.toString();
 
     return this.http.post(apiUrl + "/post", body, httpOptions);
@@ -58,9 +58,19 @@ export class RequestsService {
     bodyEncoded.append("reason", req.reason);
     bodyEncoded.append("startDate", req.startDate);
     bodyEncoded.append("endDate", req.endDate);
-    bodyEncoded.append("employeeId", req.employeeId.toString());
+    bodyEncoded.append("userEmail", req.userEmail);
     let body = bodyEncoded.toString();
     
-    return this.http.put(apiUrl + "/update/" + id, body, httpOptions);
+    return this.http.put(apiUrl + "/put/" + id, body, httpOptions);
   }
+
+  reviseRequest(id: number, req: Requests): Observable<any>{
+    let bodyEncoded = new URLSearchParams();
+    bodyEncoded.append("revised", req.revised);
+    let body = bodyEncoded.toString();
+    
+    return this.http.put(apiUrl + "/put/" + id, body, httpOptions);
+  }
+
+  
 }

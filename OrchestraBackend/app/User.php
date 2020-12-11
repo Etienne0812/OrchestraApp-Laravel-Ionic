@@ -20,6 +20,19 @@ class User extends Authenticatable implements JWTSubject
         'email', 'password',
     ];
 
+    public function data(){
+        return $this->hasOne('App/Data');
+    }
+
+    public function status(){
+        return $this->hasOne('App/Status');
+    }
+
+    public function requests()
+    {
+        return $this->hasMany('App\Requests');
+    }
+
     /**
      * The attributes that should be hidden for arrays.
      *

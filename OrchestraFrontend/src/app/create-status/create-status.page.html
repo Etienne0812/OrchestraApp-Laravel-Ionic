@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Menú creación de turnos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item lines = "none">
+    <ion-icon (click)="return()" name="arrow-back-outline" slot="start"></ion-icon>
+  </ion-item>
+  <form [formGroup]="statusCreateForm" (ngSubmit)="onFormSubmit()">
+    <ion-item>
+      <ion-label position="floating">Tipo</ion-label>
+      <ion-input formControlName="type" type="text" required></ion-input>
+      <ion-label color="danger" *ngIf="statusCreateForm.controls.type.errors?.required && (statusCreateForm.touched || statusCreateForm.dirty)">* El tipo es obligatorio </ion-label>
+      <ion-label color="danger" *ngIf="statusCreateForm.controls.type.errors?.minlength && (statusCreateForm.touched || statusCreateForm.dirty)">* Mínimo 4 carácteres.</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Fecha de inicio</ion-label>
+      <ion-input formControlName="startDate" type="text" required></ion-input>
+      <ion-label color="danger" *ngIf="statusCreateForm.controls.startDate.errors?.required && (statusCreateForm.touched || statusCreateForm.dirty)">* La fecha de inicio es obligatoria </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Fecha de finalización</ion-label>
+      <ion-input formControlName="endDate" type="text" required></ion-input>
+      <ion-label color="danger" *ngIf="statusCreateForm.controls.endDate.errors?.required && (statusCreateForm.touched || statusCreateForm.dirty)">* La fecha de finalización es obligatoria </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Autor</ion-label>
+      <ion-input formControlName="userEmail" type="text" required></ion-input>
+      <ion-label color="danger" *ngIf="statusCreateForm.controls.userEmail.errors?.required && (statusCreateForm.touched || statusCreateForm.dirty)">* El autor es obligatorio </ion-label>
+    </ion-item>
+
+    <ion-row>
+      <ion-col>
+        <ion-button class = "add-form-submit" color = "tertiary" type="submit" shape="round" expand="block">Crear</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

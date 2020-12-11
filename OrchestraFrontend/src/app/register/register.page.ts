@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-register',
@@ -16,11 +17,17 @@ export class RegisterPage implements OnInit {
 
   constructor(public fb: FormBuilder, 
     private UserService: UserService,
+    private DataService: DataService,
     private router: Router) {
       this.registForm = this.fb.group({
         email: ['', [Validators.required, Validators.minLength(4)]],
         password: ['', [Validators.required, Validators.minLength(4)]], 
-        cpassword: ['', [Validators.required, Validators.minLength(4)]]
+        cpassword: ['', [Validators.required, Validators.minLength(4)]], 
+        DNI: ['', [Validators.required, Validators.minLength(4)]], 
+        name: ['', [Validators.required, Validators.minLength(4)]], 
+        firstSurname: ['', [Validators.required, Validators.minLength(4)]], 
+        secondSurname: ['', [Validators.required, Validators.minLength(4)]], 
+        phone: ['', [Validators.required, Validators.minLength(4)]]
       });
      }
 
@@ -43,7 +50,23 @@ export class RegisterPage implements OnInit {
         .subscribe((res) => {
           this.router.navigateByUrl("/tabs/tab1");
         });
+      let dat = {
+        id: null,
+        DNI: this.registForm.value.DNI,
+        name: this.registForm.value.name, 
+        firstSurname: this.registForm.value.firstSurname, 
+        secondSurname: this.registForm.value.secondSurname, 
+        phone: this.registForm.value.phone,  
+        userEmail: this.registForm.value.email, 
+      }
+      this.DataService.addData(dat)
+        .subscribe((res) => {
+          this.router.navigateByUrl("/tabs/tab1");
+        });
     }
+  }
+  return(){
+    this.router.navigateByUrl("/tabs/tab2");
   }
 
 }

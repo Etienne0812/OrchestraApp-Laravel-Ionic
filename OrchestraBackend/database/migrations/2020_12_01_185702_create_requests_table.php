@@ -20,10 +20,10 @@ class CreateRequestsTable extends Migration
             $table->string('startDate');
             $table->string('endDate');
             $table->string('reason');
-            $table->tinyInteger('revised')->default('0');
+            $table->string('revised')->default('Sin revisar');
 
-            $table->biginteger('employeeId')->unsigned()->default('1'); 
-            $table->foreign('employeeId')->references('id')->on('employees'); 
+            $table->string('userEmail'); 
+            $table->foreign('userEmail')->references('email')->on('users'); 
         });
     }
 

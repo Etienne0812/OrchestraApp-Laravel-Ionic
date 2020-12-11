@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Data extends Model
 {
     protected $fillable = [
-        'DNI', 'name', 'firstSurname', 'secondSurname', 'phone', 'email', 'employeeId'
+        'DNI', 'name', 'firstSurname', 'secondSurname', 'phone',  'userEmail'
     ];
 
-    public function employee(){
-        return $this->belongsTo('App\Employee');
+    public function users(){
+        return $this->belongsTo('App\User');
     }
 }

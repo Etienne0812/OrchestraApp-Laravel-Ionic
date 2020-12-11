@@ -25,4 +25,8 @@ export class EmployeeDataPage implements OnInit {
     });
   }
 
+  return(){
+    this.router.navigateByUrl("/tabs/tab2");
+  }
+
 }

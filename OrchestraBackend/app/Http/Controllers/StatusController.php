@@ -14,7 +14,7 @@ class StatusController extends Controller
      */
     public function index()
     {
-        //
+        return Status::all();
     }
 
     /**
@@ -35,7 +35,7 @@ class StatusController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Status::create($request->except('id'));
     }
 
     /**
@@ -44,9 +44,9 @@ class StatusController extends Controller
      * @param  \App\Status  $status
      * @return \Illuminate\Http\Response
      */
-    public function show(Status $status)
+    public function show(Status $status, $id)
     {
-        //
+        return Status::findOrFail($id);
     }
 
     /**
@@ -67,9 +67,10 @@ class StatusController extends Controller
      * @param  \App\Status  $status
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Status $status)
+    public function update(Request $request, Status $status, $id)
     {
-        //
+        Status::find($id)->update($request->all());
+        return $request->all();
     }
 
     /**
@@ -78,8 +79,9 @@ class StatusController extends Controller
      * @param  \App\Status  $status
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Status $status)
+    public function destroy(Status $status, $id)
     {
-        //
+        Status::find($id)->delete();
+        return "done";
     }
 }

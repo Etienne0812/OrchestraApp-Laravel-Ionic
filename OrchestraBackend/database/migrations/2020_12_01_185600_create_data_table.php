@@ -21,10 +21,9 @@ class CreateDataTable extends Migration
             $table->string('firstSurname');
             $table->string('secondSurname');
             $table->string('phone');
-            $table->string('email');
 
-            $table->biginteger('employeeId')->unsigned(); 
-            $table->foreign('employeeId')->references('id')->on('employees'); 
+            $table->string('userEmail'); 
+            $table->foreign('userEmail')->references('email')->on('users'); 
         });
     }
 

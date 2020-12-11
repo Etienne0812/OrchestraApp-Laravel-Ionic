@@ -8,10 +8,10 @@ class Requests extends Model
 {
 
     protected $fillable = [
-        'type', 'startDate', 'endDate', 'reason', 'revised', 'employeeId'
+        'type', 'startDate', 'endDate', 'reason', 'revised', 'userEmail'
     ];
 
-    public function employee(){
-        return $this->belongsTo('App\Employee');
+    public function users(){
+        return $this->belongsTo('App\User');
     }
 }

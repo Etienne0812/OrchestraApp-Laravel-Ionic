@@ -1,26 +1,32 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>EmployeeRequests</ion-title>
+    <ion-title>Solicitudes</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-item lines = "none">
+    <ion-icon (click)="return()" name="arrow-back-outline" slot="start"></ion-icon>
+  </ion-item>
   <ion-card *ngFor="let r of req">
     <ion-card-header>
-      <ion-card-title>Solicitudes</ion-card-title>
+      <ion-card-title><ion-icon name="git-pull-request-outline"></ion-icon></ion-card-title>
     </ion-card-header>
   
     <ion-card-content>
+      <ion-card-title>Solicitud de:</ion-card-title>
+      <ion-card-subtitle>{{r.userEmail}} </ion-card-subtitle>
       Tipo: {{r.type}}<br /> 
       Motivo: {{r.reason}}<br />
       Fecha de inicio: {{r.startDate}}<br /> 
       Fecha de finalización: {{r.endDate}}<br /> 
       Estado: {{r.revised}}<br /> 
+        <ion-icon (click)="updateRequest(r.id)" name="create" slot="end" style="zoom:2.0;"></ion-icon>
+        <ion-icon (click)="deleteRequest(r.id)" name="trash" slot="end" style="zoom:2.0;"></ion-icon>
+        <ion-icon (click)="confirmRequest(r.id)" name="checkmark-outline" slot="end" style="zoom:2.0"></ion-icon>
+        <ion-icon (click)="rejectRequest(r.id)" name="close-outline" slot="end" style="zoom:2.0"></ion-icon>
     </ion-card-content>
-    <ion-item>
-      <ion-icon (click)="updateRequest(r.id)" name="create" slot="end"></ion-icon>
-      <ion-icon (click)="deleteRequest(r.id)" name="trash" slot="end"></ion-icon>
-    </ion-item>
+    
   </ion-card>
 
   <ion-button (click)="insertRequest()" shape = "round" color = "tertiary" class = "add-button" expand="block">Crear una solicitud</ion-button>

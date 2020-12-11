@@ -17,11 +17,11 @@ class CreateStatusesTable extends Migration
             $table->bigIncrements('id');
             $table->timestamps();
             $table->string('type');
-            $table->date('startDate');
-            $table->date('endDate');
+            $table->string('startDate');
+            $table->string('endDate');
 
-            $table->biginteger('employeeId')->unsigned(); 
-            $table->foreign('employeeId')->references('id')->on('employees'); 
+            $table->string('userEmail'); 
+            $table->foreign('userEmail')->references('email')->on('users'); 
         });
     }
 

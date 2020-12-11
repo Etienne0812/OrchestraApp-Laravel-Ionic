@@ -5,6 +5,5 @@ export class Data {
     firstSurname: string;
     secondSurname: string;
     phone: string;
-    email: string;
-    employeeId: number;
+    userEmail: string;
 }

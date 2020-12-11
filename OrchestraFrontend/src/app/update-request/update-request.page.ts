@@ -1,6 +1,7 @@
 import { ReturnStatement } from '@angular/compiler';
 import { PipeCollector } from '@angular/compiler/src/template_parser/binding_parser';
 import { Component, OnInit } from '@angular/core';
+import { Requests } from '../models/requests';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RequestsService } from '../services/requests.service';
@@ -12,6 +13,8 @@ import { RequestsService } from '../services/requests.service';
 })
 export class UpdateRequestPage implements OnInit {
 
+  req: Requests[];
+
   requestUpdateForm: FormGroup;
   
 
@@ -19,36 +22,61 @@ export class UpdateRequestPage implements OnInit {
     private RequestsService: RequestsService,
     private router: Router) {
     this.requestUpdateForm = this.fb.group({
-      type: ['', [Validators.required, Validators.minLength(4)]],
-      reason: ['', [Validators.required, Validators.minLength(4)]], 
-      employeeId: ['', [Validators.minLength(4)]], 
-      startDate: ['', [Validators.minLength(4)]], 
-      endDate: ['', [Validators.minLength(4)]]
+      type: [''],
+      reason: [''], 
+      userEmail: [''], 
+      startDate: [''],
+      endDate: ['']
     });
   }
 
   ngOnInit() {
+    this.getAllRequests();
+    let id = this.RequestsService.getCurrentRequestId();
+
+    this.RequestsService.getRequestById(id).subscribe((req) => { 
+      this.requestUpdateForm = this.fb.group({
+        type: req.type,
+        reason: req.reason, 
+        userEmail: req.userEmail, 
+        startDate: req.startDate,
+        endDate: req.endDate
+      });
+    })
+  }
+
+  getAllRequests(){
+    this.RequestsService.getRequests().subscribe( req => {
+      this.req = req;
+    });
   }
 
   onFormSubmit() {
     if (!this.requestUpdateForm.valid) {
+      
       return false;
       
     } else {
+      console.log("pero");
+      let id = this.RequestsService.getCurrentRequestId();
       let req = {
         id: null,
         type: this.requestUpdateForm.value.type,
         reason: this.requestUpdateForm.value.reason, 
         startDate: this.requestUpdateForm.value.startDate, 
         endDate: this.requestUpdateForm.value.endDate, 
-        employeeId: this.requestUpdateForm.value.employeeId, 
+        userEmail: this.requestUpdateForm.value.userEmail, 
         revised: this.requestUpdateForm.value.revised, 
       }
-      this.RequestsService.addRequest(req)
+      this.RequestsService.updateRequest(id, req)
         .subscribe((res) => {
           this.router.navigateByUrl("/employee-requests");
         });
     }
+  }
+
+  return(){
+    this.router.navigateByUrl("/employee-requests")
   }
 
 }

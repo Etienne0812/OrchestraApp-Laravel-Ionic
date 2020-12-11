@@ -6,7 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Status extends Model
 {
-    public function employee(){
-        return $this->belongsTo('App\Employee');
+
+    protected $fillable = [
+        'type', 'startDate', 'endDate', 'userEmail'
+    ];
+
+    public function users(){
+        return $this->belongsTo('App\User');
     }
 }

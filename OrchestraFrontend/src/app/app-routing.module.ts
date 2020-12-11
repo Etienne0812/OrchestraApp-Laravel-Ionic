@@ -7,10 +7,6 @@ const routes: Routes = [
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
   {
-    path: 'employee-page',
-    loadChildren: () => import('./employee-page/employee-page.module').then( m => m.EmployeePagePageModule)
-  },
-  {
     path: 'employee-requests',
     loadChildren: () => import('./employee-requests/employee-requests.module').then( m => m.EmployeeRequestsPageModule)
   },
@@ -33,7 +29,19 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
-  }
+  },
+  {
+    path: 'employee-status',
+    loadChildren: () => import('./employee-status/employee-status.module').then( m => m.EmployeeStatusPageModule)
+  },
+  {
+    path: 'create-status',
+    loadChildren: () => import('./create-status/create-status.module').then( m => m.CreateStatusPageModule)
+  },
+  {
+    path: 'update-status',
+    loadChildren: () => import('./update-status/update-status.module').then( m => m.UpdateStatusPageModule)
+  },
 ];
 @NgModule({
   imports: [

@@ -20,7 +20,7 @@ export class CreateRequestPage implements OnInit {
       this.requestCreateForm = this.fb.group({
         type: ['', [Validators.required, Validators.minLength(4)]],
         reason: ['', [Validators.required, Validators.minLength(4)]], 
-        employeeId: ['', [Validators.required]], 
+        userEmail: ['', [Validators.required]], 
         startDate: ['', [Validators.required]], 
         endDate: ['', [Validators.required]]
       });
@@ -40,7 +40,7 @@ export class CreateRequestPage implements OnInit {
         reason: this.requestCreateForm.value.reason, 
         startDate: this.requestCreateForm.value.startDate, 
         endDate: this.requestCreateForm.value.endDate, 
-        employeeId: this.requestCreateForm.value.employeeId, 
+        userEmail: this.requestCreateForm.value.userEmail, 
         revised: this.requestCreateForm.value.revised, 
       }
       this.RequestsService.addRequest(req)
@@ -48,6 +48,10 @@ export class CreateRequestPage implements OnInit {
           this.router.navigateByUrl("/employee-requests");
         });
     }
+  }
+
+  return(){
+    this.router.navigateByUrl("/employee-requests");
   }
 
 }

@@ -2,9 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\RequestsController;
 use App\Http\Controllers\DataController;
+use App\Http\Controllers\StatusController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,14 +23,6 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::get('users/{id}', 'UserController@show')->middleware('isAdminOrSelf');
 });
 
-Route::prefix('employee')->group(function () {
-Route::get('/get', [EmployeeController::class, 'index']);
-Route::post('/post', [EmployeeController::class, 'store']);
-Route::put('/put/{id}', [EmployeeController::class, 'update']);
-Route::get('/get/{id}', [EmployeeController::class, 'show']);
-Route::delete('/delete/{id}', [EmployeeController::class, 'destroy']);
-    
-});
 
 Route::prefix('requests')->group(function () {
     Route::get('/get', [RequestsController::class, 'index']);
@@ -46,6 +38,14 @@ Route::prefix('data')->group(function () {
     Route::put('/put/{id}', [DataController::class, 'update']);
     Route::get('/get/{id}', [DataController::class, 'show']);
     Route::delete('/delete/{id}', [DataController::class, 'destroy']);
+});
+
+Route::prefix('status')->group(function () {
+    Route::get('/get', [StatusController::class, 'index']);
+    Route::post('/post', [StatusController::class, 'store']);
+    Route::put('/put/{id}', [StatusController::class, 'update']);
+    Route::get('/get/{id}', [StatusController::class, 'show']);
+    Route::delete('/delete/{id}', [StatusController::class, 'destroy']);
 });
 
 Route::prefix('auth')->group(function () {
