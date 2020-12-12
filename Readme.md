@@ -5,12 +5,16 @@
 
 # About
 
-1. [Description](##description)
+1. [Description](##description) 
 2. [Built with](##built-with)
 
 ## Description
 This app is used to manage the different needs of a company in order to have clear work schedules for each employee. 
 Employees can request an specific work turn and admins can accept or reject those requests. 
+
+## Diagramas
+* Use Case Diagrama: 
+![alt_text](https://github.com/Etienne0812/OrchestraApp-Laravel-Ionic/blob/develop/Images/OrchestraUse.jpg)
 
 ## Built with
 This app has been built using the next technologies:
@@ -34,7 +38,20 @@ npm install -g @ionic/cli
 * Run the Composer Installer 
 
 ## Usage
-* Clone this repo
+* Clone this repo:
 ``` markdown
 git clone https://github.com/Etienne0812/OrchestraApp-Laravel-Ionic
 ```
+* You will have to create the database. More info [here]().
+
+* In order to get the app working, you will need to run the following commands:
+   + While is the folder OrchestraBackend: 
+   ``` markdown
+    php artisan serve
+    ```
+    + While in the folder OrchestraFrontend:
+    ``` markdown
+    ionic serve
+    ```
+
+# Installation
