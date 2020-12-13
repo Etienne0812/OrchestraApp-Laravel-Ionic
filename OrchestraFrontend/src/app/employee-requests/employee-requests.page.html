@@ -13,7 +13,7 @@
       <ion-card-title><ion-icon name="git-pull-request-outline"></ion-icon></ion-card-title>
     </ion-card-header>
   
-    <ion-card-content>
+    <ion-card-content >
       <ion-card-title>Solicitud de:</ion-card-title>
       <ion-card-subtitle>{{r.userEmail}} </ion-card-subtitle>
       Tipo: {{r.type}}<br /> 
@@ -21,13 +21,19 @@
       Fecha de inicio: {{r.startDate}}<br /> 
       Fecha de finalización: {{r.endDate}}<br /> 
       Estado: {{r.revised}}<br /> 
-        <ion-icon (click)="updateRequest(r.id)" name="create" slot="end" style="zoom:2.0;"></ion-icon>
-        <ion-icon (click)="deleteRequest(r.id)" name="trash" slot="end" style="zoom:2.0;"></ion-icon>
-        <ion-icon (click)="confirmRequest(r.id)" name="checkmark-outline" slot="end" style="zoom:2.0"></ion-icon>
-        <ion-icon (click)="rejectRequest(r.id)" name="close-outline" slot="end" style="zoom:2.0"></ion-icon>
+        <ion-icon id="options-icon" (click)="isAdmin()" name="ellipsis-horizontal-outline" slot="end" style="zoom:2.0;"></ion-icon>
+        <ion-icon id = "update-icon" (click)="updateRequest(r.id)" name="create" slot="end" style="zoom:2.0; display:none;"></ion-icon>
+        <ion-icon id = "delete-icon" (click)="deleteRequest(r.id)" name="trash" slot="end" style="zoom:2.0; display:none;"></ion-icon>
+        <ion-icon id = "confirm-icon" (click)="confirmRequest(r.id)" color="success" name="checkmark-outline" slot="end" style="zoom:2.0; display:none;"></ion-icon>
+        <ion-icon id = "reject-icon" (click)="rejectRequest(r.id)" color="danger" name="close-outline" slot="end" style="zoom:2.0; display:none;"></ion-icon>
     </ion-card-content>
     
   </ion-card>
-
-  <ion-button (click)="insertRequest()" shape = "round" color = "tertiary" class = "add-button" expand="block">Crear una solicitud</ion-button>
 </ion-content>
+<ion-footer class="ion-no-border" lines = "none" >
+  <ion-toolbar lines="none">
+    <ion-item lines="none" >
+      <ion-icon (click)="insertRequest()" name="add-outline" color = "tertiary" slot="end" style="zoom:1.5;">Crear una solicitud</ion-icon>
+    </ion-item>
+  </ion-toolbar>
+</ion-footer>

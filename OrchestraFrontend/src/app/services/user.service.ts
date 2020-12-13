@@ -29,9 +29,9 @@ export class UserService {
     return this.currentUserId;
   }
 
-  // getUserById(id: number): Observable<User> {
-  //   return this.http.get<User>(apiUrl + "/user/" + id);
-  // }
+  getRequestByEmail(email: string): Observable<User> {
+    return this.http.get<User>(apiUrl + "/get/" + email);
+  }
 
   getUser(): Observable<User[]> {
     return this.http.get<User[]>(apiUrl + "/user");
@@ -51,15 +51,6 @@ export class UserService {
     return this.http.post(apiUrl + "/register", body, httpOptions);
   }
 
-  login(usr: User): Observable<any>{
-    let bodyEncoded = new URLSearchParams();
-    bodyEncoded.append("email", usr.email);
-    bodyEncoded.append("password", usr.password);
-    // bodyEncoded.append("password_confirmation", usr.password_confirmation);
-    let body = bodyEncoded.toString();
-
-    return this.http.post(apiUrl + "/login", body, httpOptions);
-  }
 
   // updateData(id: number, dat: Data): Observable<any>{
   //   let bodyEncoded = new URLSearchParams();

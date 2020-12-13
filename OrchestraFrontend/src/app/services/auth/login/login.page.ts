@@ -1,12 +1,11 @@
-import { ReturnStatement } from '@angular/compiler';
-import { PipeCollector } from '@angular/compiler/src/template_parser/binding_parser';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { YouAreLoggedInPageRoutingModule } from 'src/app/you-are-logged-in/you-are-logged-in-routing.module';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
-import { User } from '../services/user';
-import { UserService } from '../services/user.service';
-import { AuthService } from '../services/auth.service';
+import { User } from '../../../models/user';
+import { AuthService } from '../auth.service';
+
 
 @Component({
   selector: 'app-login',
@@ -16,7 +15,7 @@ import { AuthService } from '../services/auth.service';
 export class LoginPage implements OnInit {
 
   loginForm: FormGroup;
-  //usr: User[]
+  usr: User[]
   constructor(public fb: FormBuilder, 
     private authService: AuthService, 
     private alertController: AlertController, 
@@ -37,22 +36,18 @@ export class LoginPage implements OnInit {
       return false;
       
     } else {
-      let user: User = {
+      console.log("pep")
+      let usr = {
         id: null,
         email: this.loginForm.value.email,
-        password: this.loginForm.value.password, 
-        role: null, 
+        password: this.loginForm.value.password,
+        password_confirmation: null,
+        role: 2, 
       };
-      this.authService.login(user).subscribe((res)=>{
-        if(!res.access_token) {
-          this.presentAlert("invalid credentials");
-          return;
-        }
-        this.router.navigateByUrl('/you-are-logged-in');
-        this.loginForm.reset();
-      }, err => {
-        this.presentAlert("Error");
-      });
+      this.authService.login(usr)
+      if(this.authService.isAuthenticated()){
+        this.router.navigateByUrl("/tabs/tab1");
+      }
       
     }
   }

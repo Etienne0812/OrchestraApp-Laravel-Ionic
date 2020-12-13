@@ -24,11 +24,11 @@ const routes: Routes = [
   },
   {
     path: 'register',
-    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
+    loadChildren: () => import('./services/auth/register/register.module').then( m => m.RegisterPageModule)
   },
   {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./services/auth/login/login.module').then( m => m.LoginPageModule)
   },
   {
     path: 'employee-status',
@@ -41,6 +41,10 @@ const routes: Routes = [
   {
     path: 'update-status',
     loadChildren: () => import('./update-status/update-status.module').then( m => m.UpdateStatusPageModule)
+  },
+  {
+    path: 'you-are-logged-in',
+    loadChildren: () => import('./you-are-logged-in/you-are-logged-in.module').then( m => m.YouAreLoggedInPageModule)
   },
 ];
 @NgModule({

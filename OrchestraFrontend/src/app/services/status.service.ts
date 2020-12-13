@@ -60,4 +60,14 @@ export class StatusService {
     
     return this.http.put(apiUrl + "/put/" + id, body, httpOptions);
   }
+
+  modifyStatus(id: number, sta: Status): Observable<any>{
+    let bodyEncoded = new URLSearchParams();
+    bodyEncoded.append("type", sta.type);
+    bodyEncoded.append("startDate", sta.startDate);
+    bodyEncoded.append("endDate", sta.endDate);
+    let body = bodyEncoded.toString();
+    
+    return this.http.put(apiUrl + "/put/" + id, body, httpOptions);
+  }
 }

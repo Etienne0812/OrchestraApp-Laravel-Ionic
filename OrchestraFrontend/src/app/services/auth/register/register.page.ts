@@ -3,8 +3,10 @@ import { PipeCollector } from '@angular/compiler/src/template_parser/binding_par
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserService } from '../services/user.service';
-import { DataService } from '../services/data.service';
+import { UserService } from '../../user.service';
+import { DataService } from '../../data.service';
+import { AuthService } from '../auth.service';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-register',
@@ -18,6 +20,7 @@ export class RegisterPage implements OnInit {
   constructor(public fb: FormBuilder, 
     private UserService: UserService,
     private DataService: DataService,
+    private AuthService: AuthService, 
     private router: Router) {
       this.registForm = this.fb.group({
         email: ['', [Validators.required, Validators.minLength(4)]],
@@ -39,17 +42,19 @@ export class RegisterPage implements OnInit {
       return false;
       
     } else {
+      console.log("toiaqui")
       let usr = {
         id: null,
         email: this.registForm.value.email,
         password: this.registForm.value.password, 
         password_confirmation: this.registForm.value.cpassword, 
-        role: null, 
+        role: 1, 
       }
-      this.UserService.addUser(usr)
+      this.AuthService.addUser(usr)
         .subscribe((res) => {
           this.router.navigateByUrl("/tabs/tab1");
         });
+      this.AuthService.saveUser(usr)
       let dat = {
         id: null,
         DNI: this.registForm.value.DNI,

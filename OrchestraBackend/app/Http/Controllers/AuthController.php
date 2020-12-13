@@ -25,6 +25,7 @@ class AuthController extends Controller
         $user = new User;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
+        $user->role = $request->role;
         $user->save();
         return response()->json(['status' => 'success'], 200);
     }
@@ -52,6 +53,12 @@ class AuthController extends Controller
             'data' => $user
         ]);
     }
+
+    public function userData(User $user, $id)
+    {
+        return User::findOrFail($id);
+    }
+
     public function refresh()
     {
         if ($token = $this->guard()->refresh()) {
