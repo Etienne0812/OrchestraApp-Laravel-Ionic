@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { User } from '../../../models/user';
 import { AuthService } from '../auth.service';
+import { UserService } from '../../user.service';
 
 
 @Component({
@@ -14,10 +15,14 @@ import { AuthService } from '../auth.service';
 })
 export class LoginPage implements OnInit {
 
+  private role: number;
+
   loginForm: FormGroup;
   usr: User[]
+  user: User[]
   constructor(public fb: FormBuilder, 
     private authService: AuthService, 
+    private UserService: UserService, 
     private alertController: AlertController, 
     private router: Router) { 
       this.loginForm = this.fb.group({
@@ -32,22 +37,30 @@ export class LoginPage implements OnInit {
   
 
   onFormSubmit() {
+    
+
     if (!this.loginForm.valid) {
       return false;
-      
     } else {
+      let mail = this.loginForm.value.email
+      this.UserService.getUserByEmail(mail).subscribe((user) => { 
+        
+        this.role = user[0].role;
+        console.log(this.role)
+        let usr = {
+          id: null,
+          email: this.loginForm.value.email,
+          password: this.loginForm.value.password,
+          password_confirmation: null,
+          role: this.role, 
+        };
+        this.authService.login(usr)
+        if(this.authService.isAuthenticated()){
+          this.router.navigateByUrl("/tabs/tab1");
+        }
+      })
       console.log("pep")
-      let usr = {
-        id: null,
-        email: this.loginForm.value.email,
-        password: this.loginForm.value.password,
-        password_confirmation: null,
-        role: 2, 
-      };
-      this.authService.login(usr)
-      if(this.authService.isAuthenticated()){
-        this.router.navigateByUrl("/tabs/tab1");
-      }
+      
       
     }
   }

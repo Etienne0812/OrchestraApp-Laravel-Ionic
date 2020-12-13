@@ -34,6 +34,13 @@ export class CreateRequestPage implements OnInit {
 
   ngOnInit() {
     console.log(this.AuthService.getUser())
+    console.log(this.AuthService.getToken())
+    if(this.AuthService.isAuthenticated()){
+      console.log("ooo")
+    } else {
+      console.log("notok")
+    }
+    console.log(this.AuthService.isAuthenticated())
   }
 
   onFormSubmit() {

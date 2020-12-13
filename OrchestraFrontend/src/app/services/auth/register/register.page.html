@@ -10,57 +10,57 @@
   </ion-item>
   <form [formGroup]="registForm" (ngSubmit)="onFormSubmit()">
     <ion-item>
-      <ion-label position="floating">Email</ion-label>
-      <ion-input formControlName="email" type="text" required></ion-input>
+      <ion-label position="floating"></ion-label>
+      <ion-input formControlName="email" placeholder="Email" type="text" required></ion-input>
       <ion-label color="danger" *ngIf="registForm.controls.email.errors?.required && (registForm.touched || registForm.dirty)">* El tipo es obligatorio </ion-label>
       <ion-label color="danger" *ngIf="registForm.controls.email.errors?.minlength && (registForm.touched || registForm.dirty)">* Mínimo 4 carácteres.</ion-label>
     </ion-item>
 
     <ion-item>
-      <ion-label position="floating">Contraseña</ion-label>
-      <ion-input formControlName="password" type="text" required></ion-input>
+      <ion-label position="floating"></ion-label>
+      <ion-input formControlName="password" placeholder = "Contraseña" type="text" required></ion-input>
       <ion-label color="danger" *ngIf="registForm.controls.password.errors?.required && (registForm.touched || registForm.dirty)">* El motivo es obligatorio </ion-label>
       <ion-label color="danger" *ngIf="registForm.controls.password.errors?.minlength && (registForm.touched || registForm.dirty)">* Mínimo 4 carácteres.</ion-label>
     </ion-item>
 
     <ion-item>
-      <ion-label position="floating">Confirmar contraseña</ion-label>
-      <ion-input formControlName="cpassword" type="text" required></ion-input>
+      <ion-label position="floating"></ion-label>
+      <ion-input formControlName="cpassword" placeholder = "Confirmar contraseña" type="text" required></ion-input>
       <ion-label color="danger" *ngIf="registForm.controls.cpassword.errors?.required && (registForm.touched || registForm.dirty)">* El motivo es obligatorio </ion-label>
       <ion-label color="danger" *ngIf="registForm.controls.cpassword.errors?.minlength && (registForm.touched || registForm.dirty)">* Mínimo 4 carácteres.</ion-label>
     </ion-item>
 
     <ion-item>
-      <ion-label position="floating">DNI</ion-label>
-      <ion-input formControlName="DNI" type="text" required></ion-input>
+      <ion-label position="floating"></ion-label>
+      <ion-input formControlName="DNI" placeholder = "DNI" type="text" required></ion-input>
       <ion-label color="danger" *ngIf="registForm.controls.DNI.errors?.required && (registForm.touched || registForm.dirty)">* El motivo es obligatorio </ion-label>
       <ion-label color="danger" *ngIf="registForm.controls.DNI.errors?.minlength && (registForm.touched || registForm.dirty)">* Mínimo 4 carácteres.</ion-label>
     </ion-item>
 
     <ion-item>
-      <ion-label position="floating">Nombre</ion-label>
-      <ion-input formControlName="name" type="text" required></ion-input>
+      <ion-label position="floating"></ion-label>
+      <ion-input formControlName="name" placeholder = "Nombre" type="text" required></ion-input>
       <ion-label color="danger" *ngIf="registForm.controls.name.errors?.required && (registForm.touched || registForm.dirty)">* El motivo es obligatorio </ion-label>
       <ion-label color="danger" *ngIf="registForm.controls.name.errors?.minlength && (registForm.touched || registForm.dirty)">* Mínimo 4 carácteres.</ion-label>
     </ion-item>
 
     <ion-item>
-      <ion-label position="floating">Primer apellido</ion-label>
-      <ion-input formControlName="firstSurname" type="text" required></ion-input>
+      <ion-label position="floating"></ion-label>
+      <ion-input formControlName="firstSurname" placeholder = "Primer apellido" type="text" required></ion-input>
       <ion-label color="danger" *ngIf="registForm.controls.firstSurname.errors?.required && (registForm.touched || registForm.dirty)">* El motivo es obligatorio </ion-label>
       <ion-label color="danger" *ngIf="registForm.controls.firstSurname.errors?.minlength && (registForm.touched || registForm.dirty)">* Mínimo 4 carácteres.</ion-label>
     </ion-item>
 
     <ion-item>
-      <ion-label position="floating">Segundo apellido</ion-label>
-      <ion-input formControlName="secondSurname" type="text" required></ion-input>
+      <ion-label position="floating"></ion-label>
+      <ion-input formControlName="secondSurname" placeholder = "Segundo apellido" type="text" required></ion-input>
       <ion-label color="danger" *ngIf="registForm.controls.secondSurname.errors?.required && (registForm.touched || registForm.dirty)">* El motivo es obligatorio </ion-label>
       <ion-label color="danger" *ngIf="registForm.controls.secondSurname.errors?.minlength && (registForm.touched || registForm.dirty)">* Mínimo 4 carácteres.</ion-label>
     </ion-item>
 
     <ion-item>
-      <ion-label position="floating">Teléfono</ion-label>
-      <ion-input formControlName="phone" type="text" required></ion-input>
+      <ion-label position="floating"></ion-label>
+      <ion-input formControlName="phone" plceholder = "Teléfono" type="text" required></ion-input>
       <ion-label color="danger" *ngIf="registForm.controls.phone.errors?.required && (registForm.touched || registForm.dirty)">* El motivo es obligatorio </ion-label>
       <ion-label color="danger" *ngIf="registForm.controls.phone.errors?.minlength && (registForm.touched || registForm.dirty)">* Mínimo 4 carácteres.</ion-label>
     </ion-item>

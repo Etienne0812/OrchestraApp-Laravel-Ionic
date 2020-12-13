@@ -62,6 +62,7 @@ export class EmployeeRequestsPage implements OnInit {
 
   isAdmin(){
     document.getElementById("options-icon").style.display = "none";
+    document.getElementById("collapse-icon").style.display = "";
     const user = this.AuthService.getUser()
       this.role = user.role;
       console.log(this.role)
@@ -73,6 +74,23 @@ export class EmployeeRequestsPage implements OnInit {
         document.getElementById("delete-icon").style.display = "";
         document.getElementById("confirm-icon").style.display = "";
         document.getElementById("reject-icon").style.display = "";
+      }
+  }
+
+  collapse(){
+    document.getElementById("options-icon").style.display = "";
+    document.getElementById("collapse-icon").style.display = "none";
+    const user = this.AuthService.getUser()
+      this.role = user.role;
+      console.log(this.role)
+      if(this.role == '1'){
+      document.getElementById("update-icon").style.display = "none";
+      document.getElementById("delete-icon").style.display = "none";
+      } else if(this.role == '2') {
+        document.getElementById("update-icon").style.display = "none";
+        document.getElementById("delete-icon").style.display = "none";
+        document.getElementById("confirm-icon").style.display = "none";
+        document.getElementById("reject-icon").style.display = "none";
       }
   }
 

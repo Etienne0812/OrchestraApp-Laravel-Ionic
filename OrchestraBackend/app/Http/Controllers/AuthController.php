@@ -54,9 +54,11 @@ class AuthController extends Controller
         ]);
     }
 
-    public function userData(User $user, $id)
+    public function userData(User $user, $email)
     {
-        return User::findOrFail($id);
+        return User::query()
+        ->where('email', 'LIKE', $email) 
+        ->get();
     }
 
     public function refresh()

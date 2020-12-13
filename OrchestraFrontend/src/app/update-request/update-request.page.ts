@@ -35,6 +35,7 @@ export class UpdateRequestPage implements OnInit {
     let id = this.RequestsService.getCurrentRequestId();
 
     this.RequestsService.getRequestById(id).subscribe((req) => { 
+      console.log(req)
       this.requestUpdateForm = this.fb.group({
         type: req.type,
         reason: req.reason, 

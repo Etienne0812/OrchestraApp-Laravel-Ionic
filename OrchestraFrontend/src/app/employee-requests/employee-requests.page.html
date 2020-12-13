@@ -20,12 +20,15 @@
       Motivo: {{r.reason}}<br />
       Fecha de inicio: {{r.startDate}}<br /> 
       Fecha de finalización: {{r.endDate}}<br /> 
-      Estado: {{r.revised}}<br /> 
-        <ion-icon id="options-icon" (click)="isAdmin()" name="ellipsis-horizontal-outline" slot="end" style="zoom:2.0;"></ion-icon>
-        <ion-icon id = "update-icon" (click)="updateRequest(r.id)" name="create" slot="end" style="zoom:2.0; display:none;"></ion-icon>
-        <ion-icon id = "delete-icon" (click)="deleteRequest(r.id)" name="trash" slot="end" style="zoom:2.0; display:none;"></ion-icon>
-        <ion-icon id = "confirm-icon" (click)="confirmRequest(r.id)" color="success" name="checkmark-outline" slot="end" style="zoom:2.0; display:none;"></ion-icon>
-        <ion-icon id = "reject-icon" (click)="rejectRequest(r.id)" color="danger" name="close-outline" slot="end" style="zoom:2.0; display:none;"></ion-icon>
+      Estado: {{r.revised}}<br />
+
+        <!-- <ion-icon id= "options-icon" (click)="isAdmin()" name="ellipsis-horizontal-outline" slot="end" style="zoom:2.0;"></ion-icon> -->
+        <ion-icon id = "update-icon" (click)="updateRequest(r.id)" name="create" slot="end" style="zoom:2.0;"></ion-icon>
+        <ion-icon id = "delete-icon" (click)="deleteRequest(r.id)" name="trash" slot="end" style="zoom:2.0;"></ion-icon>
+        <ion-icon id = "confirm-icon" (click)="confirmRequest(r.id)" color="success" name="checkmark-outline" slot="end" style="zoom:2.0;"></ion-icon>
+        <ion-icon id = "reject-icon" (click)="rejectRequest(r.id)" color="danger" name="close-outline" slot="end" style="zoom:2.0;"></ion-icon>
+        <!-- <ion-icon id= "collapse-icon" (click)= "collapse()" name="arrow-undo-outline" slot="end" style="zoom:2.0; display:none"></ion-icon> -->
+  
     </ion-card-content>
     
   </ion-card>

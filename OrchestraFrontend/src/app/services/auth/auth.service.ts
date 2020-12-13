@@ -77,13 +77,21 @@ export class AuthService {
 
   login(user){
     this.httpClient.post(`http://localhost:8000/api/auth/login`, user).subscribe( res => {
-      return this.storage.set(TOKEN_KEY, `Bearer ${res['token']}`).then( res => {
         this.authenticationState.next(true);
         this.userId.next(user.id);
         console.log(this.authenticationState.value)
         this.saveUser(user)
-      });
+      
     });
+  }
+
+  public saveToken(token: string) {
+    window.sessionStorage.removeItem(TOKEN_KEY);
+    window.sessionStorage.setItem(TOKEN_KEY, token);
+  }
+
+  public getToken(): string {
+    return sessionStorage.getItem(TOKEN_KEY);
   }
 
   
@@ -94,21 +102,23 @@ export class AuthService {
     });
   }
 
-  isAuthenticated(){
+   isAuthenticated(){
+    if(this.checkToken != null){
+      this.authenticationState.next(true);
+    } else if (this.checkToken == null) {
+      this.authenticationState.next(false)
+    }
     return this.authenticationState.value;
   }
 
-  isAdmin(){
-    const user = this.getUser();
-    this.role = user.role();
-    return this.role;
-  }
 
   checkToken(){
     console.log(this.storage.get(TOKEN_KEY))
     return this.storage.get(TOKEN_KEY).then( res => {
       if (res){
         this.authenticationState.next(true);
+      } else {
+        this.authenticationState.next(false);
       }
     });
   }
@@ -130,6 +140,8 @@ export class AuthService {
   getUser(){
     return JSON.parse(sessionStorage.getItem(USER_KEY))
   }
+
+  
 
   
 
