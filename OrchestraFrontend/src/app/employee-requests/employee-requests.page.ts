@@ -19,13 +19,14 @@ export class EmployeeRequestsPage implements OnInit {
   req: Requests[];
   sta: Status[];
   private role: string;
+  admin :boolean;
 
   constructor(private RequestsService: RequestsService, private AuthService: AuthService, private StatusService: StatusService, private router: Router) { }
 
   ngOnInit() {
     this.getAllRequests();
     this.getAllStatus();
-    // this.isAdmin();
+    this.admin = this.AuthService.isAdmin();
   }
 
   ionViewWillEnter(){
@@ -60,42 +61,7 @@ export class EmployeeRequestsPage implements OnInit {
     this.router.navigateByUrl("/update-request");
   }
 
-  isAdmin(){
-    document.getElementById("options-icon").style.display = "none";
-    document.getElementById("collapse-icon").style.display = "";
-    const user = this.AuthService.getUser()
-      this.role = user.role;
-      console.log(this.role)
-      if(this.role == '1'){
-      document.getElementById("update-icon").style.display = "";
-      document.getElementById("delete-icon").style.display = "";
-      } else if(this.role == '2') {
-        document.getElementById("update-icon").style.display = "";
-        document.getElementById("delete-icon").style.display = "";
-        document.getElementById("confirm-icon").style.display = "";
-        document.getElementById("reject-icon").style.display = "";
-      }
-  }
-
-  collapse(){
-    document.getElementById("options-icon").style.display = "";
-    document.getElementById("collapse-icon").style.display = "none";
-    const user = this.AuthService.getUser()
-      this.role = user.role;
-      console.log(this.role)
-      if(this.role == '1'){
-      document.getElementById("update-icon").style.display = "none";
-      document.getElementById("delete-icon").style.display = "none";
-      } else if(this.role == '2') {
-        document.getElementById("update-icon").style.display = "none";
-        document.getElementById("delete-icon").style.display = "none";
-        document.getElementById("confirm-icon").style.display = "none";
-        document.getElementById("reject-icon").style.display = "none";
-      }
-  }
-
   confirmRequest(id: number){
-    console.log("pero");
       let req = {
         id: null,
         type: null,
@@ -116,10 +82,8 @@ export class EmployeeRequestsPage implements OnInit {
     modifyStatus(id: number){
       for(var i=0;i<this.req.length ; i++)
       {
-        console.log("a")
         for(var j=0;j<this.sta.length ; j++)
         {
-          console.log("b")
         if(this.req[i].userEmail.match(this.sta[j].userEmail) && this.req[i].id == id){
           console.log(this.req[i].type)
           let sta = {
@@ -128,7 +92,6 @@ export class EmployeeRequestsPage implements OnInit {
           startDate: this.req[i].startDate, 
           endDate: this.req[i].endDate, 
           userEmail: null, 
- 
          }
         this.StatusService.modifyStatus(this.sta[j].id, sta)
         .subscribe((res) => {
@@ -140,7 +103,6 @@ export class EmployeeRequestsPage implements OnInit {
     }
 
     rejectRequest(id: number){
-      console.log("pero");
         let req = {
           id: null,
           type: null,

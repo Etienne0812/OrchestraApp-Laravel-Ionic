@@ -24,6 +24,7 @@ const apiUrl = 'http://localhost:8000/api/auth';
 })
 export class AuthService {
   private role : string;
+  private admin: boolean;
   authenticationState = new BehaviorSubject(null);
   userId = new BehaviorSubject(0);
   AUTH_SERVER_ADDRESS:  string  =  'http://localhost:8000';
@@ -85,6 +86,8 @@ export class AuthService {
     });
   }
 
+  
+
   public saveToken(token: string) {
     window.sessionStorage.removeItem(TOKEN_KEY);
     window.sessionStorage.setItem(TOKEN_KEY, token);
@@ -92,6 +95,18 @@ export class AuthService {
 
   public getToken(): string {
     return sessionStorage.getItem(TOKEN_KEY);
+  }
+
+  isAdmin(){
+    const user = this.getUser()
+      this.role = user.role;
+      console.log(this.role)
+      if(this.role == '1'){
+      this.admin = false;
+      } else if(this.role == '2') {
+        this.admin = true;
+      } 
+      return this.admin;
   }
 
   

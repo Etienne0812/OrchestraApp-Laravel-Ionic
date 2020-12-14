@@ -26,7 +26,7 @@ export class LoginPage implements OnInit {
     private alertController: AlertController, 
     private router: Router) { 
       this.loginForm = this.fb.group({
-        email: ['', [Validators.required, Validators.minLength(4)]],
+        email: ['', [Validators.required]],
         password: ['', [Validators.required, Validators.minLength(4)]]
       });
     }
