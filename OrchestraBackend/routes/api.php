@@ -29,6 +29,7 @@ Route::prefix('requests')->group(function () {
     Route::post('/post', [RequestsController::class, 'store']);
     Route::put('/put/{id}', [RequestsController::class, 'update']);
     Route::get('/get/{id}', [RequestsController::class, 'show']);
+    Route::get('/userData/{email}', [RequestsController::class, 'userData']);
     Route::delete('/delete/{id}', [RequestsController::class, 'destroy']);
 });
 
@@ -37,6 +38,7 @@ Route::prefix('data')->group(function () {
     Route::post('/post', [DataController::class, 'store']);
     Route::put('/put/{id}', [DataController::class, 'update']);
     Route::get('/get/{id}', [DataController::class, 'show']);
+    Route::get('/userData/{email}', [DataController::class, 'userData']);
     Route::delete('/delete/{id}', [DataController::class, 'destroy']);
 });
 

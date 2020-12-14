@@ -15,7 +15,7 @@ export class Tab2Page implements OnInit {
   }
 
   logout(){
-    this.AuthService.logout();
+    this.AuthService.deleteUser();
     console.log("logged out")
   }
 

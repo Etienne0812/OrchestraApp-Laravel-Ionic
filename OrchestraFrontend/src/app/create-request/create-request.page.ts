@@ -33,14 +33,6 @@ export class CreateRequestPage implements OnInit {
     }
 
   ngOnInit() {
-    console.log(this.AuthService.getUser())
-    console.log(this.AuthService.getToken())
-    if(this.AuthService.isAuthenticated()){
-      console.log("ooo")
-    } else {
-      console.log("notok")
-    }
-    console.log(this.AuthService.isAuthenticated())
   }
 
   onFormSubmit() {
@@ -51,7 +43,6 @@ export class CreateRequestPage implements OnInit {
       const user = this.AuthService.getUser() ;
       this.uemail = user.email;
       this.urole = user.role;
-      console.log(this.urole)
       let req = {
         id: null,
         type: this.requestCreateForm.value.type,

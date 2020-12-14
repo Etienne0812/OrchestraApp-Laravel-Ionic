@@ -49,6 +49,13 @@ class DataController extends Controller
         return Data::findOrFail($id);
     }
 
+    public function userData(Data $data, $email)
+    {
+        return Data::query()
+        ->where('userEmail', 'LIKE', $email) 
+        ->get();
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

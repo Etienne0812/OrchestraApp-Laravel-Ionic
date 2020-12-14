@@ -32,6 +32,10 @@ export class RequestsService {
     return this.http.get<Requests>(apiUrl + "/get/" + id);
   }
 
+  getRequestByEmail(email: string): Observable<Requests[]> {
+    return this.http.get<Requests[]>(apiUrl + "/userData/" + email);
+  }
+
   getRequests(): Observable<Requests[]> {
     return this.http.get<Requests[]>(apiUrl + "/get");
   };

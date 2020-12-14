@@ -49,6 +49,13 @@ class RequestsController extends Controller
         return Requests::findOrFail($id);
     }
 
+    public function userData(Requests $requests, $email)
+    {
+        return Requests::query()
+        ->where('userEmail', 'LIKE', $email) 
+        ->get();
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

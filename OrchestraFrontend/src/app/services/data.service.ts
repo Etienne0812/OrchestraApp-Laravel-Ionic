@@ -32,6 +32,10 @@ export class DataService {
     return this.http.get<Data>(apiUrl + "/get/" + id);
   }
 
+  getDataByEmail(email: string): Observable<Data[]> {
+    return this.http.get<Data[]>(apiUrl + "/userData/" + email);
+  }
+
   getData(): Observable<Data[]> {
     return this.http.get<Data[]>(apiUrl + "/get");
   };

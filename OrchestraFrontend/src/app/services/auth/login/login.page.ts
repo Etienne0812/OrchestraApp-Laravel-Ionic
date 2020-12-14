@@ -57,7 +57,7 @@ export class LoginPage implements OnInit {
         this.authService.login(usr)
         if(this.authService.isAuthenticated()){
           this.router.navigateByUrl("/tabs/tab1");
-        }
+        } 
       })
       console.log("pep")
       

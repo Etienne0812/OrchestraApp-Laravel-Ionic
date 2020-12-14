@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { RequestsService } from '../services/requests.service';
 import { StatusService } from '../services/status.service';
 import { AuthService } from '../services/auth/auth.service';
+import { typeWithParameters } from '@angular/compiler/src/render3/util';
 
 
 
@@ -18,26 +19,43 @@ export class EmployeeRequestsPage implements OnInit {
 
   req: Requests[];
   sta: Status[];
-  private role: string;
+  private email: string;
   admin :boolean;
 
   constructor(private RequestsService: RequestsService, private AuthService: AuthService, private StatusService: StatusService, private router: Router) { }
 
   ngOnInit() {
-    this.getAllRequests();
     this.getAllStatus();
     this.admin = this.AuthService.isAdmin();
+    this.isAdmin()
   }
 
   ionViewWillEnter(){
-    this.getAllRequests();
+    this.isAdmin();
   }
+
+  isAdmin(){
+    if(this.admin){
+      this.getAllRequests();
+    } else if(!this.admin) {
+      const user = this.AuthService.getUser()
+      this.email = user.email;
+      this.getRequestsByEmail(this.email)
+      
+    }
+  }
+
 
   getAllRequests(){
     this.RequestsService.getRequests().subscribe( req => {
       this.req = req;
     });
-    
+  }
+
+  getRequestsByEmail(email: string){
+    this.RequestsService.getRequestByEmail(email).subscribe( req => {
+      this.req = req;
+    });
   }
 
   getAllStatus(){

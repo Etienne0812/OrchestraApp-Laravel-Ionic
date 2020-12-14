@@ -25,6 +25,7 @@ const apiUrl = 'http://localhost:8000/api/auth';
 export class AuthService {
   private role : string;
   private admin: boolean;
+  private logged: boolean;
   authenticationState = new BehaviorSubject(null);
   userId = new BehaviorSubject(0);
   AUTH_SERVER_ADDRESS:  string  =  'http://localhost:8000';
@@ -78,12 +79,14 @@ export class AuthService {
 
   login(user){
     this.httpClient.post(`http://localhost:8000/api/auth/login`, user).subscribe( res => {
+
         this.authenticationState.next(true);
         this.userId.next(user.id);
         console.log(this.authenticationState.value)
-        this.saveUser(user)
-      
+        this.saveUser(user)   
     });
+  
+
   }
 
   
@@ -100,13 +103,22 @@ export class AuthService {
   isAdmin(){
     const user = this.getUser()
       this.role = user.role;
-      console.log(this.role)
       if(this.role == '1'){
       this.admin = false;
       } else if(this.role == '2') {
         this.admin = true;
       } 
       return this.admin;
+  }
+
+  isLogged(){
+    const user = this.getUser()
+    if(user == null){
+      this.logged = false;
+    } else {
+      this.logged = true;
+    }
+    return this.logged;
   }
 
   
@@ -142,6 +154,11 @@ export class AuthService {
     window.sessionStorage.removeItem(USER_KEY);
     window.sessionStorage.setItem(USER_KEY, JSON.stringify(user));
   }
+
+  deleteUser(){
+    window.sessionStorage.removeItem(USER_KEY);
+  }
+
   addUser(usr: User): Observable<any>{
     let bodyEncoded = new URLSearchParams();
     bodyEncoded.append("email", usr.email);

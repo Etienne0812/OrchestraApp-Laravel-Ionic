@@ -24,8 +24,8 @@
 
         <ion-icon id = "update-icon" (click)="updateRequest(r.id)" name="create" slot="end" style="zoom:2.0;"></ion-icon>
         <ion-icon id = "delete-icon" (click)="deleteRequest(r.id)" name="trash" slot="end" style="zoom:2.0;"></ion-icon>
-        <ion-icon *ngIf = "admin" id = "confirm-icon" (click)="confirmRequest(r.id)" color="success" name="checkmark-outline" slot="end" style="zoom:2.0;"></ion-icon>
-        <ion-icon *ngIf = "admin" (click)="rejectRequest(r.id)" color="danger" name="close-outline" slot="end" style="zoom:2.0;"></ion-icon>
+        <ion-icon *ngIf = "admin && (r.revised == 'Sin revisar' || r.revised == 'Solicitud denegada')" id = "confirm-icon" (click)="confirmRequest(r.id)" color="success" name="checkmark-outline" slot="end" style="zoom:2.0;"></ion-icon>
+        <ion-icon *ngIf = "admin && (r.revised == 'Sin revisar' || r.revised == 'Solicitud aceptada')" (click)="rejectRequest(r.id)" color="danger" name="close-outline" slot="end" style="zoom:2.0;"></ion-icon>
     </ion-card-content>
     
   </ion-card>

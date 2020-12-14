@@ -18,7 +18,7 @@
     <ion-item>
       <ion-label position="floating"></ion-label>
       <ion-input formControlName="password" placeholder="Contraseña" type="password" required></ion-input>
-      <ion-label color="danger" *ngIf="loginForm.controls.password.errors?.required && (loginForm.touched || loginForm.dirty)">* El motivo es obligatorio </ion-label>
+      <ion-label color="danger" *ngIf="loginForm.controls.password.errors?.required && (loginForm.touched || loginForm.dirty)">* La contraseña es obligatoria </ion-label>
       <ion-label color="danger" *ngIf="loginForm.controls.password.errors?.minlength && (loginForm.touched || loginForm.dirty)">* Mínimo 4 carácteres.</ion-label>
     </ion-item>
 
