@@ -8,6 +8,12 @@
   <ion-item lines = "none">
     <ion-icon (click)="return()" name="arrow-back-outline" slot="start"></ion-icon>
   </ion-item>
+  <!-- <p *ngIf="!request"> No has creado ninguna solicitud</p> -->
+  <ion-card *ngIf="!request">
+    <ion-card-content>
+      No has creado ninguna solicitud
+    </ion-card-content>
+  </ion-card>
   <ion-card *ngFor="let r of req">
     <ion-card-header>
       <ion-card-title><ion-icon name="git-pull-request-outline"></ion-icon></ion-card-title>
@@ -21,14 +27,15 @@
       Fecha de inicio: {{r.startDate}}<br /> 
       Fecha de finalización: {{r.endDate}}<br /> 
       Estado: {{r.revised}}<br />
-
         <ion-icon id = "update-icon" (click)="updateRequest(r.id)" name="create" slot="end" style="zoom:2.0;"></ion-icon>
         <ion-icon id = "delete-icon" (click)="deleteRequest(r.id)" name="trash" slot="end" style="zoom:2.0;"></ion-icon>
         <ion-icon *ngIf = "admin && (r.revised == 'Sin revisar' || r.revised == 'Solicitud denegada')" id = "confirm-icon" (click)="confirmRequest(r.id)" color="success" name="checkmark-outline" slot="end" style="zoom:2.0;"></ion-icon>
         <ion-icon *ngIf = "admin && (r.revised == 'Sin revisar' || r.revised == 'Solicitud aceptada')" (click)="rejectRequest(r.id)" color="danger" name="close-outline" slot="end" style="zoom:2.0;"></ion-icon>
+        
     </ion-card-content>
     
   </ion-card>
+
 </ion-content>
 <ion-footer class="ion-no-border" lines = "none" >
   <ion-toolbar lines="none">

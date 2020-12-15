@@ -21,6 +21,8 @@ export class EmployeeRequestsPage implements OnInit {
   sta: Status[];
   private email: string;
   admin :boolean;
+  request: boolean;
+
 
   constructor(private RequestsService: RequestsService, private AuthService: AuthService, private StatusService: StatusService, private router: Router) { }
 
@@ -35,16 +37,17 @@ export class EmployeeRequestsPage implements OnInit {
   }
 
   isAdmin(){
+    
     if(this.admin){
       this.getAllRequests();
     } else if(!this.admin) {
       const user = this.AuthService.getUser()
       this.email = user.email;
       this.getRequestsByEmail(this.email)
-      
     }
   }
 
+ 
 
   getAllRequests(){
     this.RequestsService.getRequests().subscribe( req => {
@@ -55,7 +58,15 @@ export class EmployeeRequestsPage implements OnInit {
   getRequestsByEmail(email: string){
     this.RequestsService.getRequestByEmail(email).subscribe( req => {
       this.req = req;
+      if(this.req.length == 0){
+        console.log("agua")
+        this.request = false
+      } else {
+        this.request = true
+      }
     });
+    
+    
   }
 
   getAllStatus(){
