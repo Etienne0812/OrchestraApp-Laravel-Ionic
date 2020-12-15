@@ -18,6 +18,7 @@ export class EmployeeDataPage implements OnInit {
   constructor(private DataService: DataService, private AuthService: AuthService, private router: Router) { }
 
   ngOnInit() {
+    this.admin = this.AuthService.isAdmin();
     this.isAdmin();
   }
 
@@ -37,7 +38,6 @@ export class EmployeeDataPage implements OnInit {
     if(this.admin){
       this.getAllData();
     } else if(!this.admin) {
-      
       const user = this.AuthService.getUser()
       this.email = user.email;
       this.getDataByEmail(this.email)

@@ -25,7 +25,7 @@ export class CreateRequestPage implements OnInit {
     private AuthService: AuthService, 
     private router: Router) { 
       this.requestCreateForm = this.fb.group({
-        type: ['', [Validators.required, Validators.minLength(4)]],
+        type: ['', [Validators.required]],
         reason: ['', [Validators.required, Validators.minLength(4)]], 
         startDate: ['', [Validators.required]], 
         endDate: ['', [Validators.required]]

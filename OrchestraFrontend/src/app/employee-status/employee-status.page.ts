@@ -11,11 +11,12 @@ import { StatusService } from '../services/status.service';
 export class EmployeeStatusPage implements OnInit {
 
   sta: Status[];
+  admin :boolean;
 
   constructor(private StatusService: StatusService, private router: Router) { }
 
   ngOnInit() {
-    this.getAllStatuses();
+    this.isAdmin();
   }
 
   ionViewWillEnter(){
@@ -35,6 +36,13 @@ export class EmployeeStatusPage implements OnInit {
   updateStatus(id: number){
     this.StatusService.setCurrentStatusId(id);
     this.router.navigateByUrl("/update-status");
+  }
+
+  isAdmin(){
+    
+    if(this.admin){
+      this.getAllStatuses();
+    } 
   }
 
   return(){

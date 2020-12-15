@@ -83,6 +83,7 @@ export class EmployeeRequestsPage implements OnInit {
     this.RequestsService.deleteRequest(id).subscribe( () => {
       this.getAllRequests();
     })
+    window.location.reload();
   }
 
   updateRequest(id: number){
@@ -129,6 +130,7 @@ export class EmployeeRequestsPage implements OnInit {
         }
        }
       }
+      
     }
 
     rejectRequest(id: number){

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab2',
@@ -7,8 +8,8 @@ import { AuthService } from '../services/auth/auth.service';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page implements OnInit {
-
-  constructor(private AuthService: AuthService) {}
+  private logged: boolean;
+  constructor(private AuthService: AuthService, private router: Router) {}
 
   ngOnInit() {
     this.isLogged()
@@ -20,10 +21,12 @@ export class Tab2Page implements OnInit {
   }
 
   isLogged(){
-    if(this.AuthService.isAuthenticated){
-      
-    } else {
-      document.getElementById("logout-btn").style.display = "none";
+    this.logged = this.AuthService.isLogged()
+    if(this.logged){
+      this.router.navigateByUrl("/employee-data");
+    } else if (!this.logged){
+      this.router.navigateByUrl("/login");
     }
+    // href="/employee-requests"
   }
 }

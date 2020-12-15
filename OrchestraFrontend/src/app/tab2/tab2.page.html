@@ -16,7 +16,7 @@
   <div class = "container">
     <ion-button class = "menu-buttons" shape = "square" color = "tertiary" href="/register">Registrarse <br></ion-button>
     <ion-button class = "menu-buttons" shape = "square" color = "tertiary" href="/login">Iniciar <br> sesión</ion-button>
-    <ion-button class = "menu-buttons" shape = "square" color = "tertiary" href="/employee-data">Datos <br> personales</ion-button>
+    <ion-button (click) = "isLogged()" class = "menu-buttons" shape = "square" color = "tertiary" href="/employee-data">Datos <br> personales</ion-button>
     <ion-button id="logout-btn" (click)="logout()" class = "menu-buttons" shape = "square" color = "tertiary">Cerrar <br> sesión</ion-button>
     <!-- <ion-icon (click)="logout()" name="log-out-outline"></ion-icon> -->
   </div>

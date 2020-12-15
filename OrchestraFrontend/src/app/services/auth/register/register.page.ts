@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from '../../user.service';
 import { DataService } from '../../data.service';
+import { StatusService } from '../../status.service';
 import { AuthService } from '../auth.service';
 import { User } from 'src/app/models/user';
 
@@ -20,6 +21,7 @@ export class RegisterPage implements OnInit {
   constructor(public fb: FormBuilder, 
     private UserService: UserService,
     private DataService: DataService,
+    private StatusService: StatusService,
     private AuthService: AuthService, 
     private router: Router) {
       this.registForm = this.fb.group({
@@ -48,7 +50,7 @@ export class RegisterPage implements OnInit {
         email: this.registForm.value.email,
         password: this.registForm.value.password, 
         password_confirmation: this.registForm.value.cpassword, 
-        role: 1, 
+        role: 1
       }
       this.AuthService.addUser(usr)
         .subscribe((res) => {
@@ -62,9 +64,20 @@ export class RegisterPage implements OnInit {
         firstSurname: this.registForm.value.firstSurname, 
         secondSurname: this.registForm.value.secondSurname, 
         phone: this.registForm.value.phone,  
-        userEmail: this.registForm.value.email, 
+        userEmail: this.registForm.value.email
       }
       this.DataService.addData(dat)
+        .subscribe((res) => {
+          this.router.navigateByUrl("/tabs/tab1");
+        });
+      let sta = {
+        id: null, 
+        type: 'Presencial', 
+        startDate: 'A revisar', 
+        endDate: 'A revisar', 
+        userEmail: this.registForm.value.email
+      }
+      this.StatusService.addStatus(sta)
         .subscribe((res) => {
           this.router.navigateByUrl("/tabs/tab1");
         });

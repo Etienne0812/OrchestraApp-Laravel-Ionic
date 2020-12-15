@@ -11,9 +11,16 @@
   <form [formGroup]="requestCreateForm" (ngSubmit)="onFormSubmit()">
     <ion-item>
       <ion-label position="floating" ></ion-label>
-      <ion-input formControlName="type" type="email" placeholder = "Tipo" required></ion-input>
-      <ion-label color="danger" *ngIf="requestCreateForm.controls.type.errors?.required && (requestCreateForm.touched || requestCreateForm.dirty)">* El tipo es obligatorio </ion-label>
-      <ion-label color="danger" *ngIf="requestCreateForm.controls.type.errors?.minlength && (requestCreateForm.touched || requestCreateForm.dirty)">* Mínimo 4 carácteres.</ion-label>
+      <ion-select formControlName="type" placeholder = "Tipo" interface="popover">
+        <ion-select-option value="Teletrabajo">Teletrabajo</ion-select-option>
+        <ion-select-option value="Presencial">Presencial</ion-select-option>
+        <ion-select-option value="Baja por enfermedad">Baja por enfermedad</ion-select-option>
+        <ion-select-option value="Baja por vacaciones">Baja por vacaciones</ion-select-option>
+        <ion-select-option value="Otro">Otro</ion-select-option>
+      </ion-select>
+      <!-- <ion-input formControlName="type" type="text" placeholder = "Tipo" required></ion-input> -->
+      <!-- <ion-label color="danger" *ngIf="requestCreateForm.controls.type.errors?.required && (requestCreateForm.touched || requestCreateForm.dirty)">* El tipo es obligatorio </ion-label>
+      <ion-label color="danger" *ngIf="requestCreateForm.controls.type.errors?.minlength && (requestCreateForm.touched || requestCreateForm.dirty)">* Mínimo 4 carácteres.</ion-label> -->
     </ion-item>
 
     <ion-item>

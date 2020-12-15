@@ -164,6 +164,7 @@ export class AuthService {
     bodyEncoded.append("email", usr.email);
     bodyEncoded.append("password", usr.password);
     bodyEncoded.append("password_confirmation", usr.password_confirmation);
+    bodyEncoded.append("role", usr.role.toString());
     let body = bodyEncoded.toString();
     return this.http.post(apiUrl + "/register", body, httpOptions);
     

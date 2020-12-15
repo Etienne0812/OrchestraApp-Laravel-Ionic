@@ -14,6 +14,7 @@ export class Tab1Page {
   isLogged(){
     this.logged = this.AuthService.isLogged()
     if(this.logged){
+      
       this.router.navigateByUrl("/employee-requests");
     } else if (!this.logged){
       this.router.navigateByUrl("/login");
