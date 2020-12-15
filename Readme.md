@@ -66,24 +66,24 @@ I personally have used these programms. It is personal preference, but I recomme
 
 1. Simplicity: This app is very simple to use and to get used to. There are two tabs with just a few buttons. 
 2. Colours: The colours in this app are very consistent: mostly black, grey and purple. 
-![alt_text](https://github.com/Etienne0812/OrchestraApp-Laravel-Ionic/blob/develop/Images/.jpg)
+![alt_text](https://github.com/Etienne0812/OrchestraApp-Laravel-Ionic/blob/develop/Images/s1.png)
 3. Text: There is very little text in the app, and even in long lists, only the necessary text is displayed.
-![alt_text](https://github.com/Etienne0812/OrchestraApp-Laravel-Ionic/blob/develop/Images/.jpg)
+![alt_text](https://github.com/Etienne0812/OrchestraApp-Laravel-Ionic/blob/develop/Images/s7.png)
 4. Font: The font used is consistent along the app
 5. Error handling: The app validates every form so you cant't send wrong information. 
-![alt_text](https://github.com/Etienne0812/OrchestraApp-Laravel-Ionic/blob/develop/Images/.jpg)
+![alt_text](https://github.com/Etienne0812/OrchestraApp-Laravel-Ionic/blob/develop/Images/s3.png)
 6. Legibility: Every piece of text is totally readable due to a good font and a color that contrasts with the background
 7. Use of icons: The app uses icons to make the UI more pleasent to the eye.
-![alt_text](https://github.com/Etienne0812/OrchestraApp-Laravel-Ionic/blob/develop/Images/.jpg)
+![alt_text](https://github.com/Etienne0812/OrchestraApp-Laravel-Ionic/blob/develop/Images/s8.png)
 8. Simple info: Every interactive part of this app let the user clearly know it's use: might it be a button that displays the action it is used for or an icon that visually describes it's function.
-![alt_text](https://github.com/Etienne0812/OrchestraApp-Laravel-Ionic/blob/develop/Images/.jpg)
+![alt_text](https://github.com/Etienne0812/OrchestraApp-Laravel-Ionic/blob/develop/Images/s4.png)
 9. Just what you need: This app only shows you the elements you need in each moment. For example, icons used to access admin-only functions are not display to regular users, which helps to not confuse them. 
-![alt_text](https://github.com/Etienne0812/OrchestraApp-Laravel-Ionic/blob/develop/Images/.jpg)
-![alt_text](https://github.com/Etienne0812/OrchestraApp-Laravel-Ionic/blob/develop/Images/.jpg)
+![alt_text](https://github.com/Etienne0812/OrchestraApp-Laravel-Ionic/blob/develop/Images/s2.png)
+![alt_text](https://github.com/Etienne0812/OrchestraApp-Laravel-Ionic/blob/develop/Images/s5.png)
 10. Feedback: The app gives the user certain info to help them know what's happening
-![alt_text](https://github.com/Etienne0812/OrchestraApp-Laravel-Ionic/blob/develop/Images/.jpg)
+![alt_text](https://github.com/Etienne0812/OrchestraApp-Laravel-Ionic/blob/develop/Images/s6.png)
 11. Page names: Pages on the app display their name on top, helping user's quickly realize in which part of the app they are in.
-![alt_text](https://github.com/Etienne0812/OrchestraApp-Laravel-Ionic/blob/develop/Images/.jpg)
+![alt_text](https://github.com/Etienne0812/OrchestraApp-Laravel-Ionic/blob/develop/Images/s9.png)
 
 
 
