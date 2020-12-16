@@ -86,6 +86,27 @@ I personally have used these programms. It is personal preference, but I recomme
 11. Page names: Pages on the app display their name on top, helping user's quickly realize in which part of the app they are in.
 ![alt_text](https://github.com/Etienne0812/OrchestraApp-Laravel-Ionic/blob/develop/Images/s9.png)
 
+## User Requisites
+
+1. Platform
+* This app will be developed mainly for mobile devices
+* It has to work properly on desktop too
+2. Users need to login in order to enter the different pages
+3. Menu
+* Users will see 2 tabs with 2 buttons in each tab
+* Users will have 2 roles: admin and regular user
+* Depending on the role more or less options will be available for the user
+* There will be search options to find certain info
+* If no content matches the search, users will be notified
+4. Users will be asked when deleting things
+5. USers will be asked when creating smething
+6. If a request on the database fails, users will be notified
+7. Users can be authenticated using digital cert
+8. Users can select between specific options when creating requests
+9. USers can see with which account they are logged in
+10. Admins can filter requests by creation dates
+
+
 
 
 # Getting started
