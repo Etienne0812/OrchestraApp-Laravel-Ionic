@@ -47,6 +47,7 @@ Route::prefix('status')->group(function () {
     Route::post('/post', [StatusController::class, 'store']);
     Route::put('/put/{id}', [StatusController::class, 'update']);
     Route::get('/get/{id}', [StatusController::class, 'show']);
+    Route::get('/userData/{email}', [StatusController::class, 'userData']);
     Route::delete('/delete/{id}', [StatusController::class, 'destroy']);
 });
 

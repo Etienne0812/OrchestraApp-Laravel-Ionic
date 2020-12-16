@@ -36,6 +36,10 @@ export class StatusService {
     return this.http.get<Status[]>(apiUrl + "/get");
   };
 
+  getStatusByEmail(email: string): Observable<Status[]> {
+    return this.http.get<Status[]>(apiUrl + "/userData/" + email);
+  }
+
   deleteStatus(id: number): Observable<any>{
     return this.http.delete(apiUrl + "/delete/" + id);
   }

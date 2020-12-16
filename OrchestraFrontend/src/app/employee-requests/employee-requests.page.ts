@@ -65,8 +65,6 @@ export class EmployeeRequestsPage implements OnInit {
         this.request = true
       }
     });
-    
-    
   }
 
   getAllStatus(){

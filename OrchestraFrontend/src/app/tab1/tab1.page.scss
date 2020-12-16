@@ -1,16 +1,37 @@
 
 
-.container{
-    height: 50%;
-    margin-top: 50%;
-    // margin-bottom: 25%;
-    margin-left: 3%;
-    // margin-left: 5%;
-} 
+// .container{
+//     height: 50%;
+//     margin-top: 50%;
+//     margin-left: 3%;
+// } 
 
 .menu-buttons{
-    margin-left: 3.5%;
+    margin-left: 20px;
     height: 160px;
     width: 160px;
+    margin-top: 240px;
     align-self: center;
 }
+@media (min-width: 1300px) {
+    .menu-buttons {
+      margin-left: 170px;  
+      height: 250px;
+      width: 650px;
+      margin-top: 375px;
+      margin-bottom: 375px;
+    } 
+
+  }
+
+// // Media
+// @media (min-width: 576px) 
+//     .menu-buttons
+//         right: 30px
+//         bottom: 15px
+    
+
+// @media (min-width: 768px) 
+//     #add-button
+//         right: 30px
+//         bottom: 15px

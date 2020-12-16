@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Status } from '../models/status';
 import { Router } from '@angular/router';
 import { StatusService } from '../services/status.service';
+import { AuthService } from '../services/auth/auth.service';
+import { elementAt } from 'rxjs/operators';
 
 @Component({
   selector: 'app-employee-status',
@@ -12,11 +14,15 @@ export class EmployeeStatusPage implements OnInit {
 
   sta: Status[];
   admin :boolean;
+  private email: string;
+  status: boolean;
+  search: string;
 
-  constructor(private StatusService: StatusService, private router: Router) { }
+  constructor(private StatusService: StatusService, private AuthService: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.isAdmin();
+    this.admin = this.AuthService.isAdmin();
   }
 
   ionViewWillEnter(){
@@ -26,11 +32,40 @@ export class EmployeeStatusPage implements OnInit {
   getAllStatuses(){
     this.StatusService.getStatus().subscribe( sta => {
       this.sta = sta;
+      if(this.sta.length == 0){
+        console.log("agua")
+        this.status = false
+      } else {
+        this.status = true
+      }
     });
+    document.getElementById("reload-icon").style.display = "none";
+    document.getElementById("search-icon").style.display = "";
+    this.search = "";
+  }
+
+
+  getStatusByEmail(email: string){
+    this.StatusService.getStatusByEmail(email).subscribe( sta => {
+      this.sta = sta;
+      if(this.sta.length == 0){
+        console.log("agua")
+        this.status = false
+      } else {
+        this.status = true
+      }
+    });
+    document.getElementById("reload-icon").style.display = "";
+    document.getElementById("search-icon").style.display = "none";
   }
 
   insertStatus(){
     this.router.navigateByUrl("/create-status");
+  }
+
+  StatusSearch(){
+    this.getStatusByEmail(this.search)
+  
   }
 
   updateStatus(id: number){
@@ -41,7 +76,7 @@ export class EmployeeStatusPage implements OnInit {
   isAdmin(){
     
     if(this.admin){
-      this.getAllStatuses();
+      this.admin = true;
     } 
   }
 

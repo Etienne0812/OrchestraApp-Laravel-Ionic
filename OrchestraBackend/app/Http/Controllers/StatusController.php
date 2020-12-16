@@ -49,6 +49,13 @@ class StatusController extends Controller
         return Status::findOrFail($id);
     }
 
+    public function userData(Status $status, $email)
+    {
+        return Status::query()
+        ->where('userEmail', 'LIKE', $email) 
+        ->get();
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

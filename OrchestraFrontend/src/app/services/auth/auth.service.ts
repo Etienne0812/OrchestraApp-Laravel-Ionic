@@ -53,30 +53,6 @@ export class AuthService {
     return options;
   }
 
-
-  // register(usr: User): Observable<AuthResponse> {
-  //   return this.httpClient.post<AuthResponse>(`${this.AUTH_SERVER_ADDRESS}/api/auth/register/`, usr, this.getOptions(usr)).pipe(
-  //     tap(async (res:  AuthResponse ) => {
-
-  //       if (res.user) {
-  //         await this.storage.set("token", res.access_token);
-  //       }
-  //     })
-
-  //   );
-  // }
-
-  // login(usr: User): Observable<AuthResponse> {
-  //   return this.httpClient.post(`${this.AUTH_SERVER_ADDRESS}/api/auth/login`, null, this.getOptions(usr)).pipe(
-  //     tap(async (res: AuthResponse) => {
-
-  //       if (res.user) {
-  //         await this.storage.set("token", res.access_token);
-  //       }
-  //     })
-  //   );
-  // }
-
   login(user){
     this.httpClient.post(`http://localhost:8000/api/auth/login`, user).subscribe( res => {
 
@@ -88,8 +64,6 @@ export class AuthService {
   
 
   }
-
-  
 
   public saveToken(token: string) {
     window.sessionStorage.removeItem(TOKEN_KEY);
@@ -140,7 +114,6 @@ export class AuthService {
 
 
   checkToken(){
-    console.log(this.storage.get(TOKEN_KEY))
     return this.storage.get(TOKEN_KEY).then( res => {
       if (res){
         this.authenticationState.next(true);
@@ -173,22 +146,4 @@ export class AuthService {
   getUser(){
     return JSON.parse(sessionStorage.getItem(USER_KEY))
   }
-
-  
-
-  
-
-
-
-  // async logout() {
-  //   await this.storage.remove(TOKEN_KEY);
-  // }
-
-  // async isAuthenticated() {
-  //   let token = await this.storage.get(TOKEN_KEY);
-  //   if (token){ //Just check if exists. This should be checked with current date
-  //     return true;
-  //   }
-  //   return false;
-  // }
 }

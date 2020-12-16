@@ -19,6 +19,15 @@ export class Tab1Page {
     } else if (!this.logged){
       this.router.navigateByUrl("/login");
     }
-    // href="/employee-requests"
+  }
+
+  isLogged2(){
+    this.logged = this.AuthService.isLogged()
+    if(this.logged){
+      
+      this.router.navigateByUrl("/employee-status");
+    } else if (!this.logged){
+      this.router.navigateByUrl("/login");
+    }
   }
 }

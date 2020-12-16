@@ -12,11 +12,12 @@ export class Tab2Page implements OnInit {
   constructor(private AuthService: AuthService, private router: Router) {}
 
   ngOnInit() {
-    this.isLogged()
+    this.logged = this.AuthService.isLogged()
   }
 
   logout(){
     this.AuthService.deleteUser();
+    document.getElementById("logout-alert").style.display = "";
     console.log("logged out")
   }
 
@@ -27,6 +28,10 @@ export class Tab2Page implements OnInit {
     } else if (!this.logged){
       this.router.navigateByUrl("/login");
     }
-    // href="/employee-requests"
+  }
+
+  confirmLogout(){
+    document.getElementById("logout-alert").style.display = "none";
+    window.location.reload();
   }
 }

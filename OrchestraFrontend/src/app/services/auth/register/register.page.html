@@ -11,21 +11,21 @@
   <form [formGroup]="registForm" (ngSubmit)="onFormSubmit()">
     <ion-item>
       <ion-label position="floating"></ion-label>
-      <ion-input formControlName="email" placeholder="Email" type="text" required></ion-input>
+      <ion-input formControlName="email" placeholder="Email" type="email" required></ion-input>
       <ion-label color="danger" *ngIf="registForm.controls.email.errors?.required && (registForm.touched || registForm.dirty)">* El email es obligatorio </ion-label>
       <ion-label color="danger" *ngIf="registForm.controls.email.errors?.minlength && (registForm.touched || registForm.dirty)">* Mínimo 4 carácteres.</ion-label>
     </ion-item>
 
     <ion-item>
       <ion-label position="floating"></ion-label>
-      <ion-input formControlName="password" placeholder = "Contraseña" type="text" required></ion-input>
+      <ion-input formControlName="password" placeholder = "Contraseña" type="password" required></ion-input>
       <ion-label color="danger" *ngIf="registForm.controls.password.errors?.required && (registForm.touched || registForm.dirty)">* La contraseña es obligatoria </ion-label>
       <ion-label color="danger" *ngIf="registForm.controls.password.errors?.minlength && (registForm.touched || registForm.dirty)">* Mínimo 4 carácteres.</ion-label>
     </ion-item>
 
     <ion-item>
       <ion-label position="floating"></ion-label>
-      <ion-input formControlName="cpassword" placeholder = "Confirmar contraseña" type="text" required></ion-input>
+      <ion-input formControlName="cpassword" placeholder = "Confirmar contraseña" type="password" required></ion-input>
       <ion-label color="danger" *ngIf="registForm.controls.cpassword.errors?.required && (registForm.touched || registForm.dirty)">*  Confirme la contraseña </ion-label>
       <ion-label color="danger" *ngIf="registForm.controls.cpassword.errors?.minlength && (registForm.touched || registForm.dirty)">* Mínimo 4 carácteres.</ion-label>
     </ion-item>
