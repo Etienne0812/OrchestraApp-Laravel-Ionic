@@ -9,6 +9,18 @@ use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
+    public function login(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
+        
+        if (Auth::attempt($credentials)) {
+            return response()->json(['status' => 'success'], 200);
+        } else {
+            return response()->json(['error' => 'login_error'], 401);
+        }
+    }
+
+
     public function register(Request $request)
     {
         $v = Validator::make($request->all(), [
@@ -29,14 +41,7 @@ class AuthController extends Controller
         $user->save();
         return response()->json(['status' => 'success'], 200);
     }
-    public function login(Request $request)
-    {
-        $credentials = $request->only('email', 'password');
-        if ($token = $this->guard()->attempt($credentials)) {
-            return response()->json(['status' => 'success'], 200)->header('Authorization', $token);
-        }
-        return response()->json(['error' => 'login_error'], 401);
-    }
+    
     public function logout()
     {
         $this->guard()->logout();

@@ -14,10 +14,8 @@ import { RequestsService } from '../services/requests.service';
 export class UpdateRequestPage implements OnInit {
 
   req: Requests[];
-
   requestUpdateForm: FormGroup;
   
-
   constructor(public fb: FormBuilder, 
     private RequestsService: RequestsService,
     private router: Router) {

@@ -17,6 +17,7 @@ import { User } from 'src/app/models/user';
 export class RegisterPage implements OnInit {
 
   registForm: FormGroup;
+  private role: number;
 
   constructor(public fb: FormBuilder, 
     private UserService: UserService,
@@ -27,17 +28,21 @@ export class RegisterPage implements OnInit {
       this.registForm = this.fb.group({
         email: ['', [Validators.required, Validators.minLength(4)]],
         password: ['', [Validators.required, Validators.minLength(4)]], 
-        cpassword: ['', [Validators.required, Validators.minLength(4)]], 
-        DNI: ['', [Validators.required, Validators.minLength(4)]], 
-        name: ['', [Validators.required, Validators.minLength(4)]], 
-        firstSurname: ['', [Validators.required, Validators.minLength(4)]], 
-        secondSurname: ['', [Validators.required, Validators.minLength(4)]], 
-        phone: ['', [Validators.required, Validators.minLength(4)]]
+        cpassword: ['', [Validators.required, Validators.minLength(4)]],
+        admin: [false],
+        // DNI: ['', [Validators.required, Validators.minLength(4)]], 
+        // name: ['', [Validators.required, Validators.minLength(4)]], 
+        // firstSurname: ['', [Validators.required, Validators.minLength(4)]], 
+        // secondSurname: ['', [Validators.required, Validators.minLength(4)]], 
+        // phone: ['', [Validators.required, Validators.minLength(4)]]
       });
      }
 
   ngOnInit() {
+    
   }
+
+  
 
   onFormSubmit() {
     if (!this.registForm.valid) {
@@ -45,25 +50,29 @@ export class RegisterPage implements OnInit {
       
     } else {
       console.log("toiaqui")
+      if(this.registForm.value.admin){
+        this.role = 2;
+      } else {
+        this.role = 1;
+      }
       let usr = {
         id: null,
         email: this.registForm.value.email,
         password: this.registForm.value.password, 
         password_confirmation: this.registForm.value.cpassword, 
-        role: 1
+        role: this.role
       }
       this.AuthService.addUser(usr)
         .subscribe((res) => {
           this.router.navigateByUrl("/tabs/tab1");
         });
-      this.AuthService.saveUser(usr)
       let dat = {
         id: null,
-        DNI: this.registForm.value.DNI,
-        name: this.registForm.value.name, 
-        firstSurname: this.registForm.value.firstSurname, 
-        secondSurname: this.registForm.value.secondSurname, 
-        phone: this.registForm.value.phone,  
+        DNI: "A definir",
+        name: "A definir", 
+        firstSurname: "A definir", 
+        secondSurname: "A definir", 
+        phone: "A definir",  
         userEmail: this.registForm.value.email
       }
       this.DataService.addData(dat)

@@ -80,8 +80,8 @@ export class EmployeeRequestsPage implements OnInit {
   deleteRequest(id: number){
     this.RequestsService.deleteRequest(id).subscribe( () => {
       this.getAllRequests();
-    })
-    window.location.reload();
+    }) 
+    window.location.reload(); 
   }
 
   updateRequest(id: number){

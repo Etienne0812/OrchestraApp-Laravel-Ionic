@@ -31,6 +31,11 @@
     </ion-item>
 
     <ion-item>
+      <ion-label>Admin</ion-label>
+      <ion-checkbox slot = "start" formControlName="admin"></ion-checkbox>
+    </ion-item>
+
+    <!-- <ion-item>
       <ion-label position="floating"></ion-label>
       <ion-input formControlName="DNI" placeholder = "DNI" type="text" required></ion-input>
       <ion-label color="danger" *ngIf="registForm.controls.DNI.errors?.required && (registForm.touched || registForm.dirty)">* El DNI es obligatorio </ion-label>
@@ -63,7 +68,7 @@
       <ion-input formControlName="phone" placeholder = "Teléfono" type="text" required></ion-input>
       <ion-label color="danger" *ngIf="registForm.controls.phone.errors?.required && (registForm.touched || registForm.dirty)">* El teléfono es obligatorio </ion-label>
       <ion-label color="danger" *ngIf="registForm.controls.phone.errors?.minlength && (registForm.touched || registForm.dirty)">* Mínimo 4 carácteres.</ion-label>
-    </ion-item>
+    </ion-item> -->
 
     <ion-row>
       <ion-col>

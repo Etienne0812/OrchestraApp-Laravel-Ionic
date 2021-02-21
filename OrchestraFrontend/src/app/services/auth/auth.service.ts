@@ -54,14 +54,15 @@ export class AuthService {
   }
 
   login(user){
-    this.httpClient.post(`http://localhost:8000/api/auth/login`, user).subscribe( res => {
+    // this.httpClient.post(`http://localhost:8000/api/auth/login`, user).subscribe( res => {
 
-        this.authenticationState.next(true);
-        this.userId.next(user.id);
-        console.log(this.authenticationState.value)
-        this.saveUser(user)   
-    });
-  
+    //     this.authenticationState.next(true);
+    //     this.userId.next(user.id);
+    //     console.log(this.authenticationState.value)
+    //     this.saveUser(user)   
+    // });
+    this.userId.next(user.id);
+    this.saveUser(user) 
 
   }
 

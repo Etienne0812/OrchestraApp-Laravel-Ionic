@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>update-data</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item lines = "none">
+    <ion-icon (click)="return()" name="arrow-back-outline" slot="start"></ion-icon>
+  </ion-item>
+  <form [formGroup]="dataUpdateForm" (ngSubmit)="onFormSubmit()">
+    <ion-item>
+      <ion-label position="floating"></ion-label>
+      <ion-input formControlName="DNI" placeholder = "DNI" type="text"></ion-input>
+      <ion-label color="danger" *ngIf="dataUpdateForm.controls.DNI.errors?.minlength && (dataUpdateForm.touched || dataUpdateForm.dirty)">* Mínimo 4 carácteres.</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating"></ion-label>
+      <ion-input formControlName="name" placeholder = "Nombre" type="text"></ion-input>
+      <ion-label color="danger" *ngIf="dataUpdateForm.controls.name.errors?.minlength && (dataUpdateForm.touched || dataUpdateForm.dirty)">* Mínimo 4 carácteres.</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating"></ion-label>
+      <ion-input formControlName="firstSurname" placeholder = "Primer apellido" type="text"></ion-input>
+      <ion-label color="danger" *ngIf="dataUpdateForm.controls.firstSurname.errors?.minlength && (dataUpdateForm.touched || dataUpdateForm.dirty)">* Mínimo 4 carácteres.</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating"></ion-label>
+      <ion-input formControlName="secondSurname" placeholder = "Segundo apellido" type="text"></ion-input>
+      <ion-label color="danger" *ngIf="dataUpdateForm.controls.secondSurname.errors?.minlength && (dataUpdateForm.touched || dataUpdateForm.dirty)">* Mínimo 4 carácteres.</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating"></ion-label>
+      <ion-input formControlName="phone" placeholder = "Teléfono" type="text"></ion-input>
+      <ion-label color="danger" *ngIf="dataUpdateForm.controls.phone.errors?.minlength && (dataUpdateForm.touched || dataUpdateForm.dirty)">* Mínimo 4 carácteres.</ion-label>
+    </ion-item>
+
+    <ion-item style="display:none">
+      <ion-label position="floating"></ion-label>
+      <ion-input formControlName="phone" placeholder = "Teléfono" type="text"></ion-input>
+      <ion-label color="danger" *ngIf="dataUpdateForm.controls.phone.errors?.minlength && (dataUpdateForm.touched || dataUpdateForm.dirty)">* Mínimo 4 carácteres.</ion-label>
+    </ion-item>
+
+    <ion-row>
+      <ion-col>
+        <ion-button class = "add-form-submit" color = "tertiary" type="submit" shape="round" expand="block">Actualizar</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

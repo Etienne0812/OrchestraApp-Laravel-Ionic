@@ -44,6 +44,12 @@ export class EmployeeStatusPage implements OnInit {
     this.search = "";
   }
 
+  deleteStatus(id: number){
+    this.StatusService.deleteStatus(id).subscribe( () => {
+      this.getAllStatuses();
+    }) 
+  }
+
 
   getStatusByEmail(email: string){
     this.StatusService.getStatusByEmail(email).subscribe( sta => {
@@ -65,7 +71,6 @@ export class EmployeeStatusPage implements OnInit {
 
   StatusSearch(){
     this.getStatusByEmail(this.search)
-  
   }
 
   updateStatus(id: number){

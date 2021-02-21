@@ -67,6 +67,6 @@ export class DataService {
     bodyEncoded.append("userEmail", dat.userEmail);
     let body = bodyEncoded.toString();
     
-    return this.http.put(apiUrl + "/update/" + id, body, httpOptions);
+    return this.http.put(apiUrl + "/put/" + id, body, httpOptions);
   }
 }

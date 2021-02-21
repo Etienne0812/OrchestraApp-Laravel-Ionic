@@ -14,10 +14,10 @@
   </ion-header>
 
   <div class = "container">
-    <ion-button *ngIf = "!logged" class = "menu-buttons" shape = "square" color = "tertiary" href="/register">Registrarse <br></ion-button>
-    <ion-button *ngIf = "!logged" class = "menu-buttons" shape = "square" color = "tertiary" href="/login">Iniciar <br> sesión</ion-button>
-    <ion-button *ngIf = "logged" class = "menu-buttons2" shape = "square" color = "tertiary" href="/employee-data">Datos <br> personales</ion-button>
-    <ion-button *ngIf = "logged" id="logout-btn" (click)="logout()" class = "menu-buttons2" shape = "square" color = "tertiary">Cerrar <br> sesión</ion-button>
+    <ion-button *ngIf = "!logged" class = "menu-buttons2" shape = "square" color = "tertiary" href="/login">Iniciar <br> sesión</ion-button>
+    <ion-button *ngIf = "logged" class = "menu-buttons3" shape = "square" color = "tertiary" href="/employee-data">Datos <br> personales</ion-button>
+    <ion-button *ngIf = "logged" id="logout-btn" (click)="logout()" class = "menu-buttons3" shape = "square" color = "tertiary">Cerrar <br> sesión</ion-button>
+    <ion-button class = "menu-buttons" id = "regist-button" shape = "square" color = "tertiary" href="/register">Registrar <br></ion-button>
     <ion-item lines = "none" id="logout-alert" style="display:none;">
       <ion-card class = "ok-menu">
         Has cerrado sesión<br/>
