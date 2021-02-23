@@ -1,11 +1,15 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Iniciar sesión</ion-title>
-  </ion-toolbar>
+  <mat-toolbar color="primary">
+    <button (click)="return()" slot = "start" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <span>Iniciar sesión</span>
+    <span class="example-spacer"></span>
+  </mat-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-item lines = "none">
+  <!-- <ion-item lines = "none">
     <ion-icon (click)="return()" name="arrow-back-outline" slot="start"></ion-icon>
   </ion-item>
   <form [formGroup]="loginForm" (ngSubmit)="onFormSubmit()">
@@ -27,5 +31,27 @@
         <ion-button class = "add-form-submit" color = "tertiary" type="submit" shape="round" expand="block">Enviar</ion-button>
       </ion-col>
     </ion-row>
-  </form>
+  </form> -->
+  <h1></h1>
+    <br/>
+    <br/>
+    <div>
+      <form [formGroup]="loginForm" (submit)="onFormSubmit()" class = "form">
+        <mat-form-field class="form-field" appearance="outline">
+          <mat-label class = "label" >Email</mat-label>
+          <input matInput type="email" formControlName="email">
+          <mat-error *ngIf="loginForm.controls.email.touched && loginForm.controls.email.invalid">
+            <span *ngIf="loginForm.controls.email.errors.required">This field is mandatory.</span>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="form-field" appearance="outline">
+          <mat-label class = "label" >Contraseña</mat-label>
+          <input matInput type = "password" formControlName="password">
+          <mat-error *ngIf="loginForm.controls.password.touched && loginForm.controls.password.invalid">
+            <span *ngIf="loginForm.controls.password.errors.required">This field is mandatory.</span>
+          </mat-error>
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit">Iniciar sesión</button>
+      </form>
+    </div>
 </ion-content>

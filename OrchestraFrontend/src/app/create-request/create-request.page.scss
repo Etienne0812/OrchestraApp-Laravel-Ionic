@@ -1,0 +1,30 @@
+.form-field{
+    display: block;
+}
+ion-content{
+  --ion-background-color:#161313;
+}
+
+mat-form-field.mat-form-field {
+  width: 90%;
+  margin-left: 5%;
+  color:#ffffff;
+}
+
+.mat-raised-button, .mat-stroked-button, .mat-flat-button {
+  margin-left: 75%;
+}
+// .label{
+//     color:var(--accent-lighter-color);
+//     border-color: #ffffff;
+// }   
+
+
+.form-container{
+    width: 400 px; 
+    margin: 0 px auto; 
+    margin-top: 200 px
+}
+
+
+

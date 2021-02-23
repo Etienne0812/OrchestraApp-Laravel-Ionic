@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AuthService } from '../services/auth/auth.service';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
