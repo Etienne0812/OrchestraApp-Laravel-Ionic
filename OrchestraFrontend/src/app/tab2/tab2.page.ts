@@ -7,15 +7,18 @@ import { Router } from '@angular/router';
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss']
 })
-export class Tab2Page implements OnInit {
+export class Tab2Page  {
   private logged: boolean;
   private admin :boolean;
   constructor(private AuthService: AuthService, private router: Router) {}
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.logged = this.AuthService.isLogged();
-    this.showRegister();
+    if(this.logged){
+      this.admin = this.AuthService.isAdmin();
+    }
   }
+
 
   logout(){
     this.AuthService.deleteUser();
@@ -35,6 +38,31 @@ export class Tab2Page implements OnInit {
     }
     
   }
+
+  loginPage(){
+    this.router.navigateByUrl("/login");
+  }
+
+  dataPage(){
+    this.router.navigateByUrl("/employee-data");
+  }
+
+  registPage(){
+    this.router.navigateByUrl("/register");
+  }
+  
+
+  // checkLogin(){
+  //   if(this.logged){
+  //     document.getElementById("data-btn").style.visibility = "visible";
+  //     document.getElementById("logout-btn").style.visibility = "visible";
+  //     document.getElementById("login-btn").style.visibility = "hidden";
+  //   } else {
+  //     document.getElementById("login-btn").style.visibility = "visible";
+  //     document.getElementById("data-btn").style.visibility = "hidden";
+  //     document.getElementById("logout-btn").style.visibility = "hidden";
+  //   }
+  // }
 
   isLogged(){
     this.logged = this.AuthService.isLogged()

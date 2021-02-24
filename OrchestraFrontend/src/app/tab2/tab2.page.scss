@@ -10,27 +10,43 @@
 }
 
 .menu-buttons{
-    margin-left: 20px;
-    height: 80px;
-    width: 340px;
-    margin-top: 10px;
+    font-size: larger; 
+    height: 10%;
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 60%;
     align-self: center;
 }
 
 .menu-buttons2{
-    margin-left: 20px;
-    height: 160px;
-    width: 160px;
-    margin-top: 240px;
+    font-size: larger; 
+    height: 20%;
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 5%;
     align-self: center;
 }
 .menu-buttons3{
-    margin-left: 20px;
-    height: 160px;
-    width: 160px;
-    margin-top: 240px;
+    font-size: larger; 
+    height: 20%;
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 5%;
     align-self: center;
 }
+.menu-buttons4{
+    font-size: larger; 
+    height: 10%;
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 80%;
+    align-self: center;
+}
+
+.container{
+    align-items: center;
+    align-self: center;
+  }
 @media (min-width: 1300px) {
     .menu-buttons {
       margin-left: 170px;  

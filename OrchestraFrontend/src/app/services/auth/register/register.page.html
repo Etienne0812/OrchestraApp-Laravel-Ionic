@@ -1,79 +1,41 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Registrarse</ion-title>
-  </ion-toolbar>
+  <mat-toolbar color="primary">
+    <button (click)="return()" slot = "start" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <span>Registrar</span>
+    <span class="example-spacer"></span>
+  </mat-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-item lines = "none">
-    <ion-icon (click)="return()" name="arrow-back-outline" slot="start"></ion-icon>
-  </ion-item>
-  <form [formGroup]="registForm" (ngSubmit)="onFormSubmit()">
-    <ion-item>
-      <ion-label position="floating"></ion-label>
-      <ion-input formControlName="email" placeholder="Email" type="email" required></ion-input>
-      <ion-label color="danger" *ngIf="registForm.controls.email.errors?.required && (registForm.touched || registForm.dirty)">* El email es obligatorio </ion-label>
-      <ion-label color="danger" *ngIf="registForm.controls.email.errors?.minlength && (registForm.touched || registForm.dirty)">* Mínimo 4 carácteres.</ion-label>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="floating"></ion-label>
-      <ion-input formControlName="password" placeholder = "Contraseña" type="password" required></ion-input>
-      <ion-label color="danger" *ngIf="registForm.controls.password.errors?.required && (registForm.touched || registForm.dirty)">* La contraseña es obligatoria </ion-label>
-      <ion-label color="danger" *ngIf="registForm.controls.password.errors?.minlength && (registForm.touched || registForm.dirty)">* Mínimo 4 carácteres.</ion-label>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="floating"></ion-label>
-      <ion-input formControlName="cpassword" placeholder = "Confirmar contraseña" type="password" required></ion-input>
-      <ion-label color="danger" *ngIf="registForm.controls.cpassword.errors?.required && (registForm.touched || registForm.dirty)">*  Confirme la contraseña </ion-label>
-      <ion-label color="danger" *ngIf="registForm.controls.cpassword.errors?.minlength && (registForm.touched || registForm.dirty)">* Mínimo 4 carácteres.</ion-label>
-    </ion-item>
-
-    <ion-item>
-      <ion-label>Admin</ion-label>
-      <ion-checkbox slot = "start" formControlName="admin"></ion-checkbox>
-    </ion-item>
-
-    <!-- <ion-item>
-      <ion-label position="floating"></ion-label>
-      <ion-input formControlName="DNI" placeholder = "DNI" type="text" required></ion-input>
-      <ion-label color="danger" *ngIf="registForm.controls.DNI.errors?.required && (registForm.touched || registForm.dirty)">* El DNI es obligatorio </ion-label>
-      <ion-label color="danger" *ngIf="registForm.controls.DNI.errors?.minlength && (registForm.touched || registForm.dirty)">* Mínimo 4 carácteres.</ion-label>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="floating"></ion-label>
-      <ion-input formControlName="name" placeholder = "Nombre" type="text" required></ion-input>
-      <ion-label color="danger" *ngIf="registForm.controls.name.errors?.required && (registForm.touched || registForm.dirty)">* El nombre es obligatorio </ion-label>
-      <ion-label color="danger" *ngIf="registForm.controls.name.errors?.minlength && (registForm.touched || registForm.dirty)">* Mínimo 4 carácteres.</ion-label>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="floating"></ion-label>
-      <ion-input formControlName="firstSurname" placeholder = "Primer apellido" type="text" required></ion-input>
-      <ion-label color="danger" *ngIf="registForm.controls.firstSurname.errors?.required && (registForm.touched || registForm.dirty)">* El apellido es obligatorio </ion-label>
-      <ion-label color="danger" *ngIf="registForm.controls.firstSurname.errors?.minlength && (registForm.touched || registForm.dirty)">* Mínimo 4 carácteres.</ion-label>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="floating"></ion-label>
-      <ion-input formControlName="secondSurname" placeholder = "Segundo apellido" type="text" required></ion-input>
-      <ion-label color="danger" *ngIf="registForm.controls.secondSurname.errors?.required && (registForm.touched || registForm.dirty)">* El segundo apellido es obligatorio </ion-label>
-      <ion-label color="danger" *ngIf="registForm.controls.secondSurname.errors?.minlength && (registForm.touched || registForm.dirty)">* Mínimo 4 carácteres.</ion-label>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="floating"></ion-label>
-      <ion-input formControlName="phone" placeholder = "Teléfono" type="text" required></ion-input>
-      <ion-label color="danger" *ngIf="registForm.controls.phone.errors?.required && (registForm.touched || registForm.dirty)">* El teléfono es obligatorio </ion-label>
-      <ion-label color="danger" *ngIf="registForm.controls.phone.errors?.minlength && (registForm.touched || registForm.dirty)">* Mínimo 4 carácteres.</ion-label>
-    </ion-item> -->
-
-    <ion-row>
-      <ion-col>
-        <ion-button class = "add-form-submit" color = "tertiary" type="submit" shape="round" expand="block">Registrarse</ion-button>
-      </ion-col>
-    </ion-row>
+  <div class = "container">
+  <form [formGroup]="registForm" (submit)="onFormSubmit()">
+    <mat-form-field class="form-field" appearance="outline">
+      <mat-label class = "label" >Email</mat-label>
+      <input matInput type="email" formControlName="email">
+      <mat-error *ngIf="registForm.controls.email.touched && registForm.controls.email.invalid">
+        <span *ngIf="registForm.controls.email.errors.required">This field is mandatory.</span>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="form-field" appearance="outline">
+      <mat-label class = "label" >Contraseña</mat-label>
+      <input matInput type = "password" formControlName="password">
+      <mat-error *ngIf="registForm.controls.password.touched && registForm.controls.password.invalid">
+        <span *ngIf="registForm.controls.password.errors.required">This field is mandatory.</span>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="form-field" appearance="outline">
+      <mat-label class = "label" >Confirmar contraseña</mat-label>
+      <input matInput type = "password" formControlName="cpassword">
+      <mat-error *ngIf="registForm.controls.cpassword.touched && registForm.controls.cpassword.invalid">
+        <span *ngIf="registForm.controls.cpassword.errors.required">This field is mandatory.</span>
+      </mat-error>
+    </mat-form-field>
+    <section class="example-section">
+      <mat-checkbox class="example-margin">Check me!</mat-checkbox>
+    </section>
+    <button mat-raised-button color="primary" type="submit">Registrar</button>
   </form>
+</div>
 </ion-content>

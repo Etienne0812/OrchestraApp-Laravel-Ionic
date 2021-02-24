@@ -25,13 +25,14 @@ export class LoginPage implements OnInit {
     private UserService: UserService, 
     private alertController: AlertController, 
     private router: Router) { 
-      this.loginForm = this.fb.group({
-        email: ['', [Validators.required]],
-        password: ['', [Validators.required, Validators.minLength(4)]]
-      });
+      
     }
 
   ngOnInit() {
+    this.loginForm = this.fb.group({
+      email: [null, [Validators.required]],
+      password: [null, [Validators.required, Validators.minLength(4)]]
+    });
   }
 
   
@@ -56,7 +57,7 @@ export class LoginPage implements OnInit {
         };
         this.authService.login(usr)
         if(this.authService.isAuthenticated()){
-          this.router.navigateByUrl("/tabs/tab1");
+          this.router.navigateByUrl('/tabs/tab1');
         } 
       })
       console.log("pep")
