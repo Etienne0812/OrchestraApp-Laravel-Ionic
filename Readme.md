@@ -63,6 +63,54 @@ I personally have used these programms. It is personal preference, but I recomme
 * [XaMPP](https://www.apachefriends.org/download.html)
 * [Postman](https://www.postman.com/downloads/)
 
+
+## Data model
+
+This database has 4 tables. 
+
+1. Users. This table has the following fields: 
+
+* id-int(10). The primary key of the table
+* email-varchar(100). This is the email used to create the account
+* password-varchar(100). The password that the user needs to login
+* role-int(10). This is what we need to tell if a user is just an employee or an admin
+
+2. Data. This has the following fields: 
+* id-int(10). The primary key
+* DNI-varchar(10). User's DNI
+* Name-varchar(100). User's name
+* firstSurname-varchar(100). User's first surname
+* secondSurname-varchar(100). User's second surname
+* phone-varchar(20). User's phone number
+* userEmail-varchar(100). User's email, foreign key from user.email
+
+3. Request. This has the following fields:
+* id-int(10). The primary key
+* type-varchar(25). Defines the type of request
+* reason-varchar(200). The reason why the user is asking for a specific work shift
+* startDate-date. The start date of a shift
+* endDate-date. The end date of a shift
+* revised-varchar(100). The status of the request, it checks if it has been accepted or denied
+* userEmail-varchar(100). User's email, foreign key from user.email
+
+4. Status. This has the following fields: 
+* id-int(10). The primary key
+* type-varchar(25). Defines the type of request
+* startDate-date. The start date of a shift
+* endDate-date. The end date of a shift
+* userEmail-varchar(100). User's email, foreign key from user.email
+
+
+
+## Technologic comparison
+
+|   |Description|Advantages| Disadvantages |
+|----|---------|------------------ | ------------------|
+|WEB|An application designed for browsers (Example:ieselrincon.org)|-They use very little device resources where it is used<br/>-They can be adapted for any device or browser | -Slower than others<br/> -Not accessible throug appstores | 
+|NATIVE|An applications that is installed in the device (Example:WhatsApp)|-They work offline<br/>-They are the fastest if they make a efficient use of the resources of the device |-They depends of your device specifications<br/>-If you want to make the app for multiple platforms, you must programm it once for each platform |
+|HYBRID|An application that combines the web and native features(Example:Gmail)|-They can be installed and also used in the browser<br/>-You only have to programm once to make it multi platform|-They have a limited user interface options<br/>-Slower transitions between pages |
+|PWA|A Web aplication that can be aded to the home screen of a device like a native app (example:Trivago,Pinterest)|-They have offline capabilities<br/>-They use Push Notifications<br/>-No installation or manual updates required |-Compatibility with IOS<br/>-They can´t use all the device capabilities because they aren´t native |
+
 ## Usability 
 
 1. Simplicity: This app is very simple to use and to get used to. There are two tabs with just a few buttons. 

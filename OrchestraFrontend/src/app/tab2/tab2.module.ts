@@ -22,7 +22,7 @@ import {MatIconModule} from '@angular/material/icon';
     MatButtonModule,
     MatButtonToggleModule,
     MatToolbarModule,
-    MatIconModule
+    MatIconModule, 
   ],
   declarations: [Tab2Page]
 })

@@ -64,44 +64,47 @@ Route::prefix('auth')->group(function () {
     });
 });
 
-// Route::get('/compilar', function () {
-//     // Crear el objeto JasperPHP
-//     $jasper = new JasperPHP;
+Route::get('/compilar', function () {
+    // Crear el objeto JasperPHP
+    $jasper = new JasperPHP;
     
-//     // Compilar el reporte para generar .jasper
-//     $jasper->compile(base_path() .
-//     '//public/solicitudesorquesta.jrxml')->execute();
+    // Compilar el reporte para generar .jasper
+    $jasper->compile(base_path() .
+    '//public/solicitudesorquesta.jrxml')->execute();
    
-//     return view('welcome');
-// });
+    return view('welcome');
+});
 
-// Route::get('/reporte', function () {
-//     // Crear el objeto JasperPHP
-//     $jasper = new JasperPHP;
+Route::get('/reporte', function () {
+    // Crear el objeto JasperPHP
+    $jasper = new JasperPHP;
+    $headers = ['Content-Type' => 'application/pdf'];
     
-    
 
-//     $filename = 'solicitudesorquesta';
-//     $output = base_path('//public/' . $filename);
-//     // Generar el Reporte
-//     $jasper->process(
-//         // Ruta y nombre de archivo de entrada del reporte
-//         base_path() .
-//         '//public/solicitudesorquesta.jasper', 
-//         $output, // Ruta y nombre de archivo de salida del reporte (sin extensión)
-//         array('pdf', 'rtf'), // Formatos de salida del reporte
-//         array(),
-//         array(
-//             'driver' => 'mysql', 
-//             'host' => '127.0.0.1', 
-//             'port' => '3306', 
-//             'database' => 'orchestra', 
-//             'username' => 'root', 
-//             'password' => '',
-//         ), 
-//     )->execute();
+    $filename = 'solicitudesorquesta';
+    $output = base_path('//storage/' . $filename);
+    // Generar el Reporte
+    $jasper->process(
+        // Ruta y nombre de archivo de entrada del reporte
+        base_path() .
+        '//public/solicitudesorquesta.jasper', 
+        $output, // Ruta y nombre de archivo de salida del reporte (sin extensión)
+        array('pdf', 'rtf'), // Formatos de salida del reporte
+        array(),
+        array(
+            'driver' => 'mysql', 
+            'host' => '127.0.0.1', 
+            'port' => '3306', 
+            'database' => 'orchestra', 
+            'username' => 'root', 
+            'password' => '',
+        ), 
+    )->execute();
+    $filename = 'solicitudorquesta.pdf';
+    $path = storage_path($filename);
+    $pathToFile = storage_path($filename);
+    // return response()->file($pathToFile);
 
-//     return response()->json(['message' => 'El reporte se encuentra en la ruta /public']);  
         
     
-// });
+});

@@ -1,5 +1,7 @@
 {
   "name": "OrchestraFrontend",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

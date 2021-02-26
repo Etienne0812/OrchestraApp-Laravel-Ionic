@@ -4,12 +4,13 @@
       <mat-icon>arrow_back</mat-icon>
     </button>
     <span>Crear solicitudes</span>
+    <img src="../../assets/img/OrchestraLogo2.png" class="img" alt="Photo of a Shiba Inu">
     <span class="example-spacer"></span>
   </mat-toolbar>
 </ion-header>
 <body>  
   <ion-content> 
-    <div class="container">
+    <div class="container" id="sample">
       <form [formGroup]="requestCreateForm" (submit)="submit()">
         <mat-form-field appearance="outline">
           <mat-label>Tipo</mat-label>
@@ -30,7 +31,7 @@
           </mat-error>
         </mat-form-field>
         <mat-form-field class="form-field" appearance="outline">
-          <mat-label>Choose a date</mat-label>
+          <mat-label>Fecha de inicio</mat-label>
           <input matInput [matDatepicker]="picker" formControlName = "startDate">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
@@ -39,8 +40,10 @@
           </mat-error>
         </mat-form-field>
         <mat-form-field class="form-field" appearance="outline">
-          <mat-label class = "label" >Fecha de finalización</mat-label>
-          <input type = "text" matInput formControlName="endDate">
+          <mat-label>Fecha de finalización</mat-label>
+          <input matInput [matDatepicker]="picker2" formControlName = "endDate">
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
           <mat-error *ngIf="requestCreateForm.controls.endDate.touched && requestCreateForm.controls.endDate.invalid">
             <span *ngIf="requestCreateForm.controls.endDate.errors.required">This field is mandatory.</span>
           </mat-error>

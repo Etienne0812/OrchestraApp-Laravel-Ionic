@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth/auth.service';
 import { Router } from '@angular/router';
+import { DocumentViewer, DocumentViewerOptions } from '@ionic-native/document-viewer/ngx';
+import { File } from '@ionic-native/file/ngx';
+
 
 @Component({
   selector: 'app-tab2',
@@ -10,15 +13,26 @@ import { Router } from '@angular/router';
 export class Tab2Page  {
   private logged: boolean;
   private admin :boolean;
-  constructor(private AuthService: AuthService, private router: Router) {}
+  
+  constructor(private AuthService: AuthService, private router: Router, private document: DocumentViewer, private file: File) {}
+  
 
   ionViewWillEnter() {
     this.logged = this.AuthService.isLogged();
     if(this.logged){
       this.admin = this.AuthService.isAdmin();
     }
+    
+    
   }
 
+  ola(){
+    const options: DocumentViewerOptions = {
+      title: 'My PDF'
+    }
+    
+    this.document.viewDocument('../../../../OrchestraBackend/public/solicitudesorquesta.pdf', 'application/pdf', options)
+  }
 
   logout(){
     this.AuthService.deleteUser();
@@ -73,6 +87,7 @@ export class Tab2Page  {
     }
   }
 
+ 
   confirmLogout(){
     document.getElementById("logout-alert").style.display = "none";
     window.location.reload();

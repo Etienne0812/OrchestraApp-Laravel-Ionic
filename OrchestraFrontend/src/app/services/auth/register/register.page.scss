@@ -3,7 +3,7 @@
 }
 
 .container{
-    margin-top: 20%;
+    margin-top: 10%;
 }
 
 mat-form-field.mat-form-field {
@@ -12,10 +12,13 @@ mat-form-field.mat-form-field {
     color:#ffffff;
   }
   
-  .mat-raised-button, .mat-stroked-button, .mat-flat-button {
+.mat-raised-button, .mat-stroked-button, .mat-flat-button {
     margin-left: 70%;
-  }
-  // .label{
-  //     color:var(--accent-lighter-color);
-  //     border-color: #ffffff;
-  // }  
+}
+.img{
+  height: 100%;
+  margin-left: 50%;
+}
+.example-margin{
+  margin-left: 5%;
+}

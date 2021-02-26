@@ -9,6 +9,9 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
+import { DocumentViewer } from '@ionic-native/document-viewer/ngx';
+import { File } from '@ionic-native/file/ngx';
+
 
 import { IonicStorageModule, Storage } from '@ionic/storage';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
@@ -20,7 +23,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
   imports: [BrowserModule, IonicModule.forRoot(), IonicStorageModule.forRoot(),  AppRoutingModule, HttpClientModule, BrowserAnimationsModule],
   providers: [
     StatusBar,
-    SplashScreen,
+    SplashScreen, 
+    DocumentViewer,
+    File,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
