@@ -14,6 +14,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { Storage } from '@ionic/storage'
 
 import { CreateRequestPage } from './create-request.page';
 
@@ -32,7 +33,8 @@ import { CreateRequestPage } from './create-request.page';
     MatToolbarModule,
     MatIconModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    Storage
   ],
   declarations: [CreateRequestPage]
 })

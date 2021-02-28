@@ -5,9 +5,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RequestsService } from '../services/requests.service';
 import { AuthService } from '../services/auth/auth.service';
-import { Storage } from '@ionic/storage'
 import { UserService } from '../services/user.service';
-import { User } from '../models/user';
+
 
 @Component({
   selector: 'app-create-request',

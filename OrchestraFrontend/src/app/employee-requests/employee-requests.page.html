@@ -11,35 +11,35 @@
 
 <ion-content>
   <div class = "container" id = 'sample-div' >
-  <mat-card color = "accent" *ngFor="let r of req" class="example-card">
-    <mat-card-header>
-      
-    </mat-card-header>
-    <mat-card-content>
-      <mat-card-title>Solicitud de {{r.userEmail}}</mat-card-title>
-      Tipo: {{r.type}}<br /> 
-      Motivo: {{r.reason}}<br />
-      Fecha de inicio: {{r.startDate}}<br /> 
-      Fecha de finalización: {{r.endDate}}<br /> 
-      Estado: {{r.revised}}<br />
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-mini-fab *ngIf = "!admin && (r.revised == 'Sin revisar')" class = "update-icon" (click)="updateRequest(r.id)" slot = "start">
-        <mat-icon>mode_edit</mat-icon>
-      </button>
-      <button mat-mini-fab class = "delete-icon" (click)="deleteRequest(r.id)" slot = "start">
-        <mat-icon>delete</mat-icon>
-      </button>
-      <ion-icon *ngIf = "admin && (r.revised == 'Sin revisar' || r.revised == 'Solicitud denegada')" id = "confirm-icon" (click)="confirmRequest(r.id)" color="success" name="checkmark-outline" slot="end" style="zoom:2.0;"></ion-icon>
-      <ion-icon *ngIf = "admin && (r.revised == 'Sin revisar' || r.revised == 'Solicitud aceptada')" (click)="rejectRequest(r.id)" color="danger" name="close-outline" slot="end" style="zoom:2.0;"></ion-icon>
-    </mat-card-actions>
-  </mat-card>
+    <mat-card color = "accent" *ngFor ="let r of req" class="example-card">
+      <mat-card-header>
+        
+      </mat-card-header>
+      <mat-card-content>
+        <mat-card-title>Solicitud de {{r.userEmail}}</mat-card-title>
+        Tipo: {{r.type}}<br /> 
+        Motivo: {{r.reason}}<br />
+        Fecha de inicio: {{r.startDate}}<br /> 
+        Fecha de finalización: {{r.endDate}}<br /> 
+        Estado: {{r.revised}}<br />
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-mini-fab *ngIf = "!admin && (r.revised == 'Sin revisar')" class = "update-icon" (click)="updateRequest(r.id)" slot = "start">
+          <mat-icon>mode_edit</mat-icon>
+        </button>
+        <button mat-mini-fab class = "delete-icon" (click)="deleteRequest(r.id)" slot = "start">
+          <mat-icon>delete</mat-icon>
+        </button>
+        <ion-icon *ngIf = "admin && (r.revised == 'Sin revisar' || r.revised == 'Solicitud denegada')" id = "confirm-icon" (click)="confirmRequest(r.id)" color="success" name="checkmark-outline" slot="end" style="zoom:2.0;"></ion-icon>
+        <ion-icon *ngIf = "admin && (r.revised == 'Sin revisar' || r.revised == 'Solicitud aceptada')" (click)="rejectRequest(r.id)" color="danger" name="close-outline" slot="end" style="zoom:2.0;"></ion-icon>
+      </mat-card-actions>
+    </mat-card>
 </div>
 </ion-content>
 
 <ion-footer class="ion-no-border" lines = "none" >
   <ion-toolbar class = "footer" lines="none">
-    <button mat-mini-fab (click)="insertRequest()" class = "addIcon" color = "primary" slot="end">
+    <button mat-mini-fab (click) = "insertRequest()" class = "addIcon" color = "primary" slot="end">
       <mat-icon>add</mat-icon>
     </button>
   </ion-toolbar>
