@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { FormsModule } from '@angular/forms'
 import { ReactiveFormsModule} from '@angular/forms'
+import { CommonModule } from "@angular/common";
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -24,6 +25,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
   entryComponents: [],
   imports: [
     BrowserModule, 
+    CommonModule,
     IonicModule.forRoot(), 
     IonicStorageModule.forRoot(),  
     AppRoutingModule, 

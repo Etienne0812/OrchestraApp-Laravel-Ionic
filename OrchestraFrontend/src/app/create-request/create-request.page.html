@@ -10,7 +10,7 @@
 </ion-header>
 <body>  
   <ion-content> 
-    <div class="container" id="sample">
+    <div class="container">
       <form [formGroup]="requestCreateForm" (submit)="submit()">
         <mat-form-field appearance="outline">
           <mat-label>Tipo</mat-label>
@@ -22,6 +22,7 @@
             <mat-option value="Otro">Otro</mat-option>
           </mat-select>
         </mat-form-field>
+
         <mat-form-field class="form-field" appearance="outline">
           <mat-label class = "label" >Motivo</mat-label>
           <input type = "search" matInput formControlName="reason">
@@ -30,6 +31,7 @@
             <span *ngIf="requestCreateForm.controls.reason.errors.minlength">Mínimo 4 carácteres.</span>
           </mat-error>
         </mat-form-field>
+
         <mat-form-field class="form-field" appearance="outline">
           <mat-label>Fecha de inicio</mat-label>
           <input matInput [matDatepicker]="picker" formControlName = "startDate">
@@ -39,6 +41,7 @@
             <span *ngIf="requestCreateForm.controls.startDate.errors.required">This field is mandatory.</span>
           </mat-error>
         </mat-form-field>
+
         <mat-form-field class="form-field" appearance="outline">
           <mat-label>Fecha de finalización</mat-label>
           <input matInput [matDatepicker]="picker2" formControlName = "endDate">
@@ -48,6 +51,7 @@
             <span *ngIf="requestCreateForm.controls.endDate.errors.required">This field is mandatory.</span>
           </mat-error>
         </mat-form-field>
+        
         <button mat-raised-button color="primary" type="submit">Enviar</button>
       </form>
     </div>
