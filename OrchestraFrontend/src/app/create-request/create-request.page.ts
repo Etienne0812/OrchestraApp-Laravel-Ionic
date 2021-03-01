@@ -17,32 +17,47 @@ import { User } from '../models/user';
 export class CreateRequestPage implements OnInit {
   private uemail: string; 
   private urole: string;
+  private logged: boolean;
   requestCreateForm: FormGroup;
   
   constructor(public fb: FormBuilder, 
     private RequestsService: RequestsService,
     private UserService: UserService, 
     private AuthService: AuthService, 
+    private storage:Storage,
     private router: Router) { 
-      this.requestCreateForm = this.fb.group({
-        type: ['', [Validators.required]],
-        reason: ['', [Validators.required, Validators.minLength(4)]], 
-        startDate: ['', [Validators.required]], 
-        endDate: ['', [Validators.required]]
-      });
+      
     }
 
   ngOnInit() {
+    this.requestCreateForm = this.fb.group({
+      type: [null, [Validators.required]],
+      reason: [null, [Validators.required, Validators.minLength(4)]], 
+      startDate: [null, [Validators.required]], 
+      endDate: [null, [Validators.required]]
+    });
+    this.logged = this.AuthService.isLogged();
+    this.storage.get("mail").then((val) => {
+      console.log(val);
+     this.uemail=val;
+    })
+   
+    this.storage.get("role").then((val) => {
+      console.log(val);
+     this.urole=val;
+    });
   }
 
-  onFormSubmit() {
+  submit() {
     if (!this.requestCreateForm.valid ) {
+      console.log("awebo")
       return false;
       
-    } else if (this.AuthService.isAuthenticated()){
+    } else {
+    
       const user = this.AuthService.getUser() ;
-      this.uemail = user.email;
-      this.urole = user.role;
+      
+   
       let req = {
         id: null,
         type: this.requestCreateForm.value.type,
@@ -62,5 +77,6 @@ export class CreateRequestPage implements OnInit {
   return(){
     this.router.navigateByUrl("/employee-requests");
   }
+  
 
 }

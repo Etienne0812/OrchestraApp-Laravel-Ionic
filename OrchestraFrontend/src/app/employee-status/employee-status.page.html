@@ -1,42 +1,49 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Turnos de trabajo</ion-title>
-  </ion-toolbar>
+  <mat-toolbar color="primary">
+    <button (click)="return()" slot = "start" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <span>Turnos de trabajo</span>
+    <span class="example-spacer"></span>
+  </mat-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-item lines = "none">
-    <ion-icon (click)="return()" name="arrow-back-outline" slot="start"></ion-icon>
-  </ion-item> 
-  <ion-item>
-    <ion-input [(ngModel)]="search" placeholder = "Búsqueda por email" type="text"></ion-input>
-    <ion-icon id = "search-icon" (click) = "StatusSearch()" name="search-outline" slot = "end" ></ion-icon>
-    <ion-icon id="reload-icon" (click) = "getAllStatuses()" name="close-outline" slot = "end" style="display: 'none';"></ion-icon>
-  </ion-item>
+  <mat-form-field class="form-field" appearance="outline">
+    <mat-label class = "label" >Búsqueda por email</mat-label>
+    <input [(ngModel)]="search" type = "text" matInput>
+    <button (click)="StatusSearch()" slot = "end" mat-icon-button id="search-icon">
+      <mat-icon slot = "end">search</mat-icon>
+    </button>
+    <button (click)="getAllStatuses()" slot = "end" mat-icon-button id= "reload-icon" style="display: 'none';">
+      <mat-icon slot = "end">search_off</mat-icon>
+    </button>
+  </mat-form-field>
   <ion-card *ngIf="!status">
     <ion-card-content>
       No se han encontrado resultados
     </ion-card-content>
   </ion-card>
-  <ion-card *ngFor="let s of sta">
-    <ion-card-header>
-      <ion-card-title>Turno de {{s.userEmail}}</ion-card-title>
-    </ion-card-header>
-  
-    <ion-card-content>
+  <mat-card color = "accent" *ngFor="let s of sta" class="example-card">
+    <mat-card-header>
+      
+    </mat-card-header>
+    <mat-card-content>
+      <mat-card-title>Turno de {{s.userEmail}}</mat-card-title>
       Turno: {{s.type}}<br /> 
       Fecha de inicio: {{s.startDate}}<br />
       Fecha de finalización: {{s.endDate}}<br /> 
+    </mat-card-content>
+    <mat-card-actions>
       <ion-icon *ngIf = "admin" (click)="updateStatus(s.id)" name="create" slot="end" style="zoom:2.0;"></ion-icon>
       <ion-icon *ngIf = "admin" (click)="deleteStatus(s.id)" name="trash" slot="end" style="zoom:2.0;"></ion-icon>
-    </ion-card-content>
-
-  </ion-card>
+    </mat-card-actions>
+  </mat-card>
 </ion-content>
 <ion-footer class="ion-no-border" lines = "none" >
-  <ion-toolbar lines="none">
-    <ion-item lines="none" >
-      <ion-icon *ngIf = "admin" (click)="insertStatus()" name="add-outline" color = "tertiary" slot="end" style="zoom:1.5;">Crear una solicitud</ion-icon>
-    </ion-item>
+  <ion-toolbar class = "footer" lines="none">
+    <button mat-mini-fab (click)="insertStatus()" class = "addIcon" color = "primary" slot="end">
+      <mat-icon>add</mat-icon>
+    </button>
   </ion-toolbar>
 </ion-footer>

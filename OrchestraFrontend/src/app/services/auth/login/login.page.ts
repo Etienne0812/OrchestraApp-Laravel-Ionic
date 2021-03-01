@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { YouAreLoggedInPageRoutingModule } from 'src/app/you-are-logged-in/you-are-logged-in-routing.module';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { User } from '../../../models/user';
 import { AuthService } from '../auth.service';
 import { UserService } from '../../user.service';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -18,6 +19,7 @@ export class LoginPage implements OnInit {
   private role: number;
 
   loginForm: FormGroup;
+  us:Observable<User>
   usr: User[]
   user: User[]
   constructor(public fb: FormBuilder, 
@@ -25,44 +27,34 @@ export class LoginPage implements OnInit {
     private UserService: UserService, 
     private alertController: AlertController, 
     private router: Router) { 
-      this.loginForm = this.fb.group({
-        email: ['', [Validators.required]],
-        password: ['', [Validators.required, Validators.minLength(4)]]
-      });
+      
     }
 
   ngOnInit() {
+    this.loginForm = this.fb.group({
+      email: [null, [Validators.required]],
+      password: [null, [Validators.required, Validators.minLength(4)]]
+    });
   }
 
-  
-
-  onFormSubmit() {
+  login() {
     
-
-    if (!this.loginForm.valid) {
-      return false;
-    } else {
-      let mail = this.loginForm.value.email
-      this.UserService.getUserByEmail(mail).subscribe((user) => { 
+    this.authService.isAdmin(this.loginForm.value.email);
+    this.authService.login (this.loginForm.value.email, this.loginForm.value.password).subscribe(
+      
+      data => {
+        console.log("Logged In");
+      },
+      error => {
+        console.log(error);
+      },
+      () => {
         
-        this.role = user[0].role;
-        console.log(this.role)
-        let usr = {
-          id: null,
-          email: this.loginForm.value.email,
-          password: this.loginForm.value.password,
-          password_confirmation: null,
-          role: this.role, 
-        };
-        this.authService.login(usr)
-        if(this.authService.isAuthenticated()){
-          this.router.navigateByUrl("/tabs/tab1");
+        if(this.authService.checkToken()){
+          this.router.navigateByUrl('/tabs/tab1');
         } 
-      })
-      console.log("pep")
-      
-      
-    }
+      }
+    );
   }
 
   async presentAlert(message: string) {

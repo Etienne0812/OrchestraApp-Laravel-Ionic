@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Requests } from '../models/requests';
 import { Status } from '../models/status';
 import { Router } from '@angular/router';
+import { Storage } from '@ionic/Storage';
 import { RequestsService } from '../services/requests.service';
 import { StatusService } from '../services/status.service';
 import { AuthService } from '../services/auth/auth.service';
@@ -20,15 +21,27 @@ export class EmployeeRequestsPage implements OnInit {
   req: Requests[];
   sta: Status[];
   private email: string;
+  role:number;
   admin :boolean;
   request: boolean;
 
 
-  constructor(private RequestsService: RequestsService, private AuthService: AuthService, private StatusService: StatusService, private router: Router) { }
+  constructor(private RequestsService: RequestsService, private AuthService: AuthService, private StatusService: StatusService, private router: Router,private storage:Storage) { }
 
   ngOnInit() {
     this.getAllStatus();
-    this.admin = this.AuthService.isAdmin();
+    this.admin=this.AuthService.admin;
+    console.log(this.admin);
+  /*   this.storage.get("role").then((role)=>{
+      console.log(role);
+this.role=role;
+    });
+    if(this.role==2){
+      this.admin = true;
+    }else{
+      this.admin=false;
+    } */
+   
     this.isAdmin()
   }
 
@@ -37,13 +50,14 @@ export class EmployeeRequestsPage implements OnInit {
   }
 
   isAdmin(){
-    
+    console.log(this.admin);
     if(this.admin){
       this.getAllRequests();
     } else if(!this.admin) {
-      const user = this.AuthService.getUser()
-      this.email = user.email;
-      this.getRequestsByEmail(this.email)
+      this.storage.get("mail").then((mail)=>{
+        this.getRequestsByEmail(mail);
+      });
+      
     }
   }
 

@@ -4,29 +4,49 @@ import { Router } from '@angular/router';
 import { StatusService } from '../services/status.service';
 import { AuthService } from '../services/auth/auth.service';
 import { elementAt } from 'rxjs/operators';
-
+import {Storage} from '@ionic/Storage';
+ 
 @Component({
   selector: 'app-employee-status',
   templateUrl: './employee-status.page.html',
   styleUrls: ['./employee-status.page.scss'],
 })
 export class EmployeeStatusPage implements OnInit {
-
+role:number;
   sta: Status[];
   admin :boolean;
   private email: string;
   status: boolean;
   search: string;
 
-  constructor(private StatusService: StatusService, private AuthService: AuthService, private router: Router) { }
+  constructor(private StatusService: StatusService, private AuthService: AuthService, private router: Router,private storage:Storage) { }
 
   ngOnInit() {
-    this.isAdmin();
-    this.admin = this.AuthService.isAdmin();
+  
+this.storage.get("role").then((role)=>{
+      console.log(role);
+this.role=role;
+    });/*     
+    if(this.role==2){
+      
+      this.admin = true;
+    }else{
+      
+      this.admin=false;
+    }
+    console.log(this.admin); */
   }
 
   ionViewWillEnter(){
+  this.admin=this.AuthService.admin;
+  if(this.admin==true){
     this.getAllStatuses();
+  }else{
+    this.storage.get("mail").then((mail)=>{
+      this.getStatusByEmail(mail);
+    });
+  }
+ 
   }
 
   getAllStatuses(){
@@ -46,8 +66,8 @@ export class EmployeeStatusPage implements OnInit {
 
   deleteStatus(id: number){
     this.StatusService.deleteStatus(id).subscribe( () => {
-      this.getAllStatuses();
-    }) 
+      window.location.reload();
+    }) ;
   }
 
 
@@ -59,6 +79,7 @@ export class EmployeeStatusPage implements OnInit {
         this.status = false
       } else {
         this.status = true
+        console.log(this.search)
       }
     });
     document.getElementById("reload-icon").style.display = "";
@@ -70,7 +91,12 @@ export class EmployeeStatusPage implements OnInit {
   }
 
   StatusSearch(){
-    this.getStatusByEmail(this.search)
+    if(this.search == ""){
+      this.status = false;
+    } else {
+      this.getStatusByEmail(this.search)
+    }
+    
   }
 
   updateStatus(id: number){

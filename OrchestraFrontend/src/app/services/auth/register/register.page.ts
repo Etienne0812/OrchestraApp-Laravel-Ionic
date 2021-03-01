@@ -30,11 +30,6 @@ export class RegisterPage implements OnInit {
         password: ['', [Validators.required, Validators.minLength(4)]], 
         cpassword: ['', [Validators.required, Validators.minLength(4)]],
         admin: [false],
-        // DNI: ['', [Validators.required, Validators.minLength(4)]], 
-        // name: ['', [Validators.required, Validators.minLength(4)]], 
-        // firstSurname: ['', [Validators.required, Validators.minLength(4)]], 
-        // secondSurname: ['', [Validators.required, Validators.minLength(4)]], 
-        // phone: ['', [Validators.required, Validators.minLength(4)]]
       });
      }
 

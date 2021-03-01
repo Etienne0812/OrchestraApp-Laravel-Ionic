@@ -2,13 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Data } from '../models/data';
 import { Observable, of } from 'rxjs';
+import { AuthService } from './auth/auth.service';
 import { catchError, tap, map } from 'rxjs/operators';
-
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/x-www-form-urlencoded'
-  })
-};
+import {Storage} from '@ionic/storage';
 const apiUrl = 'http://localhost:8000/api/data';
 
 @Injectable({
@@ -17,9 +13,9 @@ const apiUrl = 'http://localhost:8000/api/data';
 export class DataService {
 
   currentDataId: number;
-
-  constructor(private http: HttpClient) { }
-
+  constructor(private http: HttpClient,private authService:AuthService) {
+   }
+token=this.authService.token;
   setCurrentDataId(id: number){
     this.currentDataId = id;
   }
@@ -29,22 +25,39 @@ export class DataService {
   }
 
   getDataById(id: number): Observable<Data> {
-    return this.http.get<Data>(apiUrl + "/get/" + id);
+    const headers= new HttpHeaders({      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': this.token["token_type"]+" "+this.token["access_token"]
+    })
+    console.log( 'Authorization'+" "+ this.token["token_type"]+" "+this.token["access_token"]);
+    return this.http.get<Data>(apiUrl + "/get/" + id,{headers:headers});
   }
 
   getDataByEmail(email: string): Observable<Data[]> {
-    return this.http.get<Data[]>(apiUrl + "/userData/" + email);
+    const headers= new HttpHeaders({      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': this.token["token_type"]+" "+this.token["access_token"]
+    })
+    return this.http.get<Data[]>(apiUrl + "/userData/" + email,{headers:headers});
   }
 
   getData(): Observable<Data[]> {
-    return this.http.get<Data[]>(apiUrl + "/get");
+    const headers= new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': this.token["token_type"]+" "+this.token["access_token"]
+    })
+    return this.http.get<Data[]>(apiUrl + "/get",{headers:headers});
   };
 
   deleteData(id: number): Observable<any>{
-    return this.http.delete(apiUrl + "/delete/" + id);
+    const headers= new HttpHeaders({
+      'Authorization': this.token["token_type"]+" "+this.token["access_token"]
+    })
+    return this.http.delete(apiUrl + "/delete/" + id,{headers:headers});
   }
 
   addData(dat: Data): Observable<any>{
+    const headers= new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': this.token["token_type"]+" "+this.token["access_token"]
+    })
     let bodyEncoded = new URLSearchParams();
     bodyEncoded.append("DNI", dat.DNI);
     bodyEncoded.append("name", dat.name);
@@ -54,10 +67,14 @@ export class DataService {
     bodyEncoded.append("userEmail", dat.userEmail);
     let body = bodyEncoded.toString();
 
-    return this.http.post(apiUrl + "/post", body, httpOptions);
+    return this.http.post(apiUrl + "/post", body, {headers:headers});
   }
 
   updateData(id: number, dat: Data): Observable<any>{
+    const headers= new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Authorization': this.token["token_type"]+" "+this.token["access_token"]
+    })
     let bodyEncoded = new URLSearchParams();
     bodyEncoded.append("DNI", dat.DNI);
     bodyEncoded.append("name", dat.name);
@@ -67,6 +84,6 @@ export class DataService {
     bodyEncoded.append("userEmail", dat.userEmail);
     let body = bodyEncoded.toString();
     
-    return this.http.put(apiUrl + "/put/" + id, body, httpOptions);
+    return this.http.put(apiUrl + "/put/" + id, body, {headers:headers});
   }
 }

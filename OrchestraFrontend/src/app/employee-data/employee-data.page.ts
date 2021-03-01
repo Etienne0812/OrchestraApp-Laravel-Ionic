@@ -5,29 +5,86 @@ import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 import { StatusService } from '../services/status.service';
 import { AuthService } from '../services/auth/auth.service';
-
+import {Storage} from '@ionic/storage';
 @Component({
   selector: 'app-employee-data',
   templateUrl: './employee-data.page.html',
   styleUrls: ['./employee-data.page.scss'],
 })
-export class EmployeeDataPage implements OnInit {
+export class EmployeeDataPage   implements OnInit{
 
   dat: Data[]
   sta: Status[]
-  private email: string;
+   email: string;
   admin :boolean;
   data: boolean;
   search: string;
+ logged:boolean;
+ rolee:number;
+  constructor(private DataService: DataService, private StatusService: StatusService, private AuthService: AuthService, private router: Router, private storage:Storage) {
+    /* this.storage.get("mail").then((val) => {
+      console.log(val);
+      this.email=val;
+      console.log(this.email);
+    });
 
-  constructor(private DataService: DataService, private StatusService: StatusService, private AuthService: AuthService, private router: Router) { }
+   
+       */          
+      this.storage.get("role").then((val) => {
+        console.log(val);
+        if(val==2){
+          this.rolee=val;
+         this.admin=true;
+        }else{
+          this.rolee=val;
+          this.admin=false;
+        }
+      });
+    }
+    ngOnInit() {
+    
+     
+    
+    }
 
-  ngOnInit() {
-    this.admin = this.AuthService.isAdmin();
-    this.isAdmin();
-  }
+  ionViewWillEnter() {    
+    this.storage.get("role").then((role)=>{
+      console.log(role);
+this.rolee=role;
+if(this.rolee==2){
+  this.admin = true;
+}else{
+  this.admin=false;
+}
+    });
+               
+  
+    console.log(this.admin);        
+    if(this.rolee==2){
+      console.log(this.admin);
+      this.getAllData();
+    } else {
+      this.storage.get("mail").then((val) => {
+        console.log(val);
+        this.email=val;
+        this.getStatusByEmail(this.email);
+        this.getDataByEmail(this.email);
+           
+        console.log(this.email);
+      });
+      
+      
+    }
+
+    }
+    
+
+  
+    
+  
 
   getAllData(){
+    console.log(this.email);
     this.DataService.getData().subscribe( dat => {
       this.dat = dat;
       if(this.dat.length == 0){
@@ -61,6 +118,8 @@ export class EmployeeDataPage implements OnInit {
   getStatusByEmail(email: string){
     this.StatusService.getStatusByEmail(email).subscribe( sta => {
       this.sta = sta;
+      console.log(sta);
+      console.log(email);
     });
   }
 
@@ -77,8 +136,7 @@ export class EmployeeDataPage implements OnInit {
     if(this.admin){
       this.getAllData();
     } else if(!this.admin) {
-      const user = this.AuthService.getUser()
-      this.email = user.email;
+
       this.getDataByEmail(this.email);
       this.getStatusByEmail(this.email);
       

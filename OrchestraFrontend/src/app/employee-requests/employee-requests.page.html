@@ -1,45 +1,46 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Solicitudes</ion-title>
-  </ion-toolbar>
+  <mat-toolbar color="primary">
+    <button (click)="return()" slot = "start" mat-icon-button class="example-icon">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <span>Solicitudes</span>
+    <img src="../../assets/img/OrchestraLogo2.png" class="img" alt="Photo of a Shiba Inu">
+    <span class="example-spacer"></span>
+  </mat-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-item lines = "none">
-    <ion-icon (click)="return()" name="arrow-back-outline" slot="start"></ion-icon>
-  </ion-item>
-  <ion-card *ngIf="!request && !admin">
-    <ion-card-content>
-      No has creado ninguna solicitud
-    </ion-card-content>
-  </ion-card>
-  <ion-card *ngFor="let r of req">
-    <ion-card-header>
-      <ion-card-title><ion-icon name="git-pull-request-outline"></ion-icon></ion-card-title>
-    </ion-card-header>
-  
-    <ion-card-content >
-      <ion-card-title>Solicitud de:</ion-card-title>
-      <ion-card-subtitle>{{r.userEmail}} </ion-card-subtitle>
-      Tipo: {{r.type}}<br /> 
-      Motivo: {{r.reason}}<br />
-      Fecha de inicio: {{r.startDate}}<br /> 
-      Fecha de finalización: {{r.endDate}}<br /> 
-      Estado: {{r.revised}}<br />
-        <ion-icon *ngIf = "!admin && (r.revised == 'Sin revisar')"id = "update-icon" (click)="updateRequest(r.id)" name="create" slot="end" style="zoom:2.0;"></ion-icon>
-        <ion-icon id = "delete-icon" (click)="deleteRequest(r.id)" name="trash" slot="end" style="zoom:2.0;"></ion-icon>
+  <div class = "container">
+    <mat-card color = "accent" *ngFor ="let r of req" class="example-card">
+      <mat-card-header>
+        
+      </mat-card-header>
+      <mat-card-content>
+        <mat-card-title>Solicitud de {{r.userEmail}}</mat-card-title>
+        Tipo: {{r.type}}<br /> 
+        Motivo: {{r.reason}}<br />
+        Fecha de inicio: {{r.startDate}}<br /> 
+        Fecha de finalización: {{r.endDate}}<br /> 
+        Estado: {{r.revised}}<br />
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-mini-fab *ngIf = "!admin && (r.revised == 'Sin revisar')" class = "update-icon" (click)="updateRequest(r.id)" slot = "start">
+          <mat-icon>mode_edit</mat-icon>
+        </button>
+        <button mat-mini-fab class = "delete-icon" (click)="deleteRequest(r.id)" slot = "start">
+          <mat-icon>delete</mat-icon>
+        </button>
         <ion-icon *ngIf = "admin && (r.revised == 'Sin revisar' || r.revised == 'Solicitud denegada')" id = "confirm-icon" (click)="confirmRequest(r.id)" color="success" name="checkmark-outline" slot="end" style="zoom:2.0;"></ion-icon>
         <ion-icon *ngIf = "admin && (r.revised == 'Sin revisar' || r.revised == 'Solicitud aceptada')" (click)="rejectRequest(r.id)" color="danger" name="close-outline" slot="end" style="zoom:2.0;"></ion-icon>
-        
-    </ion-card-content>
-    
-  </ion-card>
-
+      </mat-card-actions>
+    </mat-card>
+</div>
 </ion-content>
+
 <ion-footer class="ion-no-border" lines = "none" >
-  <ion-toolbar lines="none">
-    <ion-item lines="none" >
-      <ion-icon (click)="insertRequest()" name="add-outline" color = "tertiary" slot="end" style="zoom:1.5;">Crear una solicitud</ion-icon>
-    </ion-item>
+  <ion-toolbar class = "footer" lines="none">
+    <button mat-mini-fab (click) = "insertRequest()" class = "addIcon" color = "primary" slot="end">
+      <mat-icon>add</mat-icon>
+    </button>
   </ion-toolbar>
 </ion-footer>

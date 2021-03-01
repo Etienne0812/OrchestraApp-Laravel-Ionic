@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
+import { Router, RouterModule } from '@angular/router';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { IonicStorageModule} from '@ionic/storage'
 
 import { Tab2Page } from './tab2.page';
 
@@ -11,7 +14,19 @@ describe('Tab2Page', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [Tab2Page],
-      imports: [IonicModule.forRoot(), ExploreContainerComponentModule]
+      imports: [IonicModule.forRoot(), 
+      ExploreContainerComponentModule,
+      HttpClientTestingModule,
+      IonicStorageModule.forRoot(),
+      RouterModule.forRoot(
+        [
+          {
+            path: '',
+            component: Tab2Page
+          }
+        ]
+      ),
+    ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(Tab2Page);
@@ -22,4 +37,11 @@ describe('Tab2Page', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should have a div', () => {
+    const divElement: HTMLElement = fixture.nativeElement;
+    const div = divElement.querySelector('div');
+    expect(div.className).toMatch('container');
+    })
+
 });

@@ -9,12 +9,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::all();
-        return response()->json(
-            [
-                'status' => 'success',
-                'users' => $users->toArray()
-            ], 200);
+       return User::all(); 
     }
     public function show(Request $request, $id)
     {

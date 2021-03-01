@@ -11,14 +11,28 @@ class AuthController extends Controller
 {
     public function login(Request $request)
     {
-        $credentials = $request->only('email', 'password');
-        
-        if (Auth::attempt($credentials)) {
-            return response()->json(['status' => 'success'], 200);
-        } else {
-            return response()->json(['error' => 'login_error'], 401);
+        $v = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'password'  => 'required|min:3',
+        ]);
+        if ($v->fails())
+        {
+            return response()->json([
+                'status' => 'error',
+                'errors' => $v->errors()
+            ], 422);
         }
+        
+        $user = User::whereEmail($request->email)->first();
+        $tokenResult = $user->createToken('Personal Access Token');
+        $token = $tokenResult->token;
+        $token->save();
+        return response()->json([
+            'access_token' => $tokenResult->accessToken,
+            'token_type' => 'Bearer'
+        ]);
     }
+    
 
 
     public function register(Request $request)
@@ -42,13 +56,12 @@ class AuthController extends Controller
         return response()->json(['status' => 'success'], 200);
     }
     
-    public function logout()
+    public function logout(Request $request)
     {
-        $this->guard()->logout();
+        $request->user()->token()->revoke();
         return response()->json([
-            'status' => 'success',
-            'msg' => 'Logged out Successfully.'
-        ], 200);
+            'message' => 'Successfully logged out'
+        ]);
     }
     public function user(Request $request)
     {
@@ -58,6 +71,11 @@ class AuthController extends Controller
             'data' => $user
         ]);
     }
+    public function user2(Request $request)
+    {
+        return response()->json($request->user());
+    }
+
 
     public function userData(User $user, $email)
     {

@@ -1,17 +1,15 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
-  </ion-toolbar>
+<ion-header>
+  <mat-toolbar color="primary">
+    <img src="../../assets/img/OrchestraLogo.png" alt="Orchestra Logo">
+    <span class="example-spacer"></span>
+  </mat-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class = "button-container">
+    <button mat-raised-button color = "primary" class = "menu-buttons" (click) = "requestReportCompile()" >Generar informe <br> de solicitues</button>
+    <button mat-raised-button color = "primary" class = "menu-buttons" (click) = "requestReportViewer()" >Ver informe <br> de solicitues</button>
+  </div>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <!-- <app-explore-container name="Tab 3 page"></app-explore-container> -->
 </ion-content>

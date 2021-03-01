@@ -45,7 +45,8 @@ const routes: Routes = [
   {
     path: 'you-are-logged-in',
     loadChildren: () => import('./you-are-logged-in/you-are-logged-in.module').then( m => m.YouAreLoggedInPageModule)
-  },  {
+  },
+  {
     path: 'update-data',
     loadChildren: () => import('./update-data/update-data.module').then( m => m.UpdateDataPageModule)
   },

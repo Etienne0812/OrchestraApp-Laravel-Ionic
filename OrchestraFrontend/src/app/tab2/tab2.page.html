@@ -1,29 +1,24 @@
-<ion-header [translucent]="true">
-  <!-- <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
-  </ion-toolbar> -->
+<ion-header>
+  <mat-toolbar color="primary">
+    <img src="../../assets/img/OrchestraLogo.png" alt="Orchestra Logo">
+    <span class="example-spacer"></span>
+  </mat-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Cuenta</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
   <div class = "container">
-    <ion-button *ngIf = "!logged" class = "menu-buttons2" shape = "square" color = "tertiary" href="/login">Iniciar <br> sesión</ion-button>
-    <ion-button *ngIf = "logged" class = "menu-buttons3" shape = "square" color = "tertiary" href="/employee-data">Datos <br> personales</ion-button>
-    <ion-button *ngIf = "logged" id="logout-btn" (click)="logout()" class = "menu-buttons3" shape = "square" color = "tertiary">Cerrar <br> sesión</ion-button>
-    <ion-button class = "menu-buttons" id = "regist-button" shape = "square" color = "tertiary" href="/register">Registrar <br></ion-button>
+    <button mat-raised-button *ngIf = "!logged" class = "menu-buttons4" color = "primary" (click) = "loginPage()" >Iniciar <br> sesión</button>
+    <button mat-raised-button *ngIf = "logged" class = "menu-buttons" color = "primary" (click) = "dataPage()">Datos <br> personales</button>
+    <button mat-raised-button *ngIf = "logged" id="logout-btn" (click)="logout()" class = "menu-buttons2" color = "primary">Cerrar <br> sesión</button>
+    <button mat-raised-button *ngIf = "logged && admin" class = "menu-buttons3" id = "regist-button" color = "primary" (click) = "registPage()">Registrar <br> usuarios</button>
     <ion-item lines = "none" id="logout-alert" style="display:none;">
       <ion-card class = "ok-menu">
         Has cerrado sesión<br/>
         <ion-button (click) = "confirmLogout()" type="button" color="tertiary" shape="tertiary" expand="block">OK</ion-button>
       </ion-card>
     </ion-item>
+    <ion-button href = "http://localhost:8080/Ayuda%20Aplicaci%C3%B3n%20Orquesta.html" >Ayuda</ion-button>
     <!-- <ion-icon (click)="logout()" name="log-out-outline"></ion-icon> -->
   </div>
 
