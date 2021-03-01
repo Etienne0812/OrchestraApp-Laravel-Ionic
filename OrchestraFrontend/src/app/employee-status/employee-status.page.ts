@@ -59,6 +59,7 @@ export class EmployeeStatusPage implements OnInit {
         this.status = false
       } else {
         this.status = true
+        console.log(this.search)
       }
     });
     document.getElementById("reload-icon").style.display = "";
@@ -70,7 +71,12 @@ export class EmployeeStatusPage implements OnInit {
   }
 
   StatusSearch(){
-    this.getStatusByEmail(this.search)
+    if(this.search == ""){
+      this.status = false;
+    } else {
+      this.getStatusByEmail(this.search)
+    }
+    
   }
 
   updateStatus(id: number){

@@ -7,6 +7,10 @@ import { Tab3Page } from './tab3.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
 import { Tab3PageRoutingModule } from './tab3-routing.module';
+import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   imports: [
@@ -14,8 +18,11 @@ import { Tab3PageRoutingModule } from './tab3-routing.module';
     CommonModule,
     FormsModule,
     ExploreContainerComponentModule,
-    RouterModule.forChild([{ path: '', component: Tab3Page }]),
     Tab3PageRoutingModule,
+    MatButtonModule,
+    MatButtonToggleModule,
+    MatToolbarModule,
+    MatIconModule, 
   ],
   declarations: [Tab3Page]
 })

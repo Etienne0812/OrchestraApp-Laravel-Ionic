@@ -1,48 +1,50 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Actualizar una solicitud</ion-title>
-  </ion-toolbar>
+  <mat-toolbar color="primary">
+    <button (click)="return()" slot = "start" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <span>Actualizar solicitud</span>
+    <img src="../../assets/img/OrchestraLogo2.png" class="img" alt="Photo of a Shiba Inu">
+    <span class="example-spacer"></span>
+  </mat-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-item lines = "none">
-    <ion-icon (click)="return()" name="arrow-back-outline" slot="start"></ion-icon>
-  </ion-item> 
-  <form [formGroup]="requestUpdateForm" (ngSubmit)="onFormSubmit()" >
-    <ion-item>
-      <ion-label position="floating">Tipo</ion-label>
-      <ion-input formControlName="type" type="text" ></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="floating">Motivo</ion-label>
-      <ion-input formControlName="reason" type="text" placeholder ="pero"></ion-input>
-      <ion-label color="danger" *ngIf="requestUpdateForm.controls.reason.errors?.minlength && (requestUpdateForm.touched || requestUpdateForm.dirty)">* Mínimo 4 carácteres.</ion-label>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="floating">Fecha de inicio</ion-label>
-      <ion-input formControlName="startDate" type="text" ></ion-input>
-      <ion-label color="danger" *ngIf="requestUpdateForm.controls.startDate.errors?.minlength && (requestUpdateForm.touched || requestUpdateForm.dirty)">* Mínimo 4 carácteres.</ion-label>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="floating">Fecha de finalización</ion-label>
-      <ion-input formControlName="endDate" type="text" ></ion-input>
-      <ion-label color="danger" *ngIf="requestUpdateForm.controls.endDate.errors?.minlength && (requestUpdateForm.touched || requestUpdateForm.dirty)">* Mínimo 4 carácteres.</ion-label>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="floating">Autor</ion-label>
-      <ion-input formControlName="userEmail" type="text" ></ion-input>
-      <ion-label color="danger" *ngIf="requestUpdateForm.controls.userEmail.errors?.minlength && (requestUpdateForm.touched || requestUpdateForm.dirty)">* Mínimo 4 carácteres.</ion-label>
-    </ion-item>
-
-    <ion-row>
-      <ion-col>
-        <ion-button class = "update-form-submit" color = "tertiary" type="submit" shape="round" expand="block">Enviar</ion-button>
-      </ion-col>
-    </ion-row>
-
-  </form>
+  <div class="container">
+    <form [formGroup]="requestUpdateForm" (submit)="submit()">
+      <mat-form-field appearance="outline">
+        <mat-label>Tipo</mat-label>
+        <mat-select formControlName = "type" type = "text">
+          <mat-option value="Teletrabajo">Teletrabajo</mat-option>
+          <mat-option value="Presencial">Presencial</mat-option>
+          <mat-option value="Baja por enfermedad">Baja por enfermedad</mat-option>
+          <mat-option value="Baja por vacaciones">Baja por vacaciones</mat-option>
+          <mat-option value="Otro">Otro</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label class = "label" >Motivo</mat-label>
+        <input type = "search" matInput formControlName="reason">
+        <mat-error *ngIf="requestUpdateForm.controls.reason.touched && requestUpdateForm.controls.reason.invalid">
+          <span *ngIf="requestUpdateForm.controls.reason.errors.required">This field is mandatory.</span>
+          <span *ngIf="requestUpdateForm.controls.reason.errors.minlength">Mínimo 4 carácteres.</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label class = "label" >Fecha de inicio</mat-label>
+        <input type = "text" matInput formControlName="startDate" required>
+        <mat-error *ngIf="requestUpdateForm.controls.startDate.touched && requestUpdateForm.controls.startDate.invalid">
+          <span *ngIf="requestUpdateForm.controls.startDate.errors.required">This field is mandatory.</span>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label class = "label" >Fecha de finalización</mat-label>
+        <input type = "text" matInput formControlName="endDate" required>
+        <mat-error *ngIf="requestUpdateForm.controls.endDate.touched && requestUpdateForm.controls.endDate.invalid">
+          <span *ngIf="requestUpdateForm.controls.endDate.errors.required">This field is mandatory.</span>
+        </mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit">Enviar</button>
+    </form>
+  </div>
 </ion-content>

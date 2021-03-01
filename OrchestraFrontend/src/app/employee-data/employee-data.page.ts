@@ -37,8 +37,8 @@ export class EmployeeDataPage implements OnInit {
         this.data = true
       }
     });
-    document.getElementById("reload-icon").style.display = "none";
-    document.getElementById("search-icon").style.display = "";
+    // document.getElementById("reload-icon").style.display = "none";
+    // document.getElementById("search-icon").style.display = "";
     this.search = "";
   }
 

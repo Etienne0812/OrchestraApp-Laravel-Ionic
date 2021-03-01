@@ -21,4 +21,26 @@ describe('EmployeeRequestsPage', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  // describe("Search", function() {
+ 
+  //   //css should be included in Karma config
+   
+  //   var divElem = document.createElement('div');
+  //   divElem.id = 'sample-div';
+  //   document.body.appendChild(divElem);
+  
+  //    it("sample div should be shown", function() {
+     
+  //     //the hidden class should be in the css
+  //     divElem.className += " container";
+      
+  //     var elemStyle = window.getComputedStyle(divElem);
+      
+  //     expect(elemStyle.getPropertyValue('display')).toEqual('');
+      
+  //    });
+   
+   
+  //  });
 });

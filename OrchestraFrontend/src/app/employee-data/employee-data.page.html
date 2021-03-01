@@ -1,47 +1,52 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Datos personales</ion-title>
-  </ion-toolbar>
+  <mat-toolbar color="primary">
+    <button (click)="return()" slot = "start" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <span>Datos</span>
+    <img src="../../assets/img/OrchestraLogo2.png" class="img" alt="Photo of a Shiba Inu">
+    <span class="example-spacer"></span>
+  </mat-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-item lines = "none">
-    <ion-icon (click)="return()" name="arrow-back-outline" slot="start"></ion-icon>
-  </ion-item>
-  <ion-item>
-    <ion-input *ngIf="admin" [(ngModel)]="search" placeholder = "Búsqueda por email" type="text"></ion-input>
+  <!-- <ion-item *ngIf="admin">
+    <ion-input [(ngModel)]="search" placeholder = "Búsqueda por email" type="text"></ion-input>
     <ion-icon id = "search-icon" (click) = "DataSearch()" name="search-outline" slot = "end" style="display: 'none';"></ion-icon>
     <ion-icon id="reload-icon" (click) = "getAllData()" name="close-outline" slot = "end" style="display: 'none';"></ion-icon>
-  </ion-item>
-  <ion-card *ngIf="!data">
+  </ion-item> -->
+  <!-- <ion-card *ngIf="!data">
     <ion-card-content>
       No se han encontrado resultados
     </ion-card-content>
-  </ion-card>
-  <ion-card *ngFor="let d of dat">
-    <ion-card-header>
-      <ion-card-title>Datos</ion-card-title>
-    </ion-card-header>
-  
-    <ion-card-content>
+  </ion-card> -->
+  <mat-card color = "accent" *ngFor="let d of dat" class="example-card">
+    <mat-card-header>
+      
+    </mat-card-header>
+    <mat-card-content>
+      <mat-card-title>Datos</mat-card-title>
       DNI: {{d.DNI}}<br /> 
       Nombre: {{d.name}}<br />
       Primer Apellido: {{d.firstSurname}}<br /> 
       Segundo Apellido: {{d.secondSurname}}<br /> 
       Teléfono: {{d.phone}}<br /> 
       Email: {{d.userEmail}}<br /> 
+    </mat-card-content>
+    <mat-card-actions>
       <ion-icon id = "update-icon" (click)="updateData(d.id)" name="create" slot="end" style="zoom:2.0;"></ion-icon>
-    </ion-card-content>
-  </ion-card>
-  <ion-card *ngFor="let s of sta">
-    <ion-card-header>
-      <ion-card-title>Turno de trabajo</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
+    </mat-card-actions>
+  </mat-card>
+  <mat-card color = "accent" *ngFor="let s of sta" class="example-card">
+    <mat-card-header>
+      
+    </mat-card-header>
+    <mat-card-content>
+      <mat-card-title>Turno de {{s.userEmail}}</mat-card-title>
       Turno: {{s.type}}<br /> 
       Fecha de inicio: {{s.startDate}}<br />
       Fecha de finalización: {{s.endDate}}<br /> 
-    </ion-card-content>
+    </mat-card-content>
+  </mat-card>
 
-  </ion-card>
 </ion-content>

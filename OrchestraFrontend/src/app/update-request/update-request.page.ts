@@ -19,6 +19,12 @@ export class UpdateRequestPage implements OnInit {
   constructor(public fb: FormBuilder, 
     private RequestsService: RequestsService,
     private router: Router) {
+      
+  }
+
+  ngOnInit() {
+    this.getAllRequests();
+    let id = this.RequestsService.getCurrentRequestId();
     this.requestUpdateForm = this.fb.group({
       type: [''],
       reason: [''], 
@@ -26,12 +32,6 @@ export class UpdateRequestPage implements OnInit {
       startDate: [''],
       endDate: ['']
     });
-  }
-
-  ngOnInit() {
-    this.getAllRequests();
-    let id = this.RequestsService.getCurrentRequestId();
-
     this.RequestsService.getRequestById(id).subscribe((req) => { 
       console.log(req)
       this.requestUpdateForm = this.fb.group({

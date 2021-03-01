@@ -24,6 +24,7 @@ export class RequestsService {
     this.currentRequestId = id;
   }
 
+
   getCurrentRequestId(): number {
     return this.currentRequestId;
   }
