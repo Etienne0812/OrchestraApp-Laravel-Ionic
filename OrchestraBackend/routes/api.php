@@ -145,7 +145,46 @@ Route::get('status/reporte', function () {
     )->execute();
     $pathToFile = public_path('/turnosorquesta.pdf');
     return response()->file($pathToFile);
+ 
+});
 
-        
+Route::get('data/compilar', function () {
+    // Crear el objeto JasperPHP
+    $jasper = new JasperPHP;
     
+    // Compilar el reporte para generar .jasper
+    $jasper->compile(base_path() .
+    '//public/orquestadatos.jrxml')->execute();
+   
+    return view('welcome');
+});
+
+Route::get('data/reporte', function () {
+    // Crear el objeto JasperPHP
+    $jasper = new JasperPHP;
+    $headers = ['Content-Type' => 'application/pdf'];
+    
+
+    $filename = 'orquestadatos';
+    $output = base_path('//public/' . $filename);
+    // Generar el Reporte
+    $jasper->process(
+        // Ruta y nombre de archivo de entrada del reporte
+        base_path() .
+        '//public/orquestadatos.jasper', 
+        $output, // Ruta y nombre de archivo de salida del reporte (sin extensión)
+        array('pdf', 'rtf'), // Formatos de salida del reporte
+        array(),
+        array(
+            'driver' => 'mysql', 
+            'host' => '127.0.0.1', 
+            'port' => '3306', 
+            'database' => 'orchestra', 
+            'username' => 'root', 
+            'password' => '',
+        ), 
+    )->execute();
+    $pathToFile = public_path('/orquestadatos.pdf');
+    return response()->file($pathToFile);
+ 
 });

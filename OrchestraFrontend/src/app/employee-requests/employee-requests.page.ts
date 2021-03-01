@@ -36,6 +36,11 @@ export class EmployeeRequestsPage implements OnInit {
     this.isAdmin();
   }
 
+  requestReportViewer(){
+    // this.RequestsService.getReport();
+    window.open('http://localhost:8000/api/requests/reporte');
+  }
+
   isAdmin(){
     
     if(this.admin){

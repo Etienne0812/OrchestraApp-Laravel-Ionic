@@ -27,6 +27,11 @@ export class EmployeeDataPage implements OnInit {
     this.isAdmin();
   }
 
+  dataReportViewer(){
+    // this.RequestsService.getReport();
+    window.open('http://localhost:8000/api/data/reporte');
+  }
+
   getAllData(){
     this.DataService.getData().subscribe( dat => {
       this.dat = dat;

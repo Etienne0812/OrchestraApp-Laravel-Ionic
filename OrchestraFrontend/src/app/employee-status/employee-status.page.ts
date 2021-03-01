@@ -29,6 +29,11 @@ export class EmployeeStatusPage implements OnInit {
     this.getAllStatuses();
   }
 
+  statusReportViewer(){
+    // this.RequestsService.getReport();
+    window.open('http://localhost:8000/api/status/reporte');
+  }
+
   getAllStatuses(){
     this.StatusService.getStatus().subscribe( sta => {
       this.sta = sta;
