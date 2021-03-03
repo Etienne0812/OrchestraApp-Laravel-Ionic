@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth/auth.service';
 import { Router } from '@angular/router';
-
+import { Storage } from '@ionic/storage';
 
 
 @Component({
@@ -10,23 +10,28 @@ import { Router } from '@angular/router';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page  {
-  private logged: boolean;
-  private admin :boolean;
+   logged: boolean;
+   admin :boolean;
   
-  constructor(private AuthService: AuthService, private router: Router) {}
+  constructor(private AuthService: AuthService, private router: Router,private storage:Storage) {}
   
 
   ionViewWillEnter() {
     this.logged = this.AuthService.isLogged();
     if(this.logged){
-      this.admin = this.AuthService.isAdmin();
-    }
-    
+      this.storage.get("role").then((val) => {
+        console.log(val);
+        if(val=="2"){
+         this.admin=true;}
+    })}
+    console.log(this.logged, this.admin);
+  
     
   }
 
   logout(){
-    this.AuthService.deleteUser();
+    this.AuthService.logout();
+    this.AuthService.token=null;
     document.getElementById("logout-alert").style.display = "";
     console.log("logged out")
   }
@@ -36,7 +41,6 @@ export class Tab2Page  {
       document.getElementById("regist-button").style.display = "none";
     } 
     if(this.logged){
-      this.admin = this.AuthService.isAdmin();
         if(!this.admin){
           document.getElementById("regist-button").style.display = "none";
         }

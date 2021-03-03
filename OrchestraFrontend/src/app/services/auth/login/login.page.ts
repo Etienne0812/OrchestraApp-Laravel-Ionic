@@ -38,29 +38,24 @@ export class LoginPage implements OnInit {
   
 
   onFormSubmit() {
-    
-
     if (!this.loginForm.valid) {
       return false;
     } else {
-      let mail = this.loginForm.value.email
-      this.UserService.getUserByEmail(mail).subscribe((user) => { 
+    this.authService.login (this.loginForm.value.email, this.loginForm.value.password).subscribe(
+      
+      data => {
+        console.log("Logged In");
+      },
+      error => {
+        console.log(error);
+      },
+      () => {
         
-        this.role = user[0].role;
-        console.log(this.role)
-        let usr = {
-          id: null,
-          email: this.loginForm.value.email,
-          password: this.loginForm.value.password,
-          password_confirmation: null,
-          role: this.role, 
-        };
-        this.authService.login(usr)
-        if(this.authService.isAuthenticated()){
+        if(this.authService.checkToken()){
           this.router.navigateByUrl('/tabs/tab1');
         } 
-      })
-      console.log("pep")
+      }
+    );
       
       
     }

@@ -3,12 +3,8 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { User } from '../models/user';
 import { Observable, of } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
+import { Storage } from '@ionic/storage';
 
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/x-www-form-urlencoded'
-  })
-};
 const apiUrl = 'http://localhost:8000/api/auth';
 
 
@@ -19,7 +15,7 @@ export class UserService {
 
   currentUserId: number;
 
-  constructor(private http: HttpClient) { }
+  constructor( private http: HttpClient, private storage:Storage) { }
 
   setCurrentUserId(id: number){
     this.currentUserId = id;
@@ -30,10 +26,12 @@ export class UserService {
   }
 
   getUserByEmail(email: string): Observable<User> {
+  
     return this.http.get<User>(apiUrl + "/userData/" + email);
   }
 
   getUser(): Observable<User[]> {
+ 
     return this.http.get<User[]>(apiUrl + "/user");
   };
 
@@ -42,13 +40,14 @@ export class UserService {
   // }
 
   addUser(usr: User): Observable<any>{
+  
     let bodyEncoded = new URLSearchParams();
     bodyEncoded.append("email", usr.email);
     bodyEncoded.append("password", usr.password);
     bodyEncoded.append("password_confirmation", usr.password_confirmation);
     let body = bodyEncoded.toString();
 
-    return this.http.post(apiUrl + "/register", body, httpOptions);
+    return this.http.post(apiUrl + "/register", body);
   }
 
 

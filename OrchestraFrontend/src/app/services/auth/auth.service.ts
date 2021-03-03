@@ -23,21 +23,24 @@ const apiUrl = 'http://localhost:8000/api/auth';
   providedIn: 'root'
 })
 export class AuthService {
-  private role : string;
-  private admin: boolean;
-  private logged: boolean;
-  authenticationState = new BehaviorSubject(null);
+  role : string;
+  admin: boolean;
+   logged: boolean;
+   email:string;
+   token:any;
+     authenticationState = new BehaviorSubject(null);
   userId = new BehaviorSubject(0);
   AUTH_SERVER_ADDRESS:  string  =  'http://localhost:8000';
 
-  constructor(private http: HttpClient, private  httpClient:  HttpClient, private plt: Platform, private  storage:  Storage) { 
-    this.plt.ready().then ( () => {
-        this.checkToken();
-    });
+  constructor(private http: HttpClient, private  httpClient:  HttpClient, private plt: Platform, private  storage:  Storage , private UserService:UserService) { 
+    this.token=this.getTokken();
+    
+    console.log(this.admin);
+    console.log(this.email);
   }
 
 
-  private getOptions(user: User){
+/*   private getOptions(user: User){
     let base64UserAndPassword = window.btoa(user.email + ":" + user.password);
 
     let basicAccess = 'Basic ' + base64UserAndPassword;
@@ -51,9 +54,9 @@ export class AuthService {
     };
 
     return options;
-  }
+  } */
 
-  login(user){
+ /*  login(user){
     // this.httpClient.post(`http://localhost:8000/api/auth/login`, user).subscribe( res => {
 
     //     this.authenticationState.next(true);
@@ -64,8 +67,52 @@ export class AuthService {
     this.userId.next(user.id);
     this.saveUser(user) 
 
-  }
+  } */
+ 
 
+  login(email: string, password: string){
+    this.UserService.getUserByEmail(email).subscribe((user) => { 
+      this.role = user[0].role;
+      this.storage.set("role",this.role);
+      if(this.role=="2"){
+        this.admin=true;
+      }
+    });
+    this.UserService.getUserByEmail(email).subscribe((user) => { 
+      this.role = user[0].role;
+      this.storage.set("role",this.role);
+      if(this.role=="2"){
+        this.admin=true;
+      }
+    });
+    this.email=email;
+    return this.http.post(apiUrl + '/login',
+      {email:email, password:password}
+    ).pipe(
+      tap(token => {
+        this.storage.set('token', token)
+        .then(
+          () => {
+            console.log('Token Stored');
+          },
+          error => console.error('Error storing item', error)
+        );
+
+        this.token = token;
+        console.log(token);
+      //  console.log(this.getUser());
+        return token;
+        
+      }),
+    );
+    
+
+  }
+  getTokken(){
+    
+    return this.storage.get('token');
+    
+   }
   public saveToken(token: string) {
     window.sessionStorage.removeItem(TOKEN_KEY);
     window.sessionStorage.setItem(TOKEN_KEY, token);
@@ -76,8 +123,7 @@ export class AuthService {
   }
 
   isAdmin(){
-    const user = this.getUser()
-      this.role = user.role;
+  
       if(this.role == '1'){
       this.admin = false;
       } else if(this.role == '2') {
@@ -87,21 +133,29 @@ export class AuthService {
   }
 
   isLogged(){
-    const user = this.getUser()
-    if(user == null){
-      this.logged = false;
-    } else {
-      this.logged = true;
-    }
-    return this.logged;
+    this.storage.get('token').then(
+      data => {
+        this.token = data;
+        if(this.token != null) {
+          this.logged= true;
+        } else {
+          this.logged= false;
+        }
+      });
+      
+     return this.logged;
   }
 
   
 
   logout(){
-    return this.storage.remove(TOKEN_KEY).then ( () => {
-      this.authenticationState.next(false);
+    const headers = new HttpHeaders({
+      'Authorization': this.token["token_type"]+" "+this.token["access_token"]
     });
+    this.storage.remove("token");
+    this.logged=false;
+    delete this.token;
+    return this.http.get(apiUrl + '/logout', { headers: headers })
   }
 
    isAuthenticated(){
@@ -115,7 +169,7 @@ export class AuthService {
 
 
   checkToken(){
-    return this.storage.get(TOKEN_KEY).then( res => {
+    return this.storage.get('token').then( res => {
       if (res){
         this.authenticationState.next(true);
       } else {
@@ -134,13 +188,16 @@ export class AuthService {
   }
 
   addUser(usr: User): Observable<any>{
+    const headers= new HttpHeaders({      'Content-Type': 'application/x-www-form-urlencoded',
+    'Authorization': this.token["token_type"]+" "+this.token["access_token"]
+  })
     let bodyEncoded = new URLSearchParams();
     bodyEncoded.append("email", usr.email);
     bodyEncoded.append("password", usr.password);
     bodyEncoded.append("password_confirmation", usr.password_confirmation);
     bodyEncoded.append("role", usr.role.toString());
     let body = bodyEncoded.toString();
-    return this.http.post(apiUrl + "/register", body, httpOptions);
+    return this.http.post(apiUrl + "/register", body,{headers:headers});
     
   }
 

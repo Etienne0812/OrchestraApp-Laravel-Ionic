@@ -10,7 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
-
+import { Storage } from '@ionic/storage';
 @NgModule({
   imports: [
     IonicModule,
@@ -21,6 +21,7 @@ import {MatIconModule} from '@angular/material/icon';
     MatButtonToggleModule,
     MatToolbarModule,
     MatIconModule, 
+  
   ],
   declarations: [Tab2Page]
 })

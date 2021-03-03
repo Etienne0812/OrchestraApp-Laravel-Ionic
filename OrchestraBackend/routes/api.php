@@ -26,6 +26,7 @@ Route::group(['middleware' => 'auth:api'], function(){
 
 
 Route::prefix('requests')->group(function () {
+    Route::group(['middleware' => 'auth:api'], function(){
     Route::get('/get', [RequestsController::class, 'index']);
     Route::post('/post', [RequestsController::class, 'store']);
     Route::put('/put/{id}', [RequestsController::class, 'update']);
@@ -33,17 +34,21 @@ Route::prefix('requests')->group(function () {
     Route::get('/userData/{email}', [RequestsController::class, 'userData']);
     Route::delete('/delete/{id}', [RequestsController::class, 'destroy']);
 });
+});
 
 Route::prefix('data')->group(function () {
+    Route::group(['middleware' => 'auth:api'], function(){
     Route::get('/get', [DataController::class, 'index']);
     Route::post('/post', [DataController::class, 'store']);
     Route::put('/put/{id}', [DataController::class, 'update']);
     Route::get('/get/{id}', [DataController::class, 'show']);
     Route::get('/userData/{email}', [DataController::class, 'userData']);
     Route::delete('/delete/{id}', [DataController::class, 'destroy']);
+    });
 });
 
 Route::prefix('status')->group(function () {
+    Route::group(['middleware' => 'auth:api'], function(){
     Route::get('/get', [StatusController::class, 'index']);
     Route::post('/post', [StatusController::class, 'store']);
     Route::put('/put/{id}', [StatusController::class, 'update']);
@@ -51,15 +56,17 @@ Route::prefix('status')->group(function () {
     Route::get('/userData/{email}', [StatusController::class, 'userData']);
     Route::delete('/delete/{id}', [StatusController::class, 'destroy']);
 });
+});
 
 Route::prefix('auth')->group(function () {
-    Route::post('register', 'AuthController@register');
+
     Route::post('login', 'AuthController@login');
     Route::get('refresh', 'AuthController@refresh');
     Route::get('userData/{email}', 'AuthController@userData');
     Route::get('user', 'AuthController@user');
-    Route::group(['middleware' => 'auth:api'], function(){
 
+    Route::group(['middleware' => 'auth:api'], function(){
+        Route::post('register', 'AuthController@register');
         Route::post('logout', 'AuthController@logout');
     });
 });
