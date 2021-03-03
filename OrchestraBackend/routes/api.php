@@ -57,7 +57,7 @@ Route::prefix('auth')->group(function () {
     Route::post('login', 'AuthController@login');
     Route::get('refresh', 'AuthController@refresh');
     Route::get('userData/{email}', 'AuthController@userData');
-    
+
     Route::group(['middleware' => 'auth:api'], function(){
         Route::get('user', 'AuthController@user');
         Route::post('logout', 'AuthController@logout');
@@ -67,11 +67,11 @@ Route::prefix('auth')->group(function () {
 Route::get('requests/compilar', function () {
     // Crear el objeto JasperPHP
     $jasper = new JasperPHP;
-    
+
     // Compilar el reporte para generar .jasper
     $jasper->compile(base_path() .
     '//public/solicitudesorquesta.jrxml')->execute();
-   
+
     return view('welcome');
 });
 
@@ -79,7 +79,7 @@ Route::get('requests/reporte', function () {
     // Crear el objeto JasperPHP
     $jasper = new JasperPHP;
     $headers = ['Content-Type' => 'application/pdf'];
-    
+
 
     $filename = 'solicitudesorquesta';
     $output = base_path('//public/' . $filename);
@@ -87,34 +87,34 @@ Route::get('requests/reporte', function () {
     $jasper->process(
         // Ruta y nombre de archivo de entrada del reporte
         base_path() .
-        '//public/solicitudesorquesta.jasper', 
+        '//public/solicitudesorquesta.jasper',
         $output, // Ruta y nombre de archivo de salida del reporte (sin extensión)
         array('pdf', 'rtf'), // Formatos de salida del reporte
         array(),
         array(
-            'driver' => 'mysql', 
-            'host' => '127.0.0.1', 
-            'port' => '3306', 
-            'database' => 'orchestra', 
-            'username' => 'root', 
+            'driver' => 'mysql',
+            'host' => '127.0.0.1',
+            'port' => '3306',
+            'database' => 'orchestra',
+            'username' => 'root',
             'password' => '',
-        ), 
+        ),
     )->execute();
     $pathToFile = public_path('/solicitudesorquesta.pdf');
     return response()->file($pathToFile);
 
-        
-    
+
+
 });
 
 Route::get('status/compilar', function () {
     // Crear el objeto JasperPHP
     $jasper = new JasperPHP;
-    
+
     // Compilar el reporte para generar .jasper
     $jasper->compile(base_path() .
     '//public/turnosorquesta.jrxml')->execute();
-   
+
     return view('welcome');
 });
 
@@ -122,7 +122,7 @@ Route::get('status/reporte', function () {
     // Crear el objeto JasperPHP
     $jasper = new JasperPHP;
     $headers = ['Content-Type' => 'application/pdf'];
-    
+
 
     $filename = 'turnosorquesta';
     $output = base_path('//public/' . $filename);
@@ -130,32 +130,32 @@ Route::get('status/reporte', function () {
     $jasper->process(
         // Ruta y nombre de archivo de entrada del reporte
         base_path() .
-        '//public/turnosorquesta.jasper', 
+        '//public/turnosorquesta.jasper',
         $output, // Ruta y nombre de archivo de salida del reporte (sin extensión)
         array('pdf', 'rtf'), // Formatos de salida del reporte
         array(),
         array(
-            'driver' => 'mysql', 
-            'host' => '127.0.0.1', 
-            'port' => '3306', 
-            'database' => 'orchestra', 
-            'username' => 'root', 
+            'driver' => 'mysql',
+            'host' => '127.0.0.1',
+            'port' => '3306',
+            'database' => 'orchestra',
+            'username' => 'root',
             'password' => '',
-        ), 
+        ),
     )->execute();
     $pathToFile = public_path('/turnosorquesta.pdf');
     return response()->file($pathToFile);
- 
+
 });
 
 Route::get('data/compilar', function () {
     // Crear el objeto JasperPHP
     $jasper = new JasperPHP;
-    
+
     // Compilar el reporte para generar .jasper
     $jasper->compile(base_path() .
     '//public/orquestadatos.jrxml')->execute();
-   
+
     return view('welcome');
 });
 
@@ -163,7 +163,7 @@ Route::get('data/reporte', function () {
     // Crear el objeto JasperPHP
     $jasper = new JasperPHP;
     $headers = ['Content-Type' => 'application/pdf'];
-    
+
 
     $filename = 'orquestadatos';
     $output = base_path('//public/' . $filename);
@@ -171,20 +171,20 @@ Route::get('data/reporte', function () {
     $jasper->process(
         // Ruta y nombre de archivo de entrada del reporte
         base_path() .
-        '//public/orquestadatos.jasper', 
+        '//public/orquestadatos.jasper',
         $output, // Ruta y nombre de archivo de salida del reporte (sin extensión)
         array('pdf', 'rtf'), // Formatos de salida del reporte
         array(),
         array(
-            'driver' => 'mysql', 
-            'host' => '127.0.0.1', 
-            'port' => '3306', 
-            'database' => 'orchestra', 
-            'username' => 'root', 
+            'driver' => 'mysql',
+            'host' => '127.0.0.1',
+            'port' => '3306',
+            'database' => 'orchestra',
+            'username' => 'root',
             'password' => '',
-        ), 
+        ),
     )->execute();
     $pathToFile = public_path('/orquestadatos.pdf');
     return response()->file($pathToFile);
- 
+
 });
