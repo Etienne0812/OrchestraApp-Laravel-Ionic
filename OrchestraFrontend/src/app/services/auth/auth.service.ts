@@ -23,15 +23,20 @@ const apiUrl = 'http://localhost:8000/api/auth';
   providedIn: 'root'
 })
 export class AuthService {
-  private role : string;
-  private admin: boolean;
-  private logged: boolean;
-  authenticationState = new BehaviorSubject(null);
+  role : string;
+  admin: boolean;
+   logged: boolean;
+   email:string;
+   token:any;
+     authenticationState = new BehaviorSubject(null);
   userId = new BehaviorSubject(0);
   AUTH_SERVER_ADDRESS:  string  =  'http://localhost:8000';
 
   constructor(private http: HttpClient, private  httpClient:  HttpClient, private plt: Platform, private  storage:  Storage , private UserService:UserService) { 
     this.token=this.getTokken();
+    
+    console.log(this.admin);
+    console.log(this.email);
   }
 
 
@@ -63,14 +68,24 @@ export class AuthService {
     this.saveUser(user) 
 
   } */
-  token:any;
+ 
+
   login(email: string, password: string){
     this.UserService.getUserByEmail(email).subscribe((user) => { 
       this.role = user[0].role;
+      this.storage.set("role",this.role);
       if(this.role=="2"){
         this.admin=true;
       }
     });
+    this.UserService.getUserByEmail(email).subscribe((user) => { 
+      this.role = user[0].role;
+      this.storage.set("role",this.role);
+      if(this.role=="2"){
+        this.admin=true;
+      }
+    });
+    this.email=email;
     return this.http.post(apiUrl + '/login',
       {email:email, password:password}
     ).pipe(
@@ -108,6 +123,7 @@ export class AuthService {
   }
 
   isAdmin(){
+  
       if(this.role == '1'){
       this.admin = false;
       } else if(this.role == '2') {
@@ -153,7 +169,7 @@ export class AuthService {
 
 
   checkToken(){
-    return this.storage.get(TOKEN_KEY).then( res => {
+    return this.storage.get('token').then( res => {
       if (res){
         this.authenticationState.next(true);
       } else {
@@ -172,13 +188,16 @@ export class AuthService {
   }
 
   addUser(usr: User): Observable<any>{
+    const headers= new HttpHeaders({      'Content-Type': 'application/x-www-form-urlencoded',
+    'Authorization': this.token["token_type"]+" "+this.token["access_token"]
+  })
     let bodyEncoded = new URLSearchParams();
     bodyEncoded.append("email", usr.email);
     bodyEncoded.append("password", usr.password);
     bodyEncoded.append("password_confirmation", usr.password_confirmation);
     bodyEncoded.append("role", usr.role.toString());
     let body = bodyEncoded.toString();
-    return this.http.post(apiUrl + "/register", body, httpOptions);
+    return this.http.post(apiUrl + "/register", body,{headers:headers});
     
   }
 

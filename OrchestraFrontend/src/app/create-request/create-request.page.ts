@@ -14,8 +14,7 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./create-request.page.scss'],
 })
 export class CreateRequestPage implements OnInit {
-  private uemail: string; 
-  private urole: string;
+ 
   private logged: boolean;
   requestCreateForm: FormGroup;
   
@@ -26,7 +25,6 @@ export class CreateRequestPage implements OnInit {
     private router: Router) { 
       
     }
-
   ngOnInit() {
     this.requestCreateForm = this.fb.group({
       type: [null, [Validators.required]],
@@ -44,16 +42,13 @@ export class CreateRequestPage implements OnInit {
       
     } else {
       console.log("olaaa")
-      const user = this.AuthService.getUser() ;
-      this.uemail = user.email;
-      this.urole = user.role;
       let req = {
         id: null,
         type: this.requestCreateForm.value.type,
         reason: this.requestCreateForm.value.reason, 
         startDate: this.requestCreateForm.value.startDate, 
         endDate: this.requestCreateForm.value.endDate, 
-        userEmail: this.uemail, 
+        userEmail: this.AuthService.email, 
         revised: this.requestCreateForm.value.revised, 
       }
       this.RequestsService.addRequest(req)

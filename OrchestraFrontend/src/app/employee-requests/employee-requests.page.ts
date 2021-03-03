@@ -19,16 +19,16 @@ export class EmployeeRequestsPage implements OnInit {
 
   req: Requests[];
   sta: Status[];
-  private email: string;
+   
   admin :boolean;
   request: boolean;
 
 
   constructor(private RequestsService: RequestsService, private AuthService: AuthService, private StatusService: StatusService, private router: Router) { }
-
+  email=  this.AuthService.email;
   ngOnInit() {
     this.getAllStatus();
-    this.admin = this.AuthService.isAdmin();
+    this.admin = this.AuthService.admin;
     this.isAdmin()
   }
 
@@ -43,11 +43,9 @@ export class EmployeeRequestsPage implements OnInit {
 
   isAdmin(){
     
-    if(this.admin){
+    if(this.AuthService.isAdmin()){
       this.getAllRequests();
-    } else if(!this.admin) {
-      const user = this.AuthService.getUser()
-      this.email = user.email;
+    } else if(!this.AuthService.isAdmin()) {
       this.getRequestsByEmail(this.email)
     }
   }
@@ -86,7 +84,7 @@ export class EmployeeRequestsPage implements OnInit {
     this.RequestsService.deleteRequest(id).subscribe( () => {
       this.getAllRequests();
     }) 
-    window.location.reload(); 
+  
   }
 
   updateRequest(id: number){

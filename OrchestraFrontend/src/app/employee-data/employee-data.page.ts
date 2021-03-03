@@ -83,7 +83,7 @@ export class EmployeeDataPage implements OnInit {
       this.getAllData();
     } else if(!this.admin) {
       const user = this.AuthService.getUser()
-      this.email = user.email;
+      this.email = this.AuthService.email;
       this.getDataByEmail(this.email);
       this.getStatusByEmail(this.email);
       
