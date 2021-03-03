@@ -20,7 +20,7 @@ export class Tab3Page {
   constructor(private http: HttpClient, private RequestsService: RequestsService) {}
 
   requestReportCompile(){
-    return this.http.get(apiUrl, httpOptions);
+    return this.http.get(apiUrl);
   }
 
   requestReportViewer(){
