@@ -20,8 +20,6 @@ use JasperPHP\JasperPHP as JasperPHP;
 
 Route::group(['middleware' => 'auth:api'], function(){
     // Users
-    Route::get('users', 'UserController@index')->middleware('isAdmin');
-    Route::get('users/{id}', 'UserController@show')->middleware('isAdminOrSelf');
 });
 
 
@@ -64,7 +62,8 @@ Route::prefix('auth')->group(function () {
     Route::get('refresh', 'AuthController@refresh');
     Route::get('userData/{email}', 'AuthController@userData');
     Route::get('user', 'AuthController@user');
-
+    Route::get('users', 'UserController@index')->middleware('isAdmin');
+    Route::get('users/{id}', 'UserController@show')->middleware('isAdminOrSelf');
     Route::group(['middleware' => 'auth:api'], function(){
         Route::post('register', 'AuthController@register');
         Route::post('logout', 'AuthController@logout');
@@ -77,7 +76,7 @@ Route::get('requests/compilar', function () {
 
     // Compilar el reporte para generar .jasper
     $jasper->compile(base_path() .
-    '//public/solicitudesorquesta.jrxml')->execute();
+    '//public/Blank_Letter.jrxml')->execute();
 
     return view('welcome');
 });
@@ -88,13 +87,13 @@ Route::get('requests/reporte', function () {
     $headers = ['Content-Type' => 'application/pdf'];
 
 
-    $filename = 'solicitudesorquesta';
+    $filename = 'Blank_Letter';
     $output = base_path('//public/' . $filename);
     // Generar el Reporte
     $jasper->process(
         // Ruta y nombre de archivo de entrada del reporte
         base_path() .
-        '//public/solicitudesorquesta.jasper',
+        '//public/Blank_Letter.jasper',
         $output, // Ruta y nombre de archivo de salida del reporte (sin extensión)
         array('pdf', 'rtf'), // Formatos de salida del reporte
         array(),
@@ -102,12 +101,12 @@ Route::get('requests/reporte', function () {
             'driver' => 'mysql',
             'host' => '127.0.0.1',
             'port' => '3306',
-            'database' => 'orchestra',
-            'username' => 'root',
-            'password' => '',
+            'database' => 'laravel2',
+            'username' => 'pepe',
+            'password' => 'sasa',
         ),
     )->execute();
-    $pathToFile = public_path('/solicitudesorquesta.pdf');
+    $pathToFile = public_path('/Blank_Letter.pdf');
     return response()->file($pathToFile);
 
 
@@ -120,7 +119,7 @@ Route::get('status/compilar', function () {
 
     // Compilar el reporte para generar .jasper
     $jasper->compile(base_path() .
-    '//public/turnosorquesta.jrxml')->execute();
+    '//public/Blank_Letter_2.jrxml')->execute();
 
     return view('welcome');
 });
@@ -131,13 +130,13 @@ Route::get('status/reporte', function () {
     $headers = ['Content-Type' => 'application/pdf'];
 
 
-    $filename = 'turnosorquesta';
+    $filename = 'Blank_Letter_2';
     $output = base_path('//public/' . $filename);
     // Generar el Reporte
     $jasper->process(
         // Ruta y nombre de archivo de entrada del reporte
         base_path() .
-        '//public/turnosorquesta.jasper',
+        '//public/Blank_Letter_2.jasper',
         $output, // Ruta y nombre de archivo de salida del reporte (sin extensión)
         array('pdf', 'rtf'), // Formatos de salida del reporte
         array(),
@@ -145,12 +144,12 @@ Route::get('status/reporte', function () {
             'driver' => 'mysql',
             'host' => '127.0.0.1',
             'port' => '3306',
-            'database' => 'orchestra',
-            'username' => 'root',
-            'password' => '',
+            'database' => 'laravel2',
+            'username' => 'pepe',
+            'password' => 'sasa',
         ),
     )->execute();
-    $pathToFile = public_path('/turnosorquesta.pdf');
+    $pathToFile = public_path('/Blank_Letter_2.pdf');
     return response()->file($pathToFile);
 
 });

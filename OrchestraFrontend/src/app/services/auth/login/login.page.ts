@@ -34,7 +34,20 @@ export class LoginPage implements OnInit {
       password: [null, [Validators.required, Validators.minLength(4)]]
     });
   }
+  login2() {
+    let userLogged = 'invalid_form';
+    console.log('Valores del form --> ', this.loginForm.value);
+    if(this.loginForm.valid) {
+      if (this.loginForm.value.email === 'aaron@gmail.com' && this.loginForm.value.password === 'aaron') {
+        userLogged = 'login_valid';
+      } else {
+        userLogged = 'login_invalid';
+      }
+      console.log('Respuesta del servicio de login --> ', userLogged);
+    }
 
+    return userLogged;
+  }
   
 
   onFormSubmit() {

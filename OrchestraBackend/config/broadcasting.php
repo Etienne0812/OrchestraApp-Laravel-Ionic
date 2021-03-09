@@ -27,7 +27,7 @@ return [
     | each available type of connection are provided inside this array.
     |
     */
-
+  
     'connections' => [
 
         'pusher' => [
@@ -37,6 +37,9 @@ return [
             'app_id' => env('PUSHER_APP_ID'),
             'options' => [
                 'cluster' => env('PUSHER_APP_CLUSTER'),
+                'host'=>'127.0.0.1',
+                'port'=>6001,
+                'schema' => 'http',
                 'useTLS' => true,
             ],
         ],
