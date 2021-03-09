@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { RequestsService } from '../services/requests.service';
 import { StatusService } from '../services/status.service';
 import { AuthService } from '../services/auth/auth.service';
+import {Storage} from '@ionic/storage';
 import { typeWithParameters } from '@angular/compiler/src/render3/util';
 
 
@@ -15,7 +16,7 @@ import { typeWithParameters } from '@angular/compiler/src/render3/util';
   templateUrl: './employee-requests.page.html',
   styleUrls: ['./employee-requests.page.scss'],
 })
-export class EmployeeRequestsPage implements OnInit {
+export class EmployeeRequestsPage{
 
   req: Requests[];
   sta: Status[];
@@ -24,16 +25,21 @@ export class EmployeeRequestsPage implements OnInit {
   request: boolean;
 
 
-  constructor(private RequestsService: RequestsService, private AuthService: AuthService, private StatusService: StatusService, private router: Router) { }
+  constructor(private RequestsService: RequestsService, private AuthService: AuthService, private StatusService: StatusService, private router: Router, private storage:Storage) { }
   email=  this.AuthService.email;
-  ngOnInit() {
+ /*  ngOnInit() {
     this.getAllStatus();
     this.admin = this.AuthService.admin;
     this.isAdmin()
-  }
+  } */
 
   ionViewWillEnter(){
-    this.isAdmin();
+    this.storage.get("role").then((val) => {
+      console.log(val);
+      if(val=="2"){
+       this.admin=true;
+       this.isAdmin();}
+  });
   }
 
   requestReportViewer(){
@@ -43,9 +49,9 @@ export class EmployeeRequestsPage implements OnInit {
 
   isAdmin(){
     
-    if(this.AuthService.isAdmin()){
+    if(this.admin){
       this.getAllRequests();
-    } else if(!this.AuthService.isAdmin()) {
+    } else if(!this.admin) {
       this.getRequestsByEmail(this.email)
     }
   }

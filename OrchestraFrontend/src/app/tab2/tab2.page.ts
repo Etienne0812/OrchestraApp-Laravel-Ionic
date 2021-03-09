@@ -14,16 +14,22 @@ export class Tab2Page  {
    admin :boolean;
   
   constructor(private AuthService: AuthService, private router: Router,private storage:Storage) {}
-  
 
   ionViewWillEnter() {
-    this.logged = this.AuthService.isLogged();
-    if(this.logged){
+    this.storage.get('token').then (
+      data => {
+        if(data != null) {
+          this.logged= true;
+        } else {
+          this.logged= false;
+        }
+      });
+   
       this.storage.get("role").then((val) => {
         console.log(val);
         if(val=="2"){
          this.admin=true;}
-    })}
+    })
     console.log(this.logged, this.admin);
   
     

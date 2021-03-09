@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../services/auth/auth.service';
 import { Router } from '@angular/router';
-
+import {Storage} from '@ionic/storage';
 
 @Component({
   selector: 'app-tab1',
@@ -10,10 +10,21 @@ import { Router } from '@angular/router';
 })
 export class Tab1Page {
   logged: boolean;
-  constructor(private AuthService: AuthService, private router: Router) {}
+  constructor(private AuthService: AuthService, private router: Router, private storage:Storage) {}
+  
+  ionViewWillEnter() {
+    this.storage.get('token').then (
+      data => {
+        if(data != null) {
+          this.logged= true;
+        } else {
+          this.logged= false;
+        }
+      });
+    console.log(this.logged);
+  }
 
   isLogged(){
-    this.logged = this.AuthService.isLogged()
     if(this.logged){
       
       this.router.navigateByUrl("/employee-requests");
@@ -23,7 +34,6 @@ export class Tab1Page {
   }
 
   isLogged2(){
-    this.logged = this.AuthService.isLogged()
     if(this.logged){
       
       this.router.navigateByUrl("/employee-status");

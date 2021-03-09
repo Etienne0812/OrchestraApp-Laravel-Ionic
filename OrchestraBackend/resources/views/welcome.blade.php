@@ -98,8 +98,8 @@
             </div>
         </div>
         <script src="{{asset('js/app.js')}}"></script>
-        <script>Echo.Channel('home').listen('New Message',(e)=>{
+        {{-- <script>Echo.Channel('home').listen('New Message',(e)=>{
             console.log(e.message);
-        })</script>
+        })</script> --}}
     </body>
 </html>

@@ -78,13 +78,6 @@ export class AuthService {
         this.admin=true;
       }
     });
-    this.UserService.getUserByEmail(email).subscribe((user) => { 
-      this.role = user[0].role;
-      this.storage.set("role",this.role);
-      if(this.role=="2"){
-        this.admin=true;
-      }
-    });
     this.email=email;
     return this.http.post(apiUrl + '/login',
       {email:email, password:password}
@@ -133,7 +126,7 @@ export class AuthService {
   }
 
   isLogged(){
-    this.storage.get('token').then(
+    this.storage.get('token').then (
       data => {
         this.token = data;
         if(this.token != null) {

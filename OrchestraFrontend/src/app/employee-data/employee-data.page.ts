@@ -5,13 +5,14 @@ import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 import { StatusService } from '../services/status.service';
 import { AuthService } from '../services/auth/auth.service';
+import {Storage} from '@ionic/storage';
 
 @Component({
   selector: 'app-employee-data',
   templateUrl: './employee-data.page.html',
   styleUrls: ['./employee-data.page.scss'],
 })
-export class EmployeeDataPage implements OnInit {
+export class EmployeeDataPage {
 
   dat: Data[]
   sta: Status[]
@@ -20,12 +21,15 @@ export class EmployeeDataPage implements OnInit {
   data: boolean;
   search: string;
 
-  constructor(private DataService: DataService, private StatusService: StatusService, private AuthService: AuthService, private router: Router) { }
-
-  ngOnInit() {
-    this.admin = this.AuthService.isAdmin();
-    this.isAdmin();
-  }
+  constructor(private DataService: DataService, private StatusService: StatusService, private AuthService: AuthService, private router: Router, private storage:Storage) { }
+ionViewWillEnter(){
+  this.storage.get("role").then((val) => {
+    console.log(val);
+    if(val=="2"){
+     this.admin=true;
+     this.isAdmin();}
+});
+}
 
   dataReportViewer(){
     // this.RequestsService.getReport();
