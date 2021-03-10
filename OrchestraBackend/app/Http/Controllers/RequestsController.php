@@ -52,7 +52,7 @@ class RequestsController extends Controller
     public function userData(Requests $requests, $email)
     {
         return Requests::query()
-        ->where('userEmail', 'LIKE', $email) 
+        ->where('userEmail', 'LIKE', $email)
         ->get();
     }
 
@@ -89,6 +89,6 @@ class RequestsController extends Controller
     public function destroy(Requests $requests, $id)
     {
         Requests::find($id)->delete();
-        return "done";
+
     }
 }

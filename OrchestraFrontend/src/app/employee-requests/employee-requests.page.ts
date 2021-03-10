@@ -90,7 +90,8 @@ export class EmployeeRequestsPage{
     this.RequestsService.deleteRequest(id).subscribe( () => {
       this.getAllRequests();
     }) 
-  
+    this.router.navigateByUrl("/update-request");
+    this.router.navigateByUrl("/employee-requests");
   }
 
   updateRequest(id: number){

@@ -52,7 +52,7 @@ class StatusController extends Controller
     public function userData(Status $status, $email)
     {
         return Status::query()
-        ->where('userEmail', 'LIKE', $email) 
+        ->where('userEmail', 'LIKE', $email)
         ->get();
     }
 
@@ -89,6 +89,6 @@ class StatusController extends Controller
     public function destroy(Status $status, $id)
     {
         Status::find($id)->delete();
-        return "done";
+        
     }
 }

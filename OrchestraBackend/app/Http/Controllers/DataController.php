@@ -52,7 +52,7 @@ class DataController extends Controller
     public function userData(Data $data, $email)
     {
         return Data::query()
-        ->where('userEmail', 'LIKE', $email) 
+        ->where('userEmail', 'LIKE', $email)
         ->get();
     }
 
@@ -89,6 +89,6 @@ class DataController extends Controller
     public function destroy(Data $data, $id)
     {
         Data::find($id)->delete();
-        return "done";
+        
     }
 }
