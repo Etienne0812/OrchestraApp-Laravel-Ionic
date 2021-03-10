@@ -4,6 +4,7 @@ import { Requests } from '../models/requests';
 import { Observable, of } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 import { AuthService } from './auth/auth.service';
+import {Storage} from '@ionic/storage';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -18,9 +19,15 @@ const apiUrl = 'http://localhost:8000/api/requests';
 export class RequestsService {
 
   currentRequestId: number;
+token:any;
+  constructor(private http: HttpClient, private AuthService:AuthService, private storage:Storage) {
+    this.getToken();
+   }
 
-  constructor(private http: HttpClient, private AuthService:AuthService) { }
-token=this.AuthService.token;
+   getToken(){
+    this.storage.get('token').then((token) => {   
+      this.token = token; 
+    }); }
   setCurrentRequestId(id: number){
     this.currentRequestId = id;
   }

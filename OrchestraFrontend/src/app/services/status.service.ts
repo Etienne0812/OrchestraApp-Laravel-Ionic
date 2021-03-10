@@ -4,7 +4,7 @@ import { Status } from '../models/status';
 import { from, Observable, of } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 import { AuthService } from './auth/auth.service';
-
+import {Storage} from '@ionic/storage';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/x-www-form-urlencoded'
@@ -18,9 +18,15 @@ const apiUrl = 'http://localhost:8000/api/status';
 export class StatusService {
 
   currentStatusId: number;
+token:any;
+  constructor(private http: HttpClient, private authService:AuthService,private storage:Storage) {
+    this.getToken();
+   }
+  getToken(){
+    this.storage.get('token').then((token) => {   
+      this.token = token; 
+    }); }
 
-  constructor(private http: HttpClient, private authService:AuthService) { }
-token=this.authService.token;
   setCurrentStatusId(id: number){
     this.currentStatusId = id;
   }

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { StatusService } from '../services/status.service';
 import { AuthService } from '../services/auth/auth.service';
 import { elementAt } from 'rxjs/operators';
-
+import {Storage} from '@ionic/storage';
 @Component({
   selector: 'app-employee-status',
   templateUrl: './employee-status.page.html',
@@ -18,11 +18,15 @@ export class EmployeeStatusPage implements OnInit {
   status: boolean;
   search: string;
 
-  constructor(private StatusService: StatusService, private AuthService: AuthService, private router: Router) { }
+  constructor(private StatusService: StatusService, private AuthService: AuthService, private router: Router, private storage:Storage) { }
 
   ngOnInit() {
-    this.isAdmin();
-    this.admin = this.AuthService.isAdmin();
+    this.storage.get("role").then((val) => {
+      console.log(val);
+      if(val=="2"){
+       this.admin=true;
+      }
+  });
   }
 
   ionViewWillEnter(){
